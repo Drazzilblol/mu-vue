@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Categories from "~/components/Categories/Categories.vue";
 import type { TSeries } from "~/types/Series";
+import dayjs from "dayjs";
 
 const route = useRoute();
 
@@ -23,6 +24,10 @@ const desc = computed(() => {
 
 const status = computed(() => {
   return prepareText(data.value?.status);
+});
+
+const lastUpdated = computed(() => {
+  return dayjs((data.value?.last_updated.timestamp || 0) * 1000).fromNow();
 });
 </script>
 <template>
@@ -47,6 +52,11 @@ const status = computed(() => {
       <div class="flex flex-col justify-center text-white flex-wrap pt-2">
         <div class="font-semibold">Latest chapter:</div>
         {{ data?.latest_chapter }}
+      </div>
+
+      <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+        <div class="font-semibold">Last updated:</div>
+        {{ lastUpdated }}
       </div>
       <AssociatedNames :names="data?.associated" />
     </div>
