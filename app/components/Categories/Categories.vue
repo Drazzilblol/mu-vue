@@ -1,24 +1,24 @@
 <script setup lang="ts">
+import type { TCategory } from "~/types/Series";
+
 const props = defineProps({
   categories: {
-    type: Array<any>,
-    required: true,
-  } as any,
+    type: Array<TCategory>,
+  },
 });
 
-const pereparedCategories = computed(() => {
-  const sorted = props.categories.toSorted(
-    (a: any, b: any) => b.votes - a.votes
+const preparedCategories = computed(() => {
+  const sorted = props.categories?.toSorted(
+    (a: TCategory, b: TCategory) => b.votes - a.votes
   );
-  const minVotes = sorted[sorted.length - 1]?.votes || 0;
-  const maxVotes = sorted[0]?.votes || 0;
-  const full = props.categories.map((category: any) => {
+  const maxVotes = sorted?.[0]?.votes || 0;
+  const full = props.categories?.map((category: TCategory) => {
     return {
       ...category,
       weight: category.votes / maxVotes,
     };
   });
-  const popular = sorted.splice(0, 10).map((category: any) => {
+  const popular = sorted?.splice(0, 10).map((category: TCategory) => {
     return {
       ...category,
       weight: category.votes / maxVotes,
@@ -41,7 +41,7 @@ const navigate = () => {
       <div
         class="even:bg-gray-700 cursor-pointer rounded-sm hover:text-blue-300"
         :style="{ fontSize: Math.round(20 * category.weight) + 'px' }"
-        v-for="category in pereparedCategories.popular"
+        v-for="category in preparedCategories.popular"
       >
         {{ category.category }}
       </div>

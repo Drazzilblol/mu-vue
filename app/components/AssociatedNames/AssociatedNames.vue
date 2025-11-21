@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const props = defineProps({
   names: {
-    type: Array<string>,
-    required: true,
-  } as any,
+    type: Array<TAssociated>,
+  },
 });
 import { useNotificationsStore } from "~/stores/notifications";
+import type { TAssociated } from "~/types/Series";
 
 const notificationStore = useNotificationsStore();
 

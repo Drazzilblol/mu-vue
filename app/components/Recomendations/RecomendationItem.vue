@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import type { TRecommendation } from "~/types/Series";
 const props = defineProps({
   recomendation: {
-    type: Object as any,
-    required: true,
-  } as any,
+    type: Object as () => TRecommendation,
+  },
 });
 
 const navigate = () => {
-  navigateTo(`/series/${props.recomendation.series_id}`);
+  navigateTo(`/series/${props.recomendation?.series_id}`);
 };
 </script>
 
@@ -17,12 +17,12 @@ const navigate = () => {
     v-on:click="navigate"
   >
     <img
-      :src="recomendation.series_image?.url?.thumb"
+      :src="recomendation?.series_image?.url?.thumb"
       class="w-20 min-w-20 h-28 object-cover rounded-lg"
     />
 
     <div class="font-semibold text-sm ml-4">
-      {{ recomendation.series_name }}
+      {{ recomendation?.series_name }}
     </div>
   </div>
 </template>
