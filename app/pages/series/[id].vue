@@ -5,7 +5,6 @@ const route = useRoute();
 
 const { data } = (await useFetch(`/api/series/${route.params.id}`)) as any;
 
-console.log(data.value);
 const prepareText = (text: string) => {
   const pattern = /(\*\*(.*)?\*\*)/g;
   const linkPattern = /\[(.+?)\]\((.+?)\)/g;
@@ -68,12 +67,22 @@ const status = computed(() => {
         </div>
       </div>
       <div class="flex flex-row gap-4">
-        <div
-          class="w-[60%] whitespace-break-spaces wrap-anywhere break-words"
-          v-html="desc"
-        ></div>
-        <div class="w-[40%]">
-          <Categories :categories="data.categories" />
+        <div class="w-[70%]">
+          <div
+            class="whitespace-break-spaces wrap-anywhere break-words"
+            v-html="desc"
+          ></div>
+          <div class="flex flex-row gap-4 mt-4">
+            <div class="w-[50%]">
+              <Categories :categories="data.categories" />
+            </div>
+            <div class="w-[50%]">
+              <Categories :categories="data.categories" />
+            </div>
+          </div>
+        </div>
+        <div class="w-[30%]">
+          <Recomendations :recomendations="data.category_recommendations" />
         </div>
       </div>
     </div>
