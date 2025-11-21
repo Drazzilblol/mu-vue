@@ -79,10 +79,13 @@ const lastUpdated = computed(() => {
       </div>
       <div class="flex flex-row gap-4">
         <div class="w-[70%]">
-          <div
-            class="whitespace-break-spaces wrap-anywhere break-words"
-            v-html="desc"
-          ></div>
+          <TextCollapse :lines="6">
+            <div
+              class="whitespace-break-spaces wrap-anywhere break-words"
+              v-html="desc"
+            ></div>
+          </TextCollapse>
+
           <div class="flex flex-row gap-4 mt-4">
             <div class="w-[50%]">
               <Categories :categories="data?.categories" />

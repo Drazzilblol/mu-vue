@@ -18,12 +18,14 @@ const copy = (name: string) => {
 <template>
   <div class="flex flex-col justify-center text-white flex-wrap pt-2">
     <div class="font-semibold">Associated Names:</div>
-    <div
-      class="cursor-pointer hover:text-blue-300 hover:underline"
-      v-for="name in names"
-      v-on:click="copy(name.title)"
-    >
-      {{ name.title }}
-    </div>
+    <TextCollapse :lines="6">
+      <div
+        class="cursor-pointer hover:text-blue-300 hover:underline"
+        v-for="name in names"
+        v-on:click="copy(name.title)"
+      >
+        {{ name.title }}
+      </div>
+    </TextCollapse>
   </div>
 </template>
