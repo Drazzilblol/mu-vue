@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
     body: {
       ...query,
       orderby: "year_pos",
+      perpage: 40,
       include_rank_metadata: true,
     },
     headers: {

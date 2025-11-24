@@ -1,10 +1,15 @@
 <script setup lang="ts">
-const navigate = () => {
-  navigateTo(`/`);
+const navigate = (url: string) => {
+  navigateTo(url);
 };
 </script>
 <template>
-  <header class="p-4 w-screen fixed top-0 bg-gray-800 shadow-md">
-    <h1 v-on:click="navigate" class="text-2xl text-white">Manga Updates</h1>
+  <header
+    class="flex flex-row p-4 w-screen fixed top-0 bg-gray-800 shadow-md z-10 gap-4"
+  >
+    <h1 v-on:click="() => navigate('/')" class="text-2xl text-white">
+      Manga Updates
+    </h1>
+    <Button :onclick="() => navigate('/search')">Search</Button>
   </header>
 </template>

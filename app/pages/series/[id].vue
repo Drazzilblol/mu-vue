@@ -35,10 +35,10 @@ const lastUpdated = computed(() => {
     class="flex flex-row gap-4 p-8 max-w-[1240px] justify-center mx-auto w-max shrink-0"
   >
     <div>
-      <img
-        :src="data?.image?.url?.original"
-        class="w-64 min-w-64 object-cover rounded-lg"
-      />
+      <div class="w-64 min-w-64 rounded-2xl">
+        <CoverImage :url="data?.image?.url?.original" />
+      </div>
+
       <div class="flex flex-col justify-center text-white flex-wrap pt-2">
         <div class="font-semibold">Status in Country of Origin:</div>
         <div v-html="status" />
