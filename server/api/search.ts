@@ -1,10 +1,11 @@
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
+  const body = await readBody(event);
+
   const repo = await $fetch("https://api.mangaupdates.com/v1/series/search", {
     method: "POST",
     body: {
-      ...query,
-      orderby: "year_pos",
+      ...body,
       perpage: 40,
       include_rank_metadata: true,
     },
