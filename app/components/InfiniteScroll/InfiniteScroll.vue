@@ -35,5 +35,7 @@ const handleScroll = () => {
 };
 </script>
 <template>
-  <div ref="scrollContainer" class="w-full h-full overflow-auto"><slot /></div>
+  <div ref="scrollContainer" class="w-full h-full overflow-y-scroll">
+    <slot />
+  </div>
 </template>
