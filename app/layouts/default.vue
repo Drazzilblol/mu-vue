@@ -3,10 +3,10 @@ import Header from "~/components/Header/Header.vue";
 </script>
 
 <template>
-  <div class="z-10">
+  <div class="h-screen overflow-hidden">
     <Header />
 
-    <div class="pt-16"><slot /></div>
+    <div class="pt-[72px] h-full"><slot /></div>
     <NotificationsContainer />
   </div>
 </template>

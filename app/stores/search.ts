@@ -6,17 +6,23 @@ export type TSearchFilters = {
   type?: string[];
 };
 
+const INITIAL_STATE = {
+  filters: {
+    search: undefined,
+    genre: [],
+    type: [],
+  } as TSearchFilters,
+  results: [] as any[],
+  loading: false,
+  total: 0,
+  page: 0,
+  per_page: 40,
+  canLoadMore: true,
+  error: null as string | null,
+};
+
 export const useSearchStore = defineStore("searchStore", {
-  state: () => ({
-    filters: {
-      search: undefined,
-      genre: [],
-      type: [],
-    } as TSearchFilters,
-    results: [] as any[],
-    loading: false,
-    error: null as string | null,
-  }),
+  state: () => INITIAL_STATE,
   getters: {
     activeFilters: (state) => {
       return Object.entries(state.filters).filter(
@@ -42,29 +48,44 @@ export const useSearchStore = defineStore("searchStore", {
     setType(type: string[]) {
       this.filters.type = type;
     },
-    resetFilters() {
-      this.filters = {};
+    reset() {
+      this.$reset();
     },
-    async search() {
+    async search(shouldReset = true) {
+      if (shouldReset) {
+        this.reset();
+      }
       this.loading = true;
       this.error = null;
 
       try {
         const data = (await $fetch("/api/search", {
           method: "post",
-          body: Object.fromEntries(
-            Object.entries(this.filters).filter(
-              ([key, value]) =>
-                value !== null && value !== undefined && value !== ""
-            )
-          ),
+          body: {
+            ...Object.fromEntries(
+              Object.entries(this.filters).filter(
+                ([key, value]) =>
+                  value !== null && value !== undefined && value !== ""
+              )
+            ),
+            page: this.page + 1,
+            perpage: this.per_page,
+          },
         })) as any;
-        this.results = data.results;
+        this.results = [...this.results, ...data.results];
+        this.total = data.total_hits;
+        this.page = data.page;
+        this.per_page = data.per_page;
+        this.canLoadMore =
+          this.page * this.per_page < this.total ? true : false;
       } catch (e) {
         this.error = "Search failed";
       } finally {
         this.loading = false;
       }
+    },
+    async loadMore() {
+      this.search(false);
     },
   },
 });
