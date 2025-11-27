@@ -19,6 +19,13 @@ const { data } = (await useFetch("/api/genres")) as any;
       class="placeholder:text-muted-foreground w-full p-2 text-[16px] focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 rounded-full"
       v-model="filters.search"
       placeholder="Search..."
+      v-on:keydown="
+        (e) => {
+          if (e.key === 'Enter') {
+            searchStore.search();
+          }
+        }
+      "
     />
     <div
       class="flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-2 rounded-full hover:bg-gray-700 select-none"

@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import InfiniteScroll from "~/components/InfiniteScroll/InfiniteScroll.vue";
 import SearchResults from "~/components/SearchResults/SearchResults.vue";
 const searchStore = useSearchStore();
 const searchResults = ref<any[]>([]);
-const scrollContainer = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-  scrollContainer.value?.addEventListener("scroll", handleScroll);
   if (searchStore.results.length === 0) {
     searchStore.search();
     return;
@@ -13,20 +12,6 @@ onMounted(() => {
     searchResults.value = searchStore.results;
   }
 });
-
-onUnmounted(() => {
-  scrollContainer.value?.removeEventListener("scroll", handleScroll);
-});
-
-const handleScroll = () => {
-  if (!scrollContainer.value) return;
-  const bottomOfWindow =
-    scrollContainer.value?.scrollTop + scrollContainer.value?.clientHeight >=
-    scrollContainer.value?.scrollHeight - 200;
-  if (bottomOfWindow && !searchStore.loading && searchStore.canLoadMore) {
-    searchStore.loadMore();
-  }
-};
 
 watch(
   () => searchStore.results,
@@ -37,7 +22,11 @@ watch(
 </script>
 
 <template>
-  <div ref="scrollContainer" class="w-full h-full overflow-auto">
+  <InfiniteScroll
+    :isLoading="searchStore.loading"
+    :canLoadMore="searchStore.canLoadMore"
+    :loadMore="() => searchStore.loadMore()"
+  >
     <div class="flex flex-row gap-4 mx-auto max-w-[1240px] py-4">
       <SearchResults
         class="w-[75%]"
@@ -46,5 +35,5 @@ watch(
       />
       <div class="w-[25%] h-fit sticky top-4"><Filters></Filters></div>
     </div>
-  </div>
+  </InfiniteScroll>
 </template>
