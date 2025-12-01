@@ -9,7 +9,7 @@ enum FilterView {
 
 const show = reactive({ value: FilterView.Filters });
 const searchStore = useSearchStore();
-const { filters } = storeToRefs(searchStore);
+const { selectedFilters } = storeToRefs(searchStore);
 const { data } = (await useFetch("/api/genres")) as any;
 </script>
 
@@ -17,7 +17,7 @@ const { data } = (await useFetch("/api/genres")) as any;
   <div class="flex flex-col gap-2" v-if="show.value === FilterView.Filters">
     <input
       class="placeholder:text-muted-foreground w-full p-2 text-[16px] focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 rounded-full"
-      v-model="filters.search"
+      v-model="selectedFilters.search"
       placeholder="Search..."
       v-on:keydown="
         (e) => {
@@ -28,7 +28,7 @@ const { data } = (await useFetch("/api/genres")) as any;
       "
     />
     <div
-      class="flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-2 rounded-full hover:bg-gray-700 select-none"
+      class="flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-2 rounded-full border border-gray-900 hover:border-gray-700 select-none"
       v-on:click="
         () => {
           show.value = FilterView.Type;
@@ -39,7 +39,7 @@ const { data } = (await useFetch("/api/genres")) as any;
       <div>></div>
     </div>
     <div
-      class="flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-2 rounded-full hover:bg-gray-700 select-none"
+      class="flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-2 rounded-full border border-gray-900 hover:border-gray-700 select-none"
       v-on:click="
         () => {
           show.value = FilterView.Genres;

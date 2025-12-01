@@ -4,6 +4,7 @@ export type TSearchFilters = {
   search?: string;
   genre?: string[];
   type?: string[];
+  orderby?: string;
 };
 
 const INITIAL_STATE = {
@@ -11,6 +12,12 @@ const INITIAL_STATE = {
     search: undefined,
     genre: [],
     type: [],
+  } as TSearchFilters,
+  selectedFilters: {
+    search: undefined,
+    genre: [],
+    type: [],
+    orderby: "title",
   } as TSearchFilters,
   results: [] as any[],
   loading: false,
@@ -48,12 +55,17 @@ export const useSearchStore = defineStore("searchStore", {
     setType(type: string[]) {
       this.filters.type = type;
     },
+    sort(option: string) {
+      this.selectedFilters.orderby = option;
+      this.search();
+    },
     reset() {
       this.$reset();
     },
     async search(shouldReset = true) {
       if (shouldReset) {
         this.reset();
+        this.filters = { ...this.selectedFilters };
       }
       this.loading = true;
       this.error = null;

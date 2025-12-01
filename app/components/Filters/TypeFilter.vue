@@ -8,7 +8,7 @@ const props = defineProps({
   },
 });
 
-const { filters } = storeToRefs(useSearchStore());
+const { selectedFilters } = storeToRefs(useSearchStore());
 </script>
 <template>
   <div>
@@ -29,7 +29,7 @@ const { filters } = storeToRefs(useSearchStore());
         type="checkbox"
         :id="value"
         :name="value"
-        v-model="filters.type"
+        v-model="selectedFilters.type"
         :value="value"
       />
       <label :for="value">{{ value }}</label>
