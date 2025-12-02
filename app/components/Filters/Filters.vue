@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import GenreFilter from "./GenreFilter.vue";
 import TypeFilter from "./TypeFilter.vue";
+import Input from "../Input/Input.vue";
 enum FilterView {
   Filters = "filters",
   Genres = "genres",
@@ -15,11 +16,22 @@ const { data } = (await useFetch("/api/genres")) as any;
 
 <template>
   <div class="flex flex-col gap-2" v-if="show.value === FilterView.Filters">
-    <input
-      class="placeholder:text-muted-foreground w-full p-2 text-[16px] focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 rounded-full"
+    <Input
       v-model="selectedFilters.search"
       placeholder="Search..."
-      v-on:keydown="
+      :onkeydown="
+        (e) => {
+          if (e.key === 'Enter') {
+            searchStore.search();
+          }
+        }
+      "
+    />
+
+    <Input
+      v-model="selectedFilters.year"
+      placeholder="Year..."
+      :onkeydown="
         (e) => {
           if (e.key === 'Enter') {
             searchStore.search();

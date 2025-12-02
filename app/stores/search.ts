@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 
 export type TSearchFilters = {
   search?: string;
+  year?: string;
   genre?: any;
   type?: string[];
   orderby?: string;
@@ -10,14 +11,16 @@ export type TSearchFilters = {
 const INITIAL_STATE = {
   filters: {
     search: undefined,
+    year: undefined,
     genre: [],
     type: [],
   } as TSearchFilters,
   selectedFilters: {
     search: undefined,
+    year: undefined,
     genre: {},
     type: [],
-    orderby: "title",
+    orderby: "score",
   } as TSearchFilters,
   results: [] as any[],
   loading: false,
