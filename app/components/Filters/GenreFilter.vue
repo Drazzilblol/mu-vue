@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import TriCheckbox from "../Checkbox/TriCheckbox.vue";
+
 const props = defineProps({
   onback: {
     type: Function,
@@ -11,6 +13,10 @@ const props = defineProps({
 });
 
 const { selectedFilters } = storeToRefs(useSearchStore());
+
+const onCheckboxClick = (value: string, newValue: boolean | undefined) => {
+  selectedFilters.value.genre[value] = newValue;
+};
 </script>
 <template>
   <div>
@@ -23,15 +29,16 @@ const { selectedFilters } = storeToRefs(useSearchStore());
       ><- Back</Button
     >
     <div v-for="value in genres" class="flex items-center gap-2 m-2 text-white">
-      <input
-        class="w-4 h-4"
-        type="checkbox"
-        :id="value.genre"
-        :name="value.genre"
-        v-model="selectedFilters.genre"
-        :value="value.genre"
-      />
-      <label :for="value.genre">{{ value.genre }}</label>
+      <TriCheckbox
+        :onclick="
+          (newValue: boolean | undefined) => {
+            onCheckboxClick(value.genre, newValue);
+          }
+        "
+        :value="selectedFilters.genre[value.genre]"
+      >
+        {{ value.genre }}
+      </TriCheckbox>
     </div>
   </div>
 </template>

@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export type TSearchFilters = {
   search?: string;
-  genre?: string[];
+  genre?: any;
   type?: string[];
   orderby?: string;
 };
@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   } as TSearchFilters,
   selectedFilters: {
     search: undefined,
-    genre: [],
+    genre: {},
     type: [],
     orderby: "title",
   } as TSearchFilters,
@@ -26,6 +26,30 @@ const INITIAL_STATE = {
   per_page: 40,
   canLoadMore: true,
   error: null as string | null,
+};
+
+const preparedFilters = (filters: TSearchFilters) => {
+  const prepared: TSearchFilters = {};
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value !== null && value !== undefined && value !== "") {
+      prepared[key as keyof TSearchFilters] = value;
+    }
+  });
+  const genres = Object.entries(filters.genre || {}).reduce(
+    (acc, [k, v]) => {
+      if (v === true) {
+        acc.genre.push(k);
+      } else if (v === false) {
+        acc.exclude_genre.push(k);
+      }
+      return acc;
+    },
+    {
+      genre: [] as string[],
+      exclude_genre: [] as string[],
+    }
+  );
+  return { ...prepared, ...genres };
 };
 
 export const useSearchStore = defineStore("searchStore", {
@@ -74,12 +98,7 @@ export const useSearchStore = defineStore("searchStore", {
         const data = (await $fetch("/api/search", {
           method: "post",
           body: {
-            ...Object.fromEntries(
-              Object.entries(this.filters).filter(
-                ([key, value]) =>
-                  value !== null && value !== undefined && value !== ""
-              )
-            ),
+            ...preparedFilters(this.filters),
             page: this.page + 1,
             perpage: this.per_page,
           },

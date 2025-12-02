@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ESeriesType } from "~/types/Series";
+import Checkbox from "../Checkbox/Checkbox.vue";
 
 const props = defineProps({
   onback: {
@@ -9,6 +10,15 @@ const props = defineProps({
 });
 
 const { selectedFilters } = storeToRefs(useSearchStore());
+
+const onCheckboxClick = (value: ESeriesType) => {
+  const index = selectedFilters.value.type!.indexOf(value);
+  if (index > -1) {
+    selectedFilters.value.type!.splice(index, 1);
+  } else {
+    selectedFilters.value.type!.push(value);
+  }
+};
 </script>
 <template>
   <div>
@@ -24,15 +34,12 @@ const { selectedFilters } = storeToRefs(useSearchStore());
       v-for="value in ESeriesType"
       class="flex items-center gap-2 m-2 text-white"
     >
-      <input
-        class="w-4 h-4"
-        type="checkbox"
-        :id="value"
-        :name="value"
-        v-model="selectedFilters.type"
-        :value="value"
-      />
-      <label :for="value">{{ value }}</label>
+      <Checkbox
+        :onclick="() => onCheckboxClick(value)"
+        :value="selectedFilters.type?.includes(value)"
+      >
+        {{ value }}
+      </Checkbox>
     </div>
   </div>
 </template>

@@ -33,7 +33,8 @@ watch(
         :search-result="searchResults"
         :isLoading="searchStore.loading"
       />
-      <div class="flex flex-col w-[25%] h-fit sticky top-4 gap-2">
+      <!-- fix sticky scroll -->
+      <div class="flex flex-col w-[25%] h-fit gap-2">
         <div class="text-white font-semibold">Sort</div>
         <SortManga />
         <div class="text-white font-semibold">Filters</div>
