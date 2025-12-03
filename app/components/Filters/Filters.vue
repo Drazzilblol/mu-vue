@@ -2,6 +2,7 @@
 import GenreFilter from "./GenreFilter.vue";
 import TypeFilter from "./TypeFilter.vue";
 import Input from "../Input/Input.vue";
+import SearchTypeFilter from "./SearchTypeFilter.vue";
 enum FilterView {
   Filters = "filters",
   Genres = "genres",
@@ -27,6 +28,8 @@ const { data } = (await useFetch("/api/genres")) as any;
         }
       "
     />
+
+    <SearchTypeFilter />
 
     <Input
       v-model="selectedFilters.year"
