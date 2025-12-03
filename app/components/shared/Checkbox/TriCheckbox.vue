@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Icon from "../Icons/Icon.vue";
-import { TIconType } from "../Icons/IconsTypes";
+import { TIconType } from "~/components/shared/Icons/IconsTypes";
 
 const props = defineProps({
   onclick: {

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Categories from "~/components/Categories/Categories.vue";
 import type { TSeries } from "~/types/Series";
 import dayjs from "dayjs";
 

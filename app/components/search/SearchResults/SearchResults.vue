@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import type { TRecommendation } from "~/types/Series";
-import SearchResultsItem from "./SearchResultsItem.vue";
-
 const props = defineProps({
   searchResult: {
     type: Array<any>,

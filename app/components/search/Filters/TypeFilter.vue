@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ESeriesType } from "~/types/Series";
-import Checkbox from "../Checkbox/Checkbox.vue";
 
 const props = defineProps({
   onback: {

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Select from "~/components/Select/Select.vue";
-
 const SORT_OPTIONS = [
   { label: "Score", value: "score" },
   { label: "Title", value: "title" },

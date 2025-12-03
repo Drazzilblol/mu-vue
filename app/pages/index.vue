@@ -3,7 +3,6 @@ import Ranking from "~/components/Ranking/Ranking.vue";
 
 const searchStore = useSearchStore();
 const searchResults = ref<any[]>([]);
-console.log(searchResults.value);
 
 onMounted(() => {
   if (searchStore.results.length === 0) {

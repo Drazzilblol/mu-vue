@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import Header from "~/components/Header/Header.vue";
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="h-screen overflow-hidden">

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import TriCheckbox from "../Checkbox/TriCheckbox.vue";
-
 const props = defineProps({
   onback: {
     type: Function,

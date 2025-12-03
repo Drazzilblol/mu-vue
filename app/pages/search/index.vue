@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import InfiniteScroll from "~/components/InfiniteScroll/InfiniteScroll.vue";
-import SearchResults from "~/components/SearchResults/SearchResults.vue";
 const searchStore = useSearchStore();
 const searchResults = ref<any[]>([]);
 

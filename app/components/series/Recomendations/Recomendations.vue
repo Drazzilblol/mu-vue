@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { TRecommendation } from "~/types/Series";
-import RecomendationItem from "./RecomendationItem.vue";
 
 const props = defineProps({
   recomendations: {
