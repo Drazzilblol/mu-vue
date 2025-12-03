@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { useNotificationsStore } from "~/stores/notifications";
+import type { TAssociated } from "~/types/Series";
+
 const props = defineProps({
   names: {
     type: Array<TAssociated>,
   },
 });
-import { useNotificationsStore } from "~/stores/notifications";
-import type { TAssociated } from "~/types/Series";
 
 const notificationStore = useNotificationsStore();
 

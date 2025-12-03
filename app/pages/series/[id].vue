@@ -34,7 +34,7 @@ const lastUpdated = computed(() => {
     <div
       class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-max shrink-0"
     >
-      <div>
+      <div class="w-64">
         <div class="w-64 min-w-64 rounded-2xl">
           <CoverImage :url="data?.image?.url?.original" />
         </div>
@@ -88,7 +88,7 @@ const lastUpdated = computed(() => {
 
             <div class="flex flex-row gap-4 mt-4">
               <div class="w-[50%]">
-                <Categories :categories="data?.categories" />
+                <RelatedSeries :related="data?.related_series" />
               </div>
               <div class="w-[50%]">
                 <Categories :categories="data?.categories" />
