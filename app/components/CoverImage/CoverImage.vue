@@ -10,11 +10,11 @@ const props = defineProps({
     <div
       class="relative content-center aspect-[2/3] w-full blur-[4px] bg-cover bg-center"
       :style="{
-        backgroundImage: `url(${url})`,
+        backgroundImage: url ? `url(${url})` : '',
       }"
     ></div>
     <img
-      :src="url"
+      :src="url || '/not_found.png'"
       class="absolute top-[50%] -translate-y-1/2 w-full max-h-full object-fill"
       loading="lazy"
     />

@@ -7,11 +7,11 @@ const route = useRoute();
 
 const { data } = await useFetch<TSeries>(`/api/series/${route.params.id}`);
 
-const prepareText = (text: string = "") => {
+const prepareText = (text?: string) => {
   const pattern = /(\*\*(.*)?\*\*)/g;
   const linkPattern = /\[(.+?)\]\((.+?)\)/g;
-  const strong = text.replace(pattern, "<strong>$2</strong>");
-  const links = strong.replace(
+  const strong = text?.replace(pattern, "<strong>$2</strong>");
+  const links = strong?.replace(
     linkPattern,
     '<a href="$2" class="underline hover:text-blue-300" target="_blank" rel="noopener noreferrer">$1</a>'
   );
