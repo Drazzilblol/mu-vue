@@ -205,6 +205,16 @@ export type TRelease = {
   };
 };
 
+export type TUserRating = {
+  average_rating: number;
+  rainbow: TRatingRainbow[];
+};
+
+export type TRatingRainbow = {
+  rating: number;
+  count: number;
+};
+
 export enum ESeriesType {
   Artbook = "Artbook",
   Doujinshi = "Doujinshi",

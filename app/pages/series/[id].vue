@@ -87,12 +87,13 @@ const lastUpdated = computed(() => {
             </TextCollapse>
 
             <div class="flex flex-row gap-4 mt-4">
-              <div class="w-[50%]">
+              <div class="w-[50%] flex flex-col gap-4">
                 <RelatedSeries :related="data?.related_series" />
+                <UserRating />
+                <Categories :categories="data?.categories" />
               </div>
               <div class="w-[50%] flex flex-col gap-4">
                 <About :series="data" />
-                <Categories :categories="data?.categories" />
               </div>
             </div>
           </div>
