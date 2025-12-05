@@ -160,6 +160,51 @@ export type TAssociated = {
   title: string;
 };
 
+export type TGroups = {
+  group_list: TGroup[];
+  release_list: TRelease[];
+};
+
+export type TGroup = {
+  group_id: number;
+  name: string;
+  url: string;
+  active: boolean;
+  notes: string;
+  social: {
+    site: string;
+    facebook: string;
+    twitter: string;
+    irc: {
+      channel: string;
+      server: string;
+    };
+    forum: string;
+    discord: string;
+  };
+  added_by: any; // add type later if needed
+};
+
+export type TRelease = {
+  id: number;
+  title: string;
+  volume: string;
+  chapter: string;
+  groups: [
+    {
+      name: string;
+      group_id: number;
+      url: string;
+    }
+  ];
+  release_date: string;
+  time_added: {
+    timestamp: number;
+    as_rfc3339: string;
+    as_string: string;
+  };
+};
+
 export enum ESeriesType {
   Artbook = "Artbook",
   Doujinshi = "Doujinshi",

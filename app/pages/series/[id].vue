@@ -90,7 +90,8 @@ const lastUpdated = computed(() => {
               <div class="w-[50%]">
                 <RelatedSeries :related="data?.related_series" />
               </div>
-              <div class="w-[50%]">
+              <div class="w-[50%] flex flex-col gap-4">
+                <About :series="data" />
                 <Categories :categories="data?.categories" />
               </div>
             </div>
