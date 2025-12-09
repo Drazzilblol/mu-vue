@@ -1,11 +1,25 @@
 import { defineStore } from "pinia";
 
-export type TSearchFilters = {
+export type TSelectedGenre = {
+  [key: string]: boolean | undefined;
+};
+
+export type TSelectedFilters = {
   search?: string;
   stype?: string;
   year?: string;
-  genre?: any;
-  type?: string[];
+  genre: TSelectedGenre;
+  type: string[];
+  orderby?: string;
+};
+
+export type TFilters = {
+  search?: string;
+  stype?: string;
+  year?: string;
+  genre: string[];
+  exclude_genre?: string[];
+  type: string[];
   orderby?: string;
 };
 
@@ -16,7 +30,7 @@ const INITIAL_STATE = {
     year: undefined,
     genre: [],
     type: [],
-  } as TSearchFilters,
+  } as TFilters,
   selectedFilters: {
     search: undefined,
     year: undefined,
@@ -24,7 +38,7 @@ const INITIAL_STATE = {
     genre: {},
     type: [],
     orderby: "score",
-  } as TSearchFilters,
+  } as TSelectedFilters,
   results: [] as any[],
   loading: false,
   total: 0,
@@ -34,11 +48,11 @@ const INITIAL_STATE = {
   error: null as string | null,
 };
 
-const preparedFilters = (filters: TSearchFilters) => {
-  const prepared: TSearchFilters = {};
+const preparedFilters = (filters: TSelectedFilters) => {
+  const prepared: any = {};
   Object.entries(filters).forEach(([key, value]) => {
     if (value !== null && value !== undefined && value !== "") {
-      prepared[key as keyof TSearchFilters] = value;
+      prepared[key as keyof TSelectedFilters] = value;
     }
   });
   const genres = Object.entries(filters.genre || {}).reduce(
@@ -55,7 +69,7 @@ const preparedFilters = (filters: TSearchFilters) => {
       exclude_genre: [] as string[],
     }
   );
-  return { ...prepared, ...genres };
+  return { ...prepared, ...genres } as TFilters;
 };
 
 export const useSearchStore = defineStore("searchStore", {
@@ -79,8 +93,8 @@ export const useSearchStore = defineStore("searchStore", {
     setSearch(search?: string) {
       this.filters.search = search;
     },
-    setGenre(genre: string[]) {
-      this.filters.genre = genre;
+    setGenre(genre: TSelectedGenre) {
+      this.selectedFilters.genre = genre;
     },
     setType(type: string[]) {
       this.filters.type = type;
@@ -95,7 +109,7 @@ export const useSearchStore = defineStore("searchStore", {
     async search(shouldReset = true) {
       if (shouldReset) {
         this.reset();
-        this.filters = { ...this.selectedFilters };
+        this.filters = preparedFilters(this.selectedFilters);
       }
       this.loading = true;
       this.error = null;
@@ -104,7 +118,7 @@ export const useSearchStore = defineStore("searchStore", {
         const data = (await $fetch("/api/search", {
           method: "post",
           body: {
-            ...preparedFilters(this.filters),
+            ...this.filters,
             page: this.page + 1,
             perpage: this.per_page,
           },

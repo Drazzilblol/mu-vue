@@ -69,13 +69,7 @@ const lastUpdated = computed(() => {
         </div>
         <div class="text-2xl font-bold">{{ data?.title }}</div>
         <div class="flex gap-2 flex-row mb-2">
-          <div
-            v-for="value in data?.genres"
-            :key="value.genre"
-            class="px-2 py-1 bg-gray-700 rounded-lg text-sm"
-          >
-            {{ value.genre }}
-          </div>
+          <Genres :genres="data?.genres" />
         </div>
         <div class="flex flex-row gap-4">
           <div class="w-[70%]">

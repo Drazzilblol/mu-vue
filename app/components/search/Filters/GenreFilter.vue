@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import type { TGenre } from "~/types/Series";
+
 const props = defineProps({
   onback: {
     type: Function,
     required: true,
   },
   genres: {
-    type: Object as () => any,
+    type: Array<TGenre>,
     required: true,
   },
 });

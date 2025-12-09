@@ -8,7 +8,11 @@ enum FilterView {
 const show = reactive({ value: FilterView.Filters });
 const searchStore = useSearchStore();
 const { selectedFilters } = storeToRefs(searchStore);
-const { data } = (await useFetch("/api/genres")) as any;
+const genreStore = useGenreStore();
+
+onMounted(() => {
+  genreStore.loadGenres();
+});
 </script>
 
 <template>
@@ -76,7 +80,7 @@ const { data } = (await useFetch("/api/genres")) as any;
           show.value = FilterView.Filters;
         }
       "
-      :genres="data"
+      :genres="genreStore.genres"
     />
   </div>
   <div v-if="show.value === FilterView.Type">
