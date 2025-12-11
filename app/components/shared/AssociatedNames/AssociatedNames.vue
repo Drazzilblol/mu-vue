@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { useNotificationsStore } from "~/stores/notifications";
-import type { TAssociated } from "~/types/Series";
 
 const props = defineProps({
   names: {
-    type: Array<TAssociated>,
+    type: Array<string>,
   },
 });
 
@@ -23,9 +22,9 @@ const copy = (name: string) => {
       <div
         class="cursor-pointer hover:text-blue-300 hover:underline"
         v-for="name in names"
-        v-on:click="copy(name.title)"
+        v-on:click="copy(name)"
       >
-        {{ name.title }}
+        {{ name }}
       </div>
     </TextCollapse>
   </div>

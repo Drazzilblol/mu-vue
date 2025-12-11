@@ -1,0 +1,10 @@
+export const prepareText = (text?: string) => {
+  const pattern = /(\*\*(.*)?\*\*)/g;
+  const linkPattern = /\[(.+?)\]\((.+?)\)/g;
+  const strong = text?.replace(pattern, "<strong>$2</strong>");
+  const links = strong?.replace(
+    linkPattern,
+    '<a href="$2" class="underline hover:text-blue-300" target="_blank" rel="noopener noreferrer">$1</a>'
+  );
+  return links;
+};

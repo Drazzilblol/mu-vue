@@ -1,3 +1,5 @@
+import type { TGenre, TImage } from "./General";
+
 export type TSeries = {
   series_id: number;
   title: string;
@@ -99,15 +101,6 @@ export type TRecommendation = {
   weight: number;
 };
 
-export type TImage = {
-  url: {
-    original: string;
-    thumb: string;
-  };
-  height: number;
-  width: number;
-};
-
 export type TCategory = {
   series_id: number;
   category: string;
@@ -130,10 +123,6 @@ export type TPublisher = {
   url: string;
   type: EPublisherType;
   notes: string;
-};
-
-export type TGenre = {
-  genre: string;
 };
 
 export type TPublication = {

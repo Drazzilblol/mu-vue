@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { TGenre } from "~/types/Series";
+import type { TGenre } from "~/types/General";
 
 const INITIAL_STATE = {
   genres: [] as TGenre[],

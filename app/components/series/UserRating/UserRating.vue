@@ -28,19 +28,24 @@ const reversedRainbow = computed(() => {
 <template>
   <div class="flex flex-col justify-center text-white flex-wrap gap-1">
     <div class="font-semibold">User Ratings:</div>
-    <div>Average: {{ data?.average_rating }}/10.0 ({{ summary }} votes)</div>
+    <template v-if="summary !== 0">
+      <div>Average: {{ data?.average_rating }}/10.0 ({{ summary }} votes)</div>
 
-    <div class="grid grid-cols-[30px_1fr_30px] gap-x-2">
-      <template v-for="item in reversedRainbow">
-        <span>{{ item.rating }}:</span>
-        <div>
-          <div
-            class="inline-block bg-gray-700 h-5 align-middle"
-            :style="{ width: (item.count / max) * 100 + '%' }"
-          />
-        </div>
-        <span>{{ Math.round((item.count / summary) * 100) }}%</span>
-      </template>
-    </div>
+      <div class="grid grid-cols-[30px_1fr_30px] gap-x-2">
+        <template v-for="item in reversedRainbow">
+          <span>{{ item.rating }}:</span>
+          <div>
+            <div
+              class="inline-block bg-gray-700 h-5 align-middle"
+              :style="{ width: (item.count / max) * 100 + '%' }"
+            />
+          </div>
+          <span>{{ Math.round((item.count / summary) * 100) }}%</span>
+        </template>
+      </div>
+    </template>
+    <template v-else>
+      <div>N/A</div>
+    </template>
   </div>
 </template>

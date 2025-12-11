@@ -28,11 +28,15 @@ const status = computed(() => {
 const lastUpdated = computed(() => {
   return dayjs((data.value?.last_updated.timestamp || 0) * 1000).fromNow();
 });
+
+const associated = computed(() => {
+  return data.value?.associated.map((item) => item.title) || [];
+});
 </script>
 <template>
   <div class="flex h-full overflow-y-scroll bg-gray-800">
     <div
-      class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-max shrink-0"
+      class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0"
     >
       <div class="w-64">
         <div class="w-64 min-w-64 rounded-2xl">
@@ -58,9 +62,9 @@ const lastUpdated = computed(() => {
           <div class="font-semibold">Last updated:</div>
           {{ lastUpdated }}
         </div>
-        <AssociatedNames :names="data?.associated" />
+        <AssociatedNames :names="associated" />
       </div>
-      <div class="flex flex-col gap-2 text-white">
+      <div class="flex flex-col gap-2 text-white w-full">
         <div class="flex flex-row text-lg gap-4 justify-between text-center">
           <div>{{ data?.year }} - {{ data?.type }}</div>
           <div class="text-green-600 text-2xl font-bold">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TGenre } from "~/types/Series";
+import type { TGenre } from "~/types/General";
 
 const props = defineProps({
   onback: {

@@ -21,7 +21,7 @@ const { data: groupsData } = await useFetch<TGroups>(
   `/api/groups?id=${route.params.id}`
 );
 
-const creators = computed(() => {
+const creators = computed<{ authors: TAuthor[]; artists: TAuthor[] }>(() => {
   return props.series?.authors.reduce(
     (acc: any, author: TAuthor) => {
       if (author.type === EAuthorType.Author) {
@@ -62,6 +62,7 @@ const publishers = computed(() => {
       <div
         class="cursor-pointer hover:text-blue-300 underline"
         v-for="author in creators.authors"
+        @click="() => navigateTo(`/author/${author.author_id}`)"
       >
         {{ author.name }}
       </div>
@@ -75,6 +76,7 @@ const publishers = computed(() => {
       <div
         class="cursor-pointer hover:text-blue-300 underline"
         v-for="artist in creators.artists"
+        @click="() => navigateTo(`/author/${artist.author_id}`)"
       >
         {{ artist.name }}
       </div>
