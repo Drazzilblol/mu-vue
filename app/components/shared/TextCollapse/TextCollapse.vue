@@ -15,7 +15,9 @@ const isOverflowing = computed(() => {
   <div
     ref="textContainer"
     class="line-clamp-1"
-    :style="`-webkit-line-clamp: ${isCollapsed ? props.lines : 'none'}`"
+    :style="`-webkit-line-clamp: ${
+      isCollapsed && props.lines ? props.lines : 'none'
+    }`"
   >
     <slot></slot>
   </div>

@@ -88,7 +88,10 @@ const publishers = computed(() => {
       <div v-if="!publishers.original.length">N/A</div>
 
       <div v-for="publisher in publishers.original">
-        <span class="cursor-pointer hover:text-blue-300 underline mr-1">
+        <span
+          class="cursor-pointer hover:text-blue-300 underline mr-1"
+          @click="() => navigateTo(`/publisher/${publisher.publisher_id}`)"
+        >
           {{ publisher.publisher_name }}
         </span>
         <span v-if="publisher.notes">({{ publisher.notes }})</span>
@@ -101,7 +104,12 @@ const publishers = computed(() => {
       <div v-if="!series?.publications.length">N/A</div>
 
       <div v-for="publication in series?.publications">
-        <span class="cursor-pointer hover:text-blue-300 underline">
+        <span
+          class="cursor-pointer hover:text-blue-300 underline"
+          @click="
+            () => navigateTo(`/publication/${publication?.publication_name}`)
+          "
+        >
           {{ publication?.publication_name }}
         </span>
         ({{ publication?.publisher_name }})
@@ -114,7 +122,10 @@ const publishers = computed(() => {
       <div v-if="!publishers.english.length">N/A</div>
 
       <div v-for="publisher in publishers.english">
-        <span class="cursor-pointer hover:text-blue-300 underline mr-1">
+        <span
+          class="cursor-pointer hover:text-blue-300 underline mr-1"
+          @click="() => navigateTo(`/publisher/${publisher.publisher_id}`)"
+        >
           {{ publisher.publisher_name }}
         </span>
         <span v-if="publisher.notes">({{ publisher.notes }})</span>
