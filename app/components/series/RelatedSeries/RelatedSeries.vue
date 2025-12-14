@@ -13,7 +13,7 @@ const navigate = (id: number) => {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+  <div class="flex flex-col justify-center text-white flex-wrap custom-block">
     <div class="font-semibold">Related Series:</div>
     <div v-if="!related?.length">N/A</div>
     <TextCollapse :lines="6">

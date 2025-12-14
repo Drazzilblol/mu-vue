@@ -33,9 +33,7 @@ const navigate = () => {
 </script>
 
 <template>
-  <div
-    class="flex flex-col justify-center text-center rounded-md p-2 border border-gray-700"
-  >
+  <div class="flex flex-col justify-center text-center custom-block">
     <div class="font-semibold mb-2">Categories:</div>
     <div class="flex justify-center text-white flex-wrap gap-2">
       <div

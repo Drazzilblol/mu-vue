@@ -20,7 +20,7 @@ const preparedGenres = (genres: string[]) => {
 
     <div
       v-for="item in series"
-      class="grid grid-cols-[2fr_3fr_50px] gap-1 even:bg-gray-700"
+      class="grid grid-cols-[2fr_3fr_50px] gap-2"
       :key="item.series_id"
     >
       <div

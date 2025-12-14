@@ -53,7 +53,9 @@ const publishers = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center text-white flex-wrap pt-2 gap-4">
+  <div
+    class="flex flex-col justify-center text-white flex-wrap gap-4 custom-block"
+  >
     <div>
       <div class="font-semibold">Author(s):</div>
 

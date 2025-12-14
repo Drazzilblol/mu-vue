@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps({
   lines: Number,
+  class: String,
 });
 
 const isCollapsed = ref(true);
@@ -12,20 +13,22 @@ const isOverflowing = computed(() => {
 </script>
 
 <template>
-  <div
-    ref="textContainer"
-    class="line-clamp-1"
-    :style="`-webkit-line-clamp: ${
-      isCollapsed && props.lines ? props.lines : 'none'
-    }`"
-  >
-    <slot></slot>
-  </div>
-  <div
-    class="w-fit cursor-pointer text-blue-200 hover:text-blue-400"
-    v-on:click="isCollapsed = !isCollapsed"
-    v-if="isOverflowing"
-  >
-    {{ isCollapsed ? "More..." : "Less..." }}
+  <div :class="class">
+    <div
+      ref="textContainer"
+      class="line-clamp-1"
+      :style="`-webkit-line-clamp: ${
+        isCollapsed && props.lines ? props.lines : 'none'
+      }`"
+    >
+      <slot></slot>
+    </div>
+    <div
+      class="w-fit cursor-pointer text-blue-200 hover:text-blue-300"
+      v-on:click="isCollapsed = !isCollapsed"
+      v-if="isOverflowing"
+    >
+      {{ isCollapsed ? "More..." : "Less..." }}
+    </div>
   </div>
 </template>

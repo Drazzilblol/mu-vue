@@ -2,40 +2,14 @@
 import type { TPublisherPublicationsResponse } from "~/types/Publisher";
 
 const props = defineProps({
-  publisherId: String,
-});
-
-const loading = ref(false);
-const error = ref<string | null>(null);
-const publications = ref<TPublisherPublicationsResponse | null>(null);
-
-const loadPublications = async () => {
-  loading.value = true;
-  error.value = null;
-
-  try {
-    publications.value = await $fetch<TPublisherPublicationsResponse>(
-      `/api/publishers/publications/${props.publisherId}`
-    );
-  } catch (e) {
-    error.value = "Failed to fetch publications.";
-  } finally {
-    loading.value = false;
-  }
-};
-
-onMounted(() => {
-  loadPublications();
+  publications: Object as () => TPublisherPublicationsResponse | null,
 });
 </script>
 
 <template>
   <div>
-    <div class="font-semibold text-xl text-center pb-2">Publications</div>
-
-    <Loading v-if="loading" class="text-center pt-4" />
     <div
-      v-if="publications?.publication_list?.length && !loading"
+      v-if="publications?.publication_list?.length"
       class="grid grid-cols-3 gap-1"
     >
       <div
@@ -44,7 +18,7 @@ onMounted(() => {
         class="justify-center flex"
       >
         <div
-          class="overflow-hidden text-ellipsis whitespace-break-spaces cursor-pointer hover:text-blue-300 underline"
+          class="overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer hover:text-blue-300 underline"
           @click="() => navigateTo(`/publication/${item.publication_name}`)"
         >
           {{ item.publication_name }}

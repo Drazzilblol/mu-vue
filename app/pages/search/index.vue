@@ -32,7 +32,7 @@ watch(
         :isLoading="searchStore.loading"
       />
       <!-- fix sticky scroll -->
-      <div class="flex flex-col w-[25%] h-fit gap-2">
+      <div class="flex flex-col w-[25%] h-fit gap-2 custom-block">
         <div class="text-white font-semibold">Sort</div>
         <SortManga />
         <div class="text-white font-semibold">Filters</div>

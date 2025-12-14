@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
       },
     }
   ).catch((error) => {
-    console.error("Error fetching author data:", error);
+    console.error("Error fetching publisher data:", error);
     return error;
   });
   return repo;

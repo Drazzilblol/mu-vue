@@ -50,6 +50,7 @@ export type TSocial = {
 export type TAuthorSeriesResponse = {
   total_series: 0;
   series_list: TAuthorSeries[];
+
   genre_list: TGenre[];
 };
 

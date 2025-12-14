@@ -34,35 +34,43 @@ const associated = computed(() => {
 });
 </script>
 <template>
-  <div class="flex h-full overflow-y-scroll bg-gray-800">
+  <div class="flex flex-col h-full overflow-y-scroll">
+    <div class="relative w-full">
+      <img
+        class="absolute top-0 left-0 w-full h-[60vh] object-cover filter blur-md opacity-30 z-0"
+        :src="data?.image?.url?.original"
+      />
+    </div>
     <div
-      class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0"
+      class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0 z-10"
     >
       <div class="w-64">
         <div class="w-64 min-w-64 rounded-2xl">
           <CoverImage :url="data?.image?.url?.original" />
         </div>
 
-        <div class="flex flex-col justify-center text-white flex-wrap pt-2">
-          <div class="font-semibold">Status in Country of Origin:</div>
-          <div v-html="status" />
-        </div>
+        <div class="custom-block mt-2">
+          <div class="flex flex-col justify-center text-white flex-wrap">
+            <div class="font-semibold">Status in Country of Origin:</div>
+            <div v-html="status" />
+          </div>
 
-        <div class="flex flex-col justify-center text-white flex-wrap pt-2">
-          <div class="font-semibold">Scanlate:</div>
-          {{ data?.completed ? "Completed" : "Continuing" }}
-        </div>
+          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+            <div class="font-semibold">Scanlate:</div>
+            {{ data?.completed ? "Completed" : "Continuing" }}
+          </div>
 
-        <div class="flex flex-col justify-center text-white flex-wrap pt-2">
-          <div class="font-semibold">Latest chapter:</div>
-          {{ data?.latest_chapter }}
-        </div>
+          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+            <div class="font-semibold">Latest chapter:</div>
+            {{ data?.latest_chapter }}
+          </div>
 
-        <div class="flex flex-col justify-center text-white flex-wrap pt-2">
-          <div class="font-semibold">Last updated:</div>
-          {{ lastUpdated }}
+          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+            <div class="font-semibold">Last updated:</div>
+            {{ lastUpdated }}
+          </div>
+          <AssociatedNames :names="associated" />
         </div>
-        <AssociatedNames :names="associated" />
       </div>
       <div class="flex flex-col gap-2 text-white w-full">
         <div class="flex flex-row text-lg gap-4 justify-between text-center">
@@ -81,20 +89,20 @@ const associated = computed(() => {
             <Tabs>
               <Tab title="Details">
                 <div>
-                  <TextCollapse :lines="6">
+                  <TextCollapse :lines="6" class="mt-2 custom-block">
                     <div
                       class="whitespace-break-spaces wrap-anywhere break-words"
                       v-html="desc"
                     ></div>
                   </TextCollapse>
 
-                  <div class="flex flex-row gap-4 mt-4">
-                    <div class="w-[50%] flex flex-col gap-4">
+                  <div class="flex flex-row gap-2 mt-2">
+                    <div class="w-[50%] flex flex-col gap-2">
                       <RelatedSeries :related="data?.related_series" />
                       <UserRating />
                       <Categories :categories="data?.categories" />
                     </div>
-                    <div class="w-[50%] flex flex-col gap-4">
+                    <div class="w-[50%] flex flex-col gap-2">
                       <About :series="data" />
                     </div>
                   </div>

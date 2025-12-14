@@ -26,7 +26,9 @@ const reversedRainbow = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center text-white flex-wrap gap-1">
+  <div
+    class="flex flex-col justify-center text-white flex-wrap gap-1 custom-block"
+  >
     <div class="font-semibold">User Ratings:</div>
     <template v-if="summary !== 0">
       <div>Average: {{ data?.average_rating }}/10.0 ({{ summary }} votes)</div>

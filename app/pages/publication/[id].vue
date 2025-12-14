@@ -14,7 +14,7 @@ const preparedGenres = (genres: string[]) => {
 
 <template>
   <!-- TODO: Looks like shit, need redisign -->
-  <div class="flex h-full overflow-y-scroll bg-gray-800">
+  <div class="flex h-full overflow-y-scroll">
     <div
       class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0"
     >

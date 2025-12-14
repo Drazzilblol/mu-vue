@@ -2,42 +2,14 @@
 import type { TPublisherPublicationsResponse } from "~/types/Publisher";
 
 const props = defineProps({
-  publisherId: String,
-});
-
-const loading = ref(false);
-const error = ref<string | null>(null);
-const publications = ref<TPublisherPublicationsResponse | null>(null);
-
-const loadPublications = async () => {
-  loading.value = true;
-  error.value = null;
-
-  try {
-    publications.value = await $fetch<TPublisherPublicationsResponse>(
-      `/api/publishers/publications/${props.publisherId}`
-    );
-  } catch (e) {
-    error.value = "Failed to fetch publications.";
-  } finally {
-    loading.value = false;
-  }
-};
-
-onMounted(() => {
-  loadPublications();
+  publications: Object as () => TPublisherPublicationsResponse | null,
 });
 </script>
 
 <template>
   <div>
-    <div class="font-semibold text-xl text-center pb-2">
-      Licensed Series ({{ publications?.series_list?.length || 0 }})
-    </div>
-
-    <Loading v-if="loading" class="text-center pt-4" />
     <div
-      v-if="publications?.series_list?.length && !loading"
+      v-if="publications?.series_list?.length"
       class="grid grid-cols-3 gap-1"
     >
       <div

@@ -34,7 +34,7 @@ provide("register-tabs", (tab: TTab) => {
 <template>
   <div class="w-full">
     <div
-      class="flex flex-row gap-2 w-max bg-black bg-opacity-40 p-1 mb-2 rounded-full"
+      class="flex flex-row gap-2 w-max bg-zinc-900 bg-opacity-70 p-1 mb-2 rounded-full"
     >
       <div
         v-for="tab in tabs"

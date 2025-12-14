@@ -12,7 +12,7 @@ const navigate = () => {
 
 <template>
   <div
-    class="flex flex-col items-center text-white p-2 rounded-lg bg-gray-700 cursor-pointer border border-gray-600"
+    class="flex flex-col items-center text-white p-2 rounded-lg bg-zinc-900 bg-opacity-70 cursor-pointer border border-gray-600 border-opacity-40"
     v-on:click="navigate"
   >
     <div class="relative w-full">
