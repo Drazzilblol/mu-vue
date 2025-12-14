@@ -75,25 +75,35 @@ const associated = computed(() => {
         <div class="flex gap-2 flex-row mb-2">
           <Genres :genres="data?.genres" />
         </div>
+
         <div class="flex flex-row gap-4">
           <div class="w-[70%]">
-            <TextCollapse :lines="6">
-              <div
-                class="whitespace-break-spaces wrap-anywhere break-words"
-                v-html="desc"
-              ></div>
-            </TextCollapse>
+            <Tabs>
+              <Tab title="Details">
+                <div>
+                  <TextCollapse :lines="6">
+                    <div
+                      class="whitespace-break-spaces wrap-anywhere break-words"
+                      v-html="desc"
+                    ></div>
+                  </TextCollapse>
 
-            <div class="flex flex-row gap-4 mt-4">
-              <div class="w-[50%] flex flex-col gap-4">
-                <RelatedSeries :related="data?.related_series" />
-                <UserRating />
-                <Categories :categories="data?.categories" />
-              </div>
-              <div class="w-[50%] flex flex-col gap-4">
-                <About :series="data" />
-              </div>
-            </div>
+                  <div class="flex flex-row gap-4 mt-4">
+                    <div class="w-[50%] flex flex-col gap-4">
+                      <RelatedSeries :related="data?.related_series" />
+                      <UserRating />
+                      <Categories :categories="data?.categories" />
+                    </div>
+                    <div class="w-[50%] flex flex-col gap-4">
+                      <About :series="data" />
+                    </div>
+                  </div>
+                </div>
+              </Tab>
+              <Tab title="Comments">
+                <div>Comments</div>
+              </Tab>
+            </Tabs>
           </div>
           <div class="w-[30%] flex flex-col gap-4">
             <Recomendations

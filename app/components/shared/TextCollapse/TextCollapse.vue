@@ -22,7 +22,7 @@ const isOverflowing = computed(() => {
     <slot></slot>
   </div>
   <div
-    class="w-fit cursor-pointer text-blue-200 hover:text-blue-300"
+    class="w-fit cursor-pointer text-blue-200 hover:text-blue-400"
     v-on:click="isCollapsed = !isCollapsed"
     v-if="isOverflowing"
   >
