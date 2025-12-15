@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TSeries } from "~/types/Series";
 import dayjs from "dayjs";
+import type CommentsVue from "~/components/series/Comments/Comments.vue";
 
 const route = useRoute();
 
@@ -109,7 +110,7 @@ const associated = computed(() => {
                 </div>
               </Tab>
               <Tab title="Comments">
-                <div>Comments</div>
+                <Comments :seriesId="data?.series_id" />
               </Tab>
             </Tabs>
           </div>
