@@ -40,6 +40,7 @@ const visiblePages = computed(() => {
       <div @click="onPageChange(0)" class="additional-button">1</div>
       <div class="px-1">...</div>
     </template>
+
     <div class="flex">
       <div
         v-for="page in visiblePages"
@@ -51,6 +52,13 @@ const visiblePages = computed(() => {
         {{ page + 1 }}
       </div>
     </div>
+
+    <template v-if="currentPage <= pages.length - 5">
+      <div class="px-1">...</div>
+      <div @click="onPageChange(pages.length - 1)" class="additional-button">
+        {{ pages.length }}
+      </div>
+    </template>
 
     <div
       v-if="currentPage < pages.length - 1"
