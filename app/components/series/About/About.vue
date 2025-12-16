@@ -14,12 +14,10 @@ const props = defineProps({
   series: {
     type: Object as () => TSeries,
   },
+  groups: {
+    type: Object as () => TGroups,
+  },
 });
-
-const route = useRoute();
-const { data: groupsData } = await useFetch<TGroups>(
-  `/api/groups?id=${route.params.id}`
-);
 
 const creators = computed<{ authors: TAuthor[]; artists: TAuthor[] }>(() => {
   return props.series?.authors.reduce(
@@ -137,12 +135,12 @@ const publishers = computed(() => {
     <div>
       <div class="font-semibold">Groups Scanlating:</div>
 
-      <div v-if="!groupsData?.group_list.length">N/A</div>
+      <div v-if="!groups?.group_list.length">N/A</div>
 
       <TextCollapse :lines="4">
         <div
           class="cursor-pointer hover:text-blue-300 underline"
-          v-for="group in groupsData?.group_list"
+          v-for="group in groups?.group_list"
         >
           {{ group.name }}
         </div>
@@ -152,9 +150,9 @@ const publishers = computed(() => {
     <div>
       <div class="font-semibold">Latest Releases:</div>
 
-      <div v-if="!groupsData?.release_list.length">N/A</div>
+      <div v-if="!groups?.release_list.length">N/A</div>
 
-      <div v-for="release in groupsData?.release_list">
+      <div v-for="release in groups?.release_list">
         ch.{{ release.chapter }} by
         <span class="cursor-pointer hover:text-blue-300 underline">
           {{ release.groups[0].name }}

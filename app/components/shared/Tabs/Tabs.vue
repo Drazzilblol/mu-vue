@@ -53,10 +53,10 @@ provide("register-tabs", (tab: TTab) => {
 
 <style lang="css" scoped>
 .active {
-  background-color: rgb(59 130 246); /* bg-gray-700 */
+  background-color: rgb(59 130 246);
 }
 
 .active:hover {
-  background-color: rgb(96 165 250); /* bg-gray-700 */
+  background-color: rgb(96 165 250);
 }
 </style>

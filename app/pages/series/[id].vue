@@ -1,11 +1,22 @@
 <script setup lang="ts">
-import type { TSeries } from "~/types/Series";
+import type { TGroups, TSeries, TUserRating } from "~/types/Series";
 import dayjs from "dayjs";
-import type CommentsVue from "~/components/series/Comments/Comments.vue";
 
 const route = useRoute();
 
 const { data } = await useFetch<TSeries>(`/api/series/${route.params.id}`);
+const { data: comments } = await useFetch<any>(
+  `/api/series/comments/search?id=${route.params.id}&perpage=10&page=1`,
+  { lazy: true }
+);
+const { data: userRating } = await useFetch<TUserRating>(
+  `/api/ratingrainbow?id=${route.params.id}`,
+  { lazy: true }
+);
+const { data: groupsData } = await useFetch<TGroups>(
+  `/api/groups?id=${route.params.id}`,
+  { lazy: true }
+);
 
 const prepareText = (text?: string) => {
   const pattern = /(\*\*(.*)?\*\*)/g;
@@ -100,17 +111,20 @@ const associated = computed(() => {
                   <div class="flex flex-row gap-2 mt-2">
                     <div class="w-[50%] flex flex-col gap-2">
                       <RelatedSeries :related="data?.related_series" />
-                      <UserRating />
+                      <UserRating :userRating="userRating" />
                       <Categories :categories="data?.categories" />
                     </div>
                     <div class="w-[50%] flex flex-col gap-2">
-                      <About :series="data" />
+                      <About :series="data" :groups="groupsData" />
                     </div>
                   </div>
                 </div>
               </Tab>
-              <Tab title="Comments">
-                <Comments :seriesId="data?.series_id" />
+              <Tab :title="`Comments (${comments?.total_hits || 0})`">
+                <Comments
+                  :seriesId="data?.series_id"
+                  :initialComments="comments"
+                />
               </Tab>
             </Tabs>
           </div>

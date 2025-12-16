@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import type { TRatingRainbow, TUserRating } from "~/types/Series";
 
-const route = useRoute();
-const { data } = await useFetch<TUserRating>(
-  `/api/ratingrainbow?id=${route.params.id}`
-);
+const props = defineProps({
+  userRating: {
+    type: Object,
+  },
+});
 
 const summary = computed(() => {
   return (
-    data.value?.rainbow.reduce((acc: number, item: TRatingRainbow) => {
+    props.userRating?.rainbow.reduce((acc: number, item: TRatingRainbow) => {
       return acc + item.count;
     }, 0) || 0
   );
@@ -16,12 +17,13 @@ const summary = computed(() => {
 
 const max = computed(() => {
   return Math.max(
-    ...(data.value?.rainbow.map((item: TRatingRainbow) => item.count) || [])
+    ...(props.userRating?.rainbow.map((item: TRatingRainbow) => item.count) ||
+      [])
   );
 });
 
 const reversedRainbow = computed(() => {
-  return data.value?.rainbow.toReversed();
+  return props.userRating?.rainbow.toReversed();
 });
 </script>
 
@@ -31,7 +33,9 @@ const reversedRainbow = computed(() => {
   >
     <div class="font-semibold">User Ratings:</div>
     <template v-if="summary !== 0">
-      <div>Average: {{ data?.average_rating }}/10.0 ({{ summary }} votes)</div>
+      <div>
+        Average: {{ userRating?.average_rating }}/10.0 ({{ summary }} votes)
+      </div>
 
       <div class="grid grid-cols-[30px_1fr_30px] gap-x-2">
         <template v-for="item in reversedRainbow">
