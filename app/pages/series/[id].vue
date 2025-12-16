@@ -29,6 +29,8 @@ const prepareText = (text?: string) => {
   return links;
 };
 
+const scrollContainer = ref<HTMLElement | null>(null);
+
 const desc = computed(() => {
   return prepareText(data.value?.description);
 });
@@ -46,7 +48,7 @@ const associated = computed(() => {
 });
 </script>
 <template>
-  <div class="flex flex-col h-full overflow-y-scroll">
+  <div class="flex flex-col h-full overflow-y-scroll" ref="scrollContainer">
     <div class="relative w-full">
       <img
         class="absolute top-0 left-0 w-full h-[60vh] object-cover filter blur-md opacity-30 z-0"
@@ -124,6 +126,7 @@ const associated = computed(() => {
                 <Comments
                   :seriesId="data?.series_id"
                   :initialComments="comments"
+                  :scrollRef="scrollContainer as any"
                 />
               </Tab>
             </Tabs>

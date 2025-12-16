@@ -5,6 +5,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  scrollRef: {
+    type: Object as () => HTMLElement | null,
+    required: false,
+  },
 });
 
 const page = ref(0);
@@ -18,8 +22,10 @@ const loadComments = async (newPage: number) => {
     }&page=${newPage + 1}`
   );
   page.value = newPage;
-
   comments.value = data;
+  if (props.scrollRef) {
+    props.scrollRef.scroll({ top: 0, behavior: "smooth" });
+  }
 };
 </script>
 
