@@ -5,10 +5,18 @@ const props = defineProps({
   comment: Object as () => any,
 });
 
-const lastUpdated = computed(() => {
+const createdAt = computed(() => {
   return dayjs(
     (props.comment.record.time_added.timestamp || 0) * 1000
   ).fromNow();
+});
+
+const lastUpdated = computed(() => {
+  if (!props.comment.record.time_updated.timestamp) {
+    return null;
+  }
+
+  return dayjs(props.comment.record.time_updated.timestamp * 1000).fromNow();
 });
 
 const prepareText = (text?: string) => {
@@ -22,13 +30,13 @@ const prepareText = (text?: string) => {
         <div class="flex hover:opacity-0 absolute top-0 left-0 w-full h-full bg-zinc-900">
           <div class="self-center ml-2">Spoilers (Mouse over to view)</div>
         </div>
-    </blockquote>`
+    </blockquote>$2`
   );
   const links = spoilers?.replace(
     linkPattern,
     `<a href="$&" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-300">$&</a>`
   );
-  return links;
+  return links?.replaceAll("\n\n\n", "\n\n");
 };
 
 const text = computed(() => {
@@ -42,7 +50,7 @@ const text = computed(() => {
       <div class="grid grid-cols-[56px_1fr_100px] gap-2">
         <div class="self-center">
           <img
-            :src="comment.record.author.user_info.avatar.url"
+            :src="comment.record.author.user_info.avatar?.url"
             alt="avatar"
             class="w-14 h-14"
           />
@@ -53,7 +61,7 @@ const text = computed(() => {
           </div>
           <!--TODO: add navigate to user profile -->
           <div>by {{ comment.record.author.user_info.username }}</div>
-          <div>{{ lastUpdated }}</div>
+          <div>{{ createdAt }}</div>
         </div>
         <div
           class="h-max p-1 bg-zinc-900 border border-black border-opacity-50 self-center"
@@ -70,6 +78,9 @@ const text = computed(() => {
       </div>
 
       <div class="text-left whitespace-pre-line" v-html="text"></div>
+      <div v-if="lastUpdated" class="text-sm text-left text-gray-500">
+        ...Last updated {{ lastUpdated }}
+      </div>
     </div>
   </div>
 </template>
@@ -77,6 +88,6 @@ const text = computed(() => {
 <style lang="css">
 .blockquote {
   border-left: 3px solid #ccc;
-  @apply bg-zinc-900 my-2 ml-2 p-2 relative flex;
+  @apply bg-zinc-900 my-2  p-2 relative inline-flex w-full;
 }
 </style>
