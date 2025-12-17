@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import type { TCategory } from "~/types/Series";
 
-const props = defineProps({
-  categories: {
-    type: Array<TCategory>,
-  },
-});
+type TCategoryProps = {
+  categories?: TCategory[];
+};
+
+const props = defineProps<TCategoryProps>();
+
+const searchStore = useSearchStore();
 
 const preparedCategories = computed(() => {
   const sorted = props.categories?.toSorted(
@@ -27,8 +29,10 @@ const preparedCategories = computed(() => {
   return { full, popular };
 });
 
-const navigate = () => {
-  // navigateTo(`/series/${props.item.series_id}`);
+const onCategoryClick = (category: string) => {
+  searchStore.setCategories([category]);
+  searchStore.search();
+  navigateTo("/search");
 };
 </script>
 
@@ -40,6 +44,7 @@ const navigate = () => {
         class="even:bg-gray-700 cursor-pointer rounded-sm hover:text-blue-300"
         :style="{ fontSize: Math.round(20 * category.weight) + 'px' }"
         v-for="category in preparedCategories.popular"
+        @click="() => onCategoryClick(category.category)"
       >
         {{ category.category }}
       </div>

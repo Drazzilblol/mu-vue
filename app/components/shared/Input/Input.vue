@@ -10,7 +10,7 @@ const model = defineModel();
 </script>
 <template>
   <div
-    class="w-full py-2 px-4 text-[16px] rounded-full bg-white focus-within:ring-1 focus-within:ring-blue-500 relative"
+    class="w-full py-1 px-4 text-[16px] rounded-full bg-white focus-within:ring-1 focus-within:ring-blue-500 relative"
   >
     <input
       class="w-full placeholder:text-muted-foreground bg-transparent border-none focus:outline-none"

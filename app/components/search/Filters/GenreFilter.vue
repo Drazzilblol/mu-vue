@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import type { TGenre } from "~/types/General";
 
-const props = defineProps({
-  onback: {
-    type: Function,
-    required: true,
-  },
-  genres: {
-    type: Array<TGenre>,
-    required: true,
-  },
-});
+type TGenreFilterProps = {
+  onback: () => void;
+  genres: TGenre[];
+};
+
+const props = defineProps<TGenreFilterProps>();
 
 const { selectedFilters } = storeToRefs(useSearchStore());
 

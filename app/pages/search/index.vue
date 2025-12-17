@@ -32,11 +32,19 @@ watch(
         :isLoading="searchStore.loading"
       />
       <!-- fix sticky scroll -->
-      <div class="flex flex-col w-[25%] h-fit gap-2 custom-block">
-        <div class="text-white font-semibold">Sort</div>
-        <SortManga />
-        <div class="text-white font-semibold">Filters</div>
-        <Filters />
+      <div class="flex flex-col w-[25%] h-fit gap-2">
+        <div class="custom-block">
+          <div class="text-white font-semibold mb-2">Sort</div>
+          <SortManga />
+        </div>
+        <div class="custom-block">
+          <div class="text-white font-semibold mb-2">Filters</div>
+          <Filters />
+        </div>
+
+        <Button class="text-center" :onclick="() => searchStore.search()"
+          >Filter</Button
+        >
       </div>
     </div>
   </InfiniteScroll>

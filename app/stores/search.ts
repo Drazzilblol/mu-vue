@@ -9,6 +9,7 @@ export type TSelectedFilters = {
   stype?: string;
   year?: string;
   genre: TSelectedGenre;
+  category?: string[];
   type: string[];
   orderby?: string;
 };
@@ -18,6 +19,7 @@ export type TFilters = {
   stype?: string;
   year?: string;
   genre: string[];
+  category?: string[];
   exclude_genre?: string[];
   type: string[];
   orderby?: string;
@@ -29,6 +31,7 @@ const INITIAL_STATE = {
     stype: undefined,
     year: undefined,
     genre: [],
+    category: [],
     type: [],
   } as TFilters,
   selectedFilters: {
@@ -36,6 +39,7 @@ const INITIAL_STATE = {
     year: undefined,
     stype: undefined,
     genre: {},
+    category: [],
     type: [],
     orderby: "score",
   } as TSelectedFilters,
@@ -95,6 +99,9 @@ export const useSearchStore = defineStore("searchStore", {
     },
     setGenre(genre: TSelectedGenre) {
       this.selectedFilters.genre = genre;
+    },
+    setCategories(categories: string[]) {
+      this.selectedFilters.category = categories;
     },
     setType(type: string[]) {
       this.filters.type = type;

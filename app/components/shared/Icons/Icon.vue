@@ -3,6 +3,7 @@ import { TIconType } from "./IconsTypes";
 import PlusSvg from "./PlusSvg.vue";
 import MinusSvg from "./MinusSvg.vue";
 import CheckSvg from "./CheckSvg.vue";
+import CloseSvg from "./CloseSvg.vue";
 
 type TProps = {
   icon: TIconType;
@@ -50,6 +51,13 @@ const strokeColor = computed(() => {
   />
   <CheckSvg
     v-else-if="icon === TIconType.CHECK"
+    :size="size"
+    :stroke-color="strokeColor"
+    :strokeWidth="strokeWidth"
+    :classes="classes"
+  />
+  <CloseSvg
+    v-else-if="icon === TIconType.CLOSE"
     :size="size"
     :stroke-color="strokeColor"
     :strokeWidth="strokeWidth"

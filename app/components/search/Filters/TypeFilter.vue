@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ESeriesType } from "~/types/Series";
 
-const props = defineProps({
-  onback: {
-    type: Function,
-    required: true,
-  },
-});
+type TTypeFilterProps = {
+  onback: () => void;
+};
+
+const props = defineProps<TTypeFilterProps>();
 
 const { selectedFilters } = storeToRefs(useSearchStore());
 
@@ -19,6 +18,7 @@ const onCheckboxClick = (value: ESeriesType) => {
   }
 };
 </script>
+
 <template>
   <div>
     <Button
