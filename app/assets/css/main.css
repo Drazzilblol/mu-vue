@@ -18,3 +18,7 @@
 .custom-block {
   @apply bg-zinc-900 bg-opacity-70 p-2 rounded-2xl;
 }
+
+.custom-block-border {
+  @apply bg-zinc-900 bg-opacity-70 p-2 rounded-2xl border border-gray-600 border-opacity-40;
+}

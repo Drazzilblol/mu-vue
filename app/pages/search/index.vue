@@ -33,11 +33,11 @@ watch(
       />
       <!-- fix sticky scroll -->
       <div class="flex flex-col w-[25%] h-fit gap-2">
-        <div class="custom-block">
+        <div class="custom-block-border">
           <div class="text-white font-semibold mb-2">Sort</div>
           <SortManga />
         </div>
-        <div class="custom-block">
+        <div class="custom-block-border">
           <div class="text-white font-semibold mb-2">Filters</div>
           <Filters />
         </div>
