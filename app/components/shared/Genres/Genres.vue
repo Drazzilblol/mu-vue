@@ -10,6 +10,7 @@ const props = defineProps({
 const searchStore = useSearchStore();
 
 const onGenreClick = (genre: string) => {
+  searchStore.resetFilters();
   searchStore.setGenre({ [genre]: true });
   searchStore.search();
   navigateTo("/search");

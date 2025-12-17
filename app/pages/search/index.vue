@@ -3,7 +3,7 @@ const searchStore = useSearchStore();
 const searchResults = ref<any[]>([]);
 
 onMounted(() => {
-  if (searchStore.results.length === 0) {
+  if (searchStore.results.length === 0 && searchStore.loading === false) {
     searchStore.search();
     return;
   } else {

@@ -9,27 +9,18 @@ const props = defineProps<TCategoryProps>();
 
 const searchStore = useSearchStore();
 
+const isCollapsed = ref(true);
+
 const preparedCategories = computed(() => {
-  const sorted = props.categories?.toSorted(
+  const full = props.categories?.toSorted(
     (a: TCategory, b: TCategory) => b.votes - a.votes
   );
-  const maxVotes = sorted?.[0]?.votes || 0;
-  const full = props.categories?.map((category: TCategory) => {
-    return {
-      ...category,
-      weight: category.votes / maxVotes,
-    };
-  });
-  const popular = sorted?.splice(0, 10).map((category: TCategory) => {
-    return {
-      ...category,
-      weight: category.votes / maxVotes,
-    };
-  });
+  const popular = full?.slice(0, 10);
   return { full, popular };
 });
 
 const onCategoryClick = (category: string) => {
+  searchStore.resetFilters();
   searchStore.setCategories([category]);
   searchStore.search();
   navigateTo("/search");
@@ -37,13 +28,22 @@ const onCategoryClick = (category: string) => {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center text-center custom-block">
-    <div class="font-semibold mb-2">Categories:</div>
+  <div class="flex flex-col justify-center custom-block">
+    <div class="font-semibold mb-2 flex justify-between">
+      <div>Categories:</div>
+      <div
+        class="cursor-pointer text-blue-200 hover:text-blue-300"
+        @click="isCollapsed = !isCollapsed"
+      >
+        {{ isCollapsed ? "Popular" : "All" }}
+      </div>
+    </div>
     <div class="flex justify-center text-white flex-wrap gap-2">
       <div
-        class="even:bg-gray-700 cursor-pointer rounded-sm hover:text-blue-300"
-        :style="{ fontSize: Math.round(20 * category.weight) + 'px' }"
-        v-for="category in preparedCategories.popular"
+        class="even:bg-gray-700 cursor-pointer rounded-sm hover:text-blue-300 px-1"
+        v-for="category in isCollapsed
+          ? preparedCategories.popular
+          : preparedCategories.full"
         @click="() => onCategoryClick(category.category)"
       >
         {{ category.category }}

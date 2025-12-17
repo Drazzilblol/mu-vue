@@ -110,12 +110,21 @@ export const useSearchStore = defineStore("searchStore", {
       this.selectedFilters.orderby = option;
       this.search();
     },
-    reset() {
-      this.$reset();
+    resetResults() {
+      this.results = [] as any[];
+      this.loading = false;
+      this.total = 0;
+      this.page = 0;
+      this.per_page = 40;
+      this.canLoadMore = true;
+      this.error = null as string | null;
+    },
+    resetFilters() {
+      this.selectedFilters = { ...INITIAL_STATE.selectedFilters };
     },
     async search(shouldReset = true) {
       if (shouldReset) {
-        this.reset();
+        this.resetResults();
         this.filters = preparedFilters(this.selectedFilters);
       }
       this.loading = true;
