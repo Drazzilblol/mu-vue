@@ -30,6 +30,8 @@ const onInputKeydown = (e: KeyboardEvent) => {
 
 <template>
   <div class="flex flex-col gap-2" v-if="show.value === FilterView.Filters">
+    <div class="text-white font-semibold">Filters</div>
+
     <Input
       v-model="selectedFilters.search"
       placeholder="Search..."
@@ -44,7 +46,7 @@ const onInputKeydown = (e: KeyboardEvent) => {
       :onkeydown="onInputKeydown"
     />
     <div
-      class="flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-2 rounded-full border border-gray-900 hover:border-gray-700 select-none"
+      class="filter-button"
       v-on:click="() => (show.value = FilterView.Type)"
     >
       <div>
@@ -56,7 +58,7 @@ const onInputKeydown = (e: KeyboardEvent) => {
       <div>></div>
     </div>
     <div
-      class="flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-2 rounded-full border border-gray-900 hover:border-gray-700 select-none"
+      class="filter-button"
       v-on:click="() => (show.value = FilterView.Genres)"
     >
       <div>
@@ -66,7 +68,7 @@ const onInputKeydown = (e: KeyboardEvent) => {
       <div>></div>
     </div>
     <div
-      class="flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-2 rounded-full border border-gray-900 hover:border-gray-700 select-none"
+      class="filter-button"
       v-on:click="() => (show.value = FilterView.Categories)"
     >
       <div>
@@ -91,3 +93,9 @@ const onInputKeydown = (e: KeyboardEvent) => {
     <CategoriesFilter :onBack="() => (show.value = FilterView.Filters)" />
   </div>
 </template>
+
+<style lang="css" scoped>
+.filter-button {
+  @apply flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-1 rounded-full border border-gray-900 hover:border-gray-700 select-none;
+}
+</style>

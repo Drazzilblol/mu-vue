@@ -45,7 +45,7 @@ const onselect = (option: string) => {
 <template>
   <div ref="selectRef" class="relative w-full">
     <div
-      class="bg-gray-900 border border-gray-900 text-white px-4 py-2 rounded-full w-full flex flex-row justify-between items-center cursor-pointer hover:border-gray-700"
+      class="bg-gray-900 border border-gray-900 text-white px-4 py-1 rounded-full w-full flex flex-row justify-between items-center cursor-pointer hover:border-gray-700"
       @click="onClick"
     >
       <div>

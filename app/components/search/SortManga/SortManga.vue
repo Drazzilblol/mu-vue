@@ -26,11 +26,7 @@ const { selectedFilters } = storeToRefs(searchStore);
     <Select
       :options="SORT_OPTIONS"
       :selected-option="selectedFilters.orderby"
-      :onselect="
-        (option) => {
-          searchStore.sort(option);
-        }
-      "
+      :onselect="(option) => searchStore.sort(option)"
     />
   </div>
 </template>

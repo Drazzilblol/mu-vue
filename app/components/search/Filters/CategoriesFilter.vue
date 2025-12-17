@@ -33,14 +33,10 @@ const onRemoveCategory = (category: string) => {
 
 <template>
   <div>
-    <Button
-      :onclick="
-        () => {
-          onBack();
-        }
-      "
-      ><- Back</Button
-    >
+    <div class="flex justify-between items-center">
+      <div class="text-white font-semibold mb-2">Categories</div>
+      <Button :onclick="() => onBack()"><- Back</Button>
+    </div>
     <div class="my-4">
       <Autocomplete
         placeholder="Search categories..."

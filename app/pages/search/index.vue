@@ -38,13 +38,12 @@ watch(
           <SortManga />
         </div>
         <div class="custom-block-border">
-          <div class="text-white font-semibold mb-2">Filters</div>
           <Filters />
         </div>
 
-        <Button class="text-center" :onclick="() => searchStore.search()"
-          >Filter</Button
-        >
+        <Button class="text-center" :onclick="() => searchStore.search()">
+          Filter
+        </Button>
       </div>
     </div>
   </InfiniteScroll>

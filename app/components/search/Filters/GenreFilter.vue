@@ -16,14 +16,11 @@ const onCheckboxClick = (value: string, newValue: boolean | undefined) => {
 </script>
 <template>
   <div>
-    <Button
-      :onclick="
-        () => {
-          onback();
-        }
-      "
-      ><- Back</Button
-    >
+    <div class="flex justify-between items-center">
+      <div class="text-white font-semibold mb-2">Genres</div>
+      <Button :onclick="() => onback()"><- Back</Button>
+    </div>
+
     <div v-for="value in genres" class="flex items-center gap-2 m-2 text-white">
       <TriCheckbox
         :onclick="
