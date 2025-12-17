@@ -37,7 +37,7 @@ const reversedRainbow = computed(() => {
         Average: {{ userRating?.average_rating }}/10.0 ({{ summary }} votes)
       </div>
 
-      <div class="grid grid-cols-[30px_1fr_30px] gap-x-2">
+      <div class="grid grid-cols-[30px_1fr_40px] gap-x-2">
         <template v-for="item in reversedRainbow">
           <span>{{ item.rating }}:</span>
           <div>
@@ -46,7 +46,9 @@ const reversedRainbow = computed(() => {
               :style="{ width: (item.count / max) * 100 + '%' }"
             />
           </div>
-          <span>{{ Math.round((item.count / summary) * 100) }}%</span>
+          <span class="text-right"
+            >{{ Math.round((item.count / summary) * 100) }}%</span
+          >
         </template>
       </div>
     </template>

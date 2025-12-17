@@ -103,7 +103,11 @@ const associated = computed(() => {
             <Tabs>
               <Tab title="Details">
                 <div>
-                  <TextCollapse :lines="6" class="mt-2 custom-block">
+                  <TextCollapse
+                    v-if="desc"
+                    :lines="6"
+                    class="mt-2 custom-block"
+                  >
                     <div
                       class="whitespace-break-spaces wrap-anywhere break-words"
                       v-html="desc"
@@ -126,7 +130,7 @@ const associated = computed(() => {
                 <Comments
                   :seriesId="data?.series_id"
                   :initialComments="comments"
-                  :scrollRef="scrollContainer as any"
+                  :scrollRef="scrollContainer"
                 />
               </Tab>
             </Tabs>
