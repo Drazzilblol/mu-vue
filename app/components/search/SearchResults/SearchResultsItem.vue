@@ -16,7 +16,10 @@ const navigate = () => {
     v-on:click="navigate"
   >
     <div class="relative w-full">
-      <CoverImage :url="searchResultItem?.image?.url?.original" />
+      <CoverImage
+        :url="searchResultItem?.image?.url?.original"
+        :blurredBackground="true"
+      />
       <div
         class="absolute bottom-0 right-0 px-2 py-1 bg-gray-800 bg-opacity-80 text-white text-sm font-semibold rounded-full m-2"
       >
