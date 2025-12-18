@@ -1,4 +1,4 @@
-import type { TGenre, TImage } from "./General";
+import type { TGenre, TImage, TTime } from "./General";
 
 export type TAuthor = {
   id: number;
@@ -30,11 +30,7 @@ export type TAuthor = {
   };
   social: TSocial;
   comments: string;
-  last_updated: {
-    timestamp: number;
-    as_rfc3339: string;
-    as_string: string;
-  };
+  last_updated: TTime;
   added_by: any; // TODO: Define proper type
   admin: {
     approved: true;

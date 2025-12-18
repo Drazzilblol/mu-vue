@@ -1,3 +1,5 @@
+import type { TTime } from "./General";
+
 export type TPublisher = {
   publisher_id: number;
   name: string;
@@ -36,11 +38,7 @@ export type TPublisherSeries = {
   series_id: number;
   url: string;
   year: string;
-  last_updated: {
-    timestamp: number;
-    as_rfc3339: string;
-    as_string: string;
-  };
+  last_updated: TTime;
 };
 
 export enum EPublisherType {

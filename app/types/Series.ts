@@ -1,4 +1,4 @@
-import type { TGenre, TImage } from "./General";
+import type { TGenre, TImage, TTime } from "./General";
 
 export type TSeries = {
   series_id: number;
@@ -187,11 +187,7 @@ export type TRelease = {
     }
   ];
   release_date: string;
-  time_added: {
-    timestamp: number;
-    as_rfc3339: string;
-    as_string: string;
-  };
+  time_added: TTime;
 };
 
 export type TUserRating = {

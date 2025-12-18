@@ -11,5 +11,6 @@ const navigate = (url: string) => {
       Manga Updates
     </h1>
     <Button :onclick="() => navigate('/search')">Search</Button>
+    <Button :onclick="() => navigate('/releases/1')">Releases</Button>
   </header>
 </template>
