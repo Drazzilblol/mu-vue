@@ -8,21 +8,28 @@ export type TReleaseByDayResponse = {
 };
 
 export type TReleaseByDayResult = {
-  record: TReleaseByDay;
+  record: TRelease;
   metadata?: any;
 };
 
-export type TReleaseByDay = {
+export type TReleaseSearchResponse = {
+  results: { record: TRelease; metadata?: any }[];
+  total_hits: number;
+  page: number;
+  per_page: number;
+};
+
+export type TRelease = {
   id: number;
   title: string;
   volume: string;
   chapter: string;
-  groups: TReleaseByDayGroup[];
+  groups: TReleaseGroup[];
   release_date: string;
   time_added: TTime;
 };
 
-export type TReleaseByDayGroup = {
+export type TReleaseGroup = {
   name: string;
   group_id: number;
   url: string;

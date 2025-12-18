@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  EPublisherType,
   type TPublisher,
   type TPublisherPublicationsResponse,
 } from "~/types/Publisher";
@@ -77,7 +76,7 @@ const associated = computed(() => {
               </Tab>
               <Tab title="Series">
                 <div class="mt-2 custom-block">
-                  <PublisherSeries :publications="publicationsData" />
+                  <SeriesList :series="publicationsData?.series_list" />
                 </div>
               </Tab>
               <Tab title="Publications">

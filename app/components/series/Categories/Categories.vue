@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import type { TCategory } from "~/types/Series";
+import type { TCategory } from "~/types/General";
 
 type TCategoryProps = {
   categories?: TCategory[];
+  isCollapsible?: boolean;
 };
 
 const props = defineProps<TCategoryProps>();
 
 const searchStore = useSearchStore();
 
-const isCollapsed = ref(true);
+const isCollapsed = ref(props.isCollapsible);
 
 const preparedCategories = computed(() => {
   const full = props.categories?.toSorted(
@@ -32,6 +33,7 @@ const onCategoryClick = (category: string) => {
     <div class="font-semibold mb-2 flex justify-between">
       <div>Categories:</div>
       <div
+        v-if="props.isCollapsible"
         class="cursor-pointer text-blue-200 hover:text-blue-300"
         @click="isCollapsed = !isCollapsed"
       >
@@ -40,13 +42,18 @@ const onCategoryClick = (category: string) => {
     </div>
     <div class="flex justify-center text-white flex-wrap gap-2">
       <div
-        class="even:bg-gray-700 cursor-pointer rounded-sm hover:text-blue-300 px-1"
+        class="even:bg-gray-700 rounded-sm px-1"
         v-for="category in isCollapsed
           ? preparedCategories.popular
           : preparedCategories.full"
-        @click="() => onCategoryClick(category.category)"
       >
-        {{ category.category }}
+        <span
+          class="hover:text-blue-300 cursor-pointer"
+          @click="() => onCategoryClick(category.category)"
+        >
+          {{ category.category }}
+        </span>
+        <span>({{ category.votes }})</span>
       </div>
     </div>
   </div>

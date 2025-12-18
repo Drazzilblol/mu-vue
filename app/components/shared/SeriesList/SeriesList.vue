@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import type { TPublisherPublicationsResponse } from "~/types/Publisher";
+import type { TGroupSeriesTitle } from "~/types/Groups";
+import type {
+  TPublisherPublicationsResponse,
+  TPublisherSeries,
+} from "~/types/Publisher";
 
-const props = defineProps({
-  publications: Object as () => TPublisherPublicationsResponse | null,
-});
+type TSeriesListProps = {
+  series?: TGroupSeriesTitle[] | TPublisherSeries[] | null;
+};
+
+const props = defineProps<TSeriesListProps>();
 </script>
 
 <template>
   <div>
-    <div
-      v-if="publications?.series_list?.length"
-      class="grid grid-cols-3 gap-1"
-    >
+    <div v-if="series?.length" class="grid grid-cols-3 gap-1">
       <div
-        v-for="item in publications?.series_list"
+        v-for="item in series"
         :key="item.series_id"
         class="justify-center flex"
       >

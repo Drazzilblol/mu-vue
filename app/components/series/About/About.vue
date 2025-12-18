@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import {
   EAuthorType,
   EPublisherType,
-  type TAssociated,
   type TAuthor,
   type TGroups,
   type TPublisher,
@@ -141,6 +140,7 @@ const publishers = computed(() => {
         <div
           class="cursor-pointer hover:text-blue-300 underline"
           v-for="group in groups?.group_list"
+          @click="() => navigateTo(`/group/${group.group_id}`)"
         >
           {{ group.name }}
         </div>
@@ -154,7 +154,10 @@ const publishers = computed(() => {
 
       <div v-for="release in groups?.release_list">
         ch.{{ release.chapter }} by
-        <span class="cursor-pointer hover:text-blue-300 underline">
+        <span
+          class="cursor-pointer hover:text-blue-300 underline"
+          @click="() => navigateTo(`/group/${release.groups[0].group_id}`)"
+        >
           {{ release.groups[0].name }}
         </span>
         <span class="text-gray-400 ml-1">

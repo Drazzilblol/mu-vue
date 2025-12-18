@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import { useNotificationsStore } from "~/stores/notifications";
 
-const props = defineProps({
-  names: {
-    type: Array<string>,
-  },
-  title: {
-    type: String,
-    default: "Associated Names:",
-  },
-  lines: {
-    type: Number,
-    default: 6,
-  },
+type TAssociatedNamesProps = {
+  names: string[];
+  title?: string;
+  lines?: number;
+};
+
+const props = withDefaults(defineProps<TAssociatedNamesProps>(), {
+  title: "Associated Names:",
+  lines: 6,
 });
 
 const notificationStore = useNotificationsStore();

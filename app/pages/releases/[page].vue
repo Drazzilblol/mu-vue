@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { TPublicationResponse } from "~/types/Publisher";
 import type {
   TReleaseByDayResponse,
   TReleaseByDayResult,
@@ -78,6 +77,7 @@ const preparedData = computed(() => {
                 v-for="value in release.record.groups"
                 :key="value.group_id"
                 class="[&:not(:first-child)]:ml-2 cursor-pointer hover:text-blue-300 underline"
+                @click="() => navigateTo(`/group/${value.group_id}`)"
               >
                 {{ value.name }}
               </span>

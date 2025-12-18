@@ -1,34 +1,29 @@
 <script setup lang="ts">
-const props = defineProps({
-  loadMore: {
-    type: Function,
-    required: true,
-  },
-  isLoading: {
-    type: Boolean,
-    default: false,
-  },
-  canLoadMore: {
-    type: Boolean,
-    default: false,
-  },
-});
+type TInfiniteScrollProps = {
+  loadMore: () => void;
+  isLoading: boolean;
+  canLoadMore: boolean;
+  scrollRef?: HTMLElement | null;
+};
+const props = defineProps<TInfiniteScrollProps>();
 
 const scrollContainer = ref<HTMLElement | null>(null);
+const scrollRef = ref<HTMLElement | null>(props.scrollRef || null);
+const container = computed(() => scrollRef.value || scrollContainer.value);
 
 onMounted(() => {
-  scrollContainer.value?.addEventListener("scroll", handleScroll);
+  container.value?.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
-  scrollContainer.value?.removeEventListener("scroll", handleScroll);
+  container.value?.removeEventListener("scroll", handleScroll);
 });
 
 const handleScroll = () => {
-  if (!scrollContainer.value) return;
+  if (!container.value) return;
   const bottomOfWindow =
-    scrollContainer.value?.scrollTop + scrollContainer.value?.clientHeight >=
-    scrollContainer.value?.scrollHeight - 200;
+    container.value.scrollTop + container.value.clientHeight >=
+    container.value.scrollHeight - 200;
   if (bottomOfWindow && !props.isLoading && props.canLoadMore) {
     props.loadMore();
   }

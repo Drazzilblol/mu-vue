@@ -1,4 +1,4 @@
-import type { TGenre, TImage, TTime } from "./General";
+import type { TCategory, TGenre, TImage, TTime } from "./General";
 
 export type TSeries = {
   series_id: number;
@@ -99,15 +99,6 @@ export type TRecommendation = {
   series_id: number;
   series_image: TImage;
   weight: number;
-};
-
-export type TCategory = {
-  series_id: number;
-  category: string;
-  votes: number;
-  votes_plus: number;
-  votes_minus: number;
-  added_by: number;
 };
 
 export type TAuthor = {
