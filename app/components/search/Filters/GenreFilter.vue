@@ -15,23 +15,28 @@ const onCheckboxClick = (value: string, newValue: boolean | undefined) => {
 };
 </script>
 <template>
-  <div>
-    <div class="flex justify-between items-center">
+  <div class="h-full flex flex-col">
+    <div class="flex justify-between items-center mb-2">
       <div class="text-white font-semibold mb-2">Genres</div>
       <Button :onclick="() => onback()"><- Back</Button>
     </div>
 
-    <div v-for="value in genres" class="flex items-center gap-2 m-2 text-white">
-      <TriCheckbox
-        :onclick="
+    <div class="overflow-auto h-full -mr-2">
+      <div
+        v-for="value in genres"
+        class="flex items-center gap-2 m-2 text-white"
+      >
+        <TriCheckbox
+          :onclick="
           (newValue: boolean | undefined) => {
             onCheckboxClick(value.genre, newValue);
           }
         "
-        :value="selectedFilters.genre[value.genre]"
-      >
-        {{ value.genre }}
-      </TriCheckbox>
+          :value="selectedFilters.genre[value.genre]"
+        >
+          {{ value.genre }}
+        </TriCheckbox>
+      </div>
     </div>
   </div>
 </template>

@@ -82,18 +82,22 @@ const onInputKeydown = (e: KeyboardEvent) => {
       <div>></div>
     </div>
   </div>
-  <div v-if="show.value === FilterView.Genres">
-    <GenreFilter
-      :onback="() => (show.value = FilterView.Filters)"
-      :genres="genreStore.genres"
-    />
-  </div>
-  <div v-if="show.value === FilterView.Type">
-    <TypeFilter :onback="() => (show.value = FilterView.Filters)" />
-  </div>
-  <div v-if="show.value === FilterView.Categories">
-    <CategoriesFilter :onBack="() => (show.value = FilterView.Filters)" />
-  </div>
+
+  <GenreFilter
+    v-if="show.value === FilterView.Genres"
+    :onback="() => (show.value = FilterView.Filters)"
+    :genres="genreStore.genres"
+  />
+
+  <TypeFilter
+    v-if="show.value === FilterView.Type"
+    :onback="() => (show.value = FilterView.Filters)"
+  />
+
+  <CategoriesFilter
+    v-if="show.value === FilterView.Categories"
+    :onBack="() => (show.value = FilterView.Filters)"
+  />
 </template>
 
 <style lang="css" scoped>
