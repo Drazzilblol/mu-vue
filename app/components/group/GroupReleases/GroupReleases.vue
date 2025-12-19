@@ -3,14 +3,36 @@ import type { TRelease } from "~/types/Releases";
 
 type TGroupReleasesProps = {
   releases?: { record: TRelease; metadata?: any }[] | null;
+  groupId: number;
 };
 
 const props = defineProps<TGroupReleasesProps>();
+
+const releasesStore = useReleasesSearchStore();
+
+const inputModel = ref<string>("");
+
+const onSearch = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  const value = target.value;
+  releasesStore.search(props.groupId, value);
+};
+
+const debouncedSearch = debounce(onSearch, 500);
 </script>
 
 <template>
   <div>
     <div class="custom-block !p-4 flex flex-col gap-2">
+      <div class="w-80 flex self-end">
+        <span class="font-semibold mr-2 self-center">Search:</span>
+        <Input
+          placeholder="Naruto, One Piece, etc..."
+          :onInput="debouncedSearch"
+          v-model="inputModel"
+        />
+      </div>
+
       <div class="grid grid-cols-[100px_1fr_200px_200px] gap-2 p-2">
         <div class="font-bold">Date</div>
         <div class="font-bold">Title</div>

@@ -118,7 +118,10 @@ const associated = computed(() => {
                     <div class="w-[50%] flex flex-col gap-2">
                       <RelatedSeries :related="data?.related_series" />
                       <UserRating :userRating="userRating" />
-                      <Categories :categories="data?.categories" />
+                      <Categories
+                        :categories="data?.categories"
+                        isCollapsible
+                      />
                     </div>
                     <div class="w-[50%] flex flex-col gap-2">
                       <About :series="data" :groups="groupsData" />

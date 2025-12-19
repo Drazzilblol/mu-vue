@@ -11,6 +11,10 @@ onMounted(() => {
   releasesStore.loadReleases(Number(route.params.id));
 });
 
+onUnmounted(() => {
+  releasesStore.$reset();
+});
+
 const { data: groupData } = await useFetch<TGroup>(
   `/api/groups/${route.params.id}`
 );
@@ -29,7 +33,6 @@ const associated = computed(() => {
 </script>
 
 <template>
-  <!-- TODO: Looks like shit, need redisign -->
   <div class="flex h-full overflow-y-scroll" ref="scrollContainer">
     <div
       class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0"
@@ -52,6 +55,7 @@ const associated = computed(() => {
                   <div class="w-[50%] flex flex-col gap-2">
                     <div class="custom-block">
                       <GroupSocial :social="groupData?.social" />
+
                       <div class="flex flex-row gap-2">
                         <div class="font-semibold">Active:</div>
 
@@ -106,7 +110,10 @@ const associated = computed(() => {
                   "
                   :scrollRef="scrollContainer"
                 >
-                  <GroupReleases :releases="releases" />
+                  <GroupReleases
+                    :releases="releases"
+                    :groupId="Number(route.params.id)"
+                  />
                 </InfiniteScroll>
                 <Loading v-if="loading" class="text-center pt-4" />
               </Tab>

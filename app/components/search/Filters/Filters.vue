@@ -35,7 +35,7 @@ const onInputKeydown = (e: KeyboardEvent) => {
     <Input
       v-model="selectedFilters.search"
       placeholder="Search..."
-      :onkeydown="onInputKeydown"
+      :onKeydown="onInputKeydown"
     />
 
     <SearchTypeFilter />
@@ -43,7 +43,9 @@ const onInputKeydown = (e: KeyboardEvent) => {
     <Input
       v-model="selectedFilters.year"
       placeholder="Year..."
-      :onkeydown="onInputKeydown"
+      type="number"
+      :maxLength="4"
+      :onKeydown="onInputKeydown"
     />
     <div
       class="filter-button"

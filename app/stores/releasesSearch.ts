@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   page: 0,
   perpage: 40,
   totalHits: 0,
+  searchTerm: "",
   releases: [] as { record: TRelease; metadata?: any }[],
   loading: false,
   error: null as string | null,
@@ -13,18 +14,20 @@ const INITIAL_STATE = {
 export const useReleasesSearchStore = defineStore("releasesSearchStore", {
   state: () => INITIAL_STATE,
   actions: {
-    async loadReleases(groupId?: number, needReset = true) {
-      if (needReset) {
-        this.$reset();
-      }
+    setSearchTerm(term: string) {
+      this.searchTerm = term;
+    },
+    async load(groupId: number) {
       this.loading = true;
       this.error = null;
 
       try {
+        console.log(this.searchTerm);
         const data = (await $fetch(
           `/api/releases/search?group_id=${groupId}&page=${
             this.page + 1
-          }&perpage=${this.perpage}`
+          }&perpage=${this.perpage}` +
+            (this.searchTerm ? `&search=${this.searchTerm}` : "")
         )) as any;
         this.releases = [...this.releases, ...data.results];
         this.page = data.page;
@@ -37,9 +40,20 @@ export const useReleasesSearchStore = defineStore("releasesSearchStore", {
       }
     },
 
-    async loadMore(groupId?: number) {
+    async loadReleases(groupId: number) {
+      this.$reset();
+      await this.load(groupId);
+    },
+
+    async loadMore(groupId: number) {
       if (this.loading) return;
-      await this.loadReleases(groupId, false);
+      await this.load(groupId);
+    },
+
+    async search(groupId: number, searchTerm: string) {
+      this.$reset();
+      this.setSearchTerm(searchTerm);
+      await this.load(groupId);
     },
   },
 });

@@ -37,7 +37,7 @@ const onCategoryClick = (category: string) => {
         class="cursor-pointer text-blue-200 hover:text-blue-300"
         @click="isCollapsed = !isCollapsed"
       >
-        {{ isCollapsed ? "Popular" : "All" }}
+        {{ !isCollapsed ? "Show Popular" : "Show All" }}
       </div>
     </div>
     <div class="flex justify-center text-white flex-wrap gap-2">
