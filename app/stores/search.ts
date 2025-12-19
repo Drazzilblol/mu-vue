@@ -1,3 +1,4 @@
+import { cloneDeep } from "lodash";
 import { defineStore } from "pinia";
 
 export type TSelectedGenre = {
@@ -41,8 +42,8 @@ const INITIAL_STATE = {
     genre: {},
     category: [],
     type: [],
-    orderby: "score",
   } as TSelectedFilters,
+  orderby: "score",
   results: [] as any[],
   loading: false,
   total: 0,
@@ -107,7 +108,7 @@ export const useSearchStore = defineStore("searchStore", {
       this.filters.type = type;
     },
     sort(option: string) {
-      this.selectedFilters.orderby = option;
+      this.orderby = option;
       this.search();
     },
     resetResults() {
@@ -120,7 +121,9 @@ export const useSearchStore = defineStore("searchStore", {
       this.error = null as string | null;
     },
     resetFilters() {
-      this.selectedFilters = { ...INITIAL_STATE.selectedFilters };
+      this.selectedFilters = cloneDeep(INITIAL_STATE.selectedFilters);
+
+      console.log(this.selectedFilters);
     },
     async search(shouldReset = true) {
       if (shouldReset) {
@@ -135,6 +138,7 @@ export const useSearchStore = defineStore("searchStore", {
           method: "post",
           body: {
             ...this.filters,
+            orderby: this.orderby,
             page: this.page + 1,
             perpage: this.per_page,
           },

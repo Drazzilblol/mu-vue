@@ -18,14 +18,14 @@ const SORT_OPTIONS = [
 ];
 
 const searchStore = useSearchStore();
-const { selectedFilters } = storeToRefs(searchStore);
+const { orderby } = storeToRefs(searchStore);
 </script>
 
 <template>
   <div>
     <Select
       :options="SORT_OPTIONS"
-      :selected-option="selectedFilters.orderby"
+      :selected-option="orderby"
       :onselect="(option) => searchStore.sort(option)"
     />
   </div>

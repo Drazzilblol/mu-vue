@@ -10,7 +10,7 @@ const navigate = (url: string) => {
     <h1 v-on:click="() => navigate('/')" class="text-2xl text-white">
       Manga Updates
     </h1>
-    <Button :onclick="() => navigate('/search')">Search</Button>
-    <Button :onclick="() => navigate('/releases/1')">Releases</Button>
+    <Button :onClick="() => navigate('/search')">Search</Button>
+    <Button :onClick="() => navigate('/releases/1')">Releases</Button>
   </header>
 </template>

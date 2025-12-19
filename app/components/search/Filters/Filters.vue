@@ -26,11 +26,20 @@ const onInputKeydown = (e: KeyboardEvent) => {
     searchStore.search();
   }
 };
+
+const resetFilters = () => {
+  searchStore.resetFilters();
+  searchStore.search();
+};
 </script>
 
 <template>
   <div class="flex flex-col gap-2" v-if="show.value === FilterView.Filters">
-    <div class="text-white font-semibold">Filters</div>
+    <div
+      class="text-white font-semibold mb-2 flex justify-between items-center"
+    >
+      Filters <Button :onClick="resetFilters">Reset</Button>
+    </div>
 
     <Input
       v-model="selectedFilters.search"

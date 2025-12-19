@@ -23,7 +23,7 @@ const onCheckboxClick = (value: ESeriesType) => {
   <div>
     <div class="flex justify-between items-center">
       <div class="text-white font-semibold mb-2">Type</div>
-      <Button :onclick="() => onback()"><- Back</Button>
+      <Button :onClick="() => onback()"><- Back</Button>
     </div>
     <div
       v-for="value in ESeriesType"

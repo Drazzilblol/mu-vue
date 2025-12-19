@@ -35,7 +35,7 @@ const onRemoveCategory = (category: string) => {
   <div>
     <div class="flex justify-between items-center">
       <div class="text-white font-semibold mb-2">Categories</div>
-      <Button :onclick="() => onBack()"><- Back</Button>
+      <Button :onClick="() => onBack()"><- Back</Button>
     </div>
     <div class="my-4">
       <Autocomplete

@@ -18,7 +18,7 @@ const onCheckboxClick = (value: string, newValue: boolean | undefined) => {
   <div class="h-full flex flex-col">
     <div class="flex justify-between items-center mb-2">
       <div class="text-white font-semibold mb-2">Genres</div>
-      <Button :onclick="() => onback()"><- Back</Button>
+      <Button :onClick="() => onback()"><- Back</Button>
     </div>
 
     <div class="overflow-auto h-full -mr-2">

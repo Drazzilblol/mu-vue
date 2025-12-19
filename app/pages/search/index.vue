@@ -38,21 +38,21 @@ const filtersHeight = computed(() => {
           :isLoading="searchStore.loading"
         />
         <div
-          class="w-[25%] sticky top-4 self-start overflow-hidden"
+          class="w-[25%] sticky top-4 self-start"
           :style="{ height: filtersHeight }"
         >
           <div
-            class="gap-2 grid grid-rows-[min-content_1fr_min-content] overflow-hidden max-h-full"
+            class="gap-2 grid grid-rows-[min-content_minmax(100px,_1fr)_min-content] max-h-full"
           >
             <div class="custom-block-border">
               <div class="text-white font-semibold mb-2">Sort</div>
               <SortManga />
             </div>
-            <div class="custom-block-border overflow-hidden">
+            <div class="custom-block-border">
               <Filters />
             </div>
 
-            <Button class="text-center" :onclick="() => searchStore.search()">
+            <Button class="text-center" :onClick="() => searchStore.search()">
               Filter
             </Button>
           </div>
