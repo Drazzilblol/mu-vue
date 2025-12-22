@@ -5,7 +5,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 </script>
 <template>
-  <div class="min-h-screen bg-black">
+  <div id="app" class="min-h-screen bg-black relative">
     <NuxtRouteAnnouncer />
     <NuxtLayout>
       <NuxtPage />

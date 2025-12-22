@@ -54,15 +54,25 @@ const preparedData = computed(() => {
             class="grid grid-cols-[1fr_200px_300px] gap-y-1 gap-x-2 even:bg-gray-800/20 p-2 rounded"
           >
             <div class="font-bold">
-              <span
-                class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline"
-                @click="
-                  () =>
-                    navigateTo(`/series/${release.metadata.series.series_id}`)
-                "
-              >
-                {{ release.record.title }}
-              </span>
+              <Popup :width="400" :height="208" position="bottom" :delay="400">
+                <template v-slot:target>
+                  <span
+                    class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline"
+                    @click="
+                      () =>
+                        navigateTo(
+                          `/series/${release.metadata.series.series_id}`
+                        )
+                    "
+                  >
+                    {{ release.record.title }}
+                  </span>
+                </template>
+
+                <template v-slot:content>
+                  <SeriesPopup :seriesId="release.metadata.series.series_id" />
+                </template>
+              </Popup>
             </div>
             <div>
               <span v-if="release.record.volume">
