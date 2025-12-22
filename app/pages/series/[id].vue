@@ -122,6 +122,7 @@ const associated = computed(() => {
                         :categories="data?.categories"
                         isCollapsible
                       />
+                      <SeriesPosition :rank="data?.rank" />
                     </div>
                     <div class="w-[50%] flex flex-col gap-2">
                       <About :series="data" :groups="groupsData" />

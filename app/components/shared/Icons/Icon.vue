@@ -4,6 +4,8 @@ import PlusSvg from "./PlusSvg.vue";
 import MinusSvg from "./MinusSvg.vue";
 import CheckSvg from "./CheckSvg.vue";
 import CloseSvg from "./CloseSvg.vue";
+import UpTriangleSvg from "./UpTriangleSvg.vue";
+import DownTriangleSvg from "./DownTriangleSvg.vue";
 
 type TProps = {
   icon: TIconType;
@@ -58,6 +60,20 @@ const strokeColor = computed(() => {
   />
   <CloseSvg
     v-else-if="icon === TIconType.CLOSE"
+    :size="size"
+    :stroke-color="strokeColor"
+    :strokeWidth="strokeWidth"
+    :classes="classes"
+  />
+  <UpTriangleSvg
+    v-else-if="icon === TIconType.UP_TRIANGLE"
+    :size="size"
+    :stroke-color="strokeColor"
+    :strokeWidth="strokeWidth"
+    :classes="classes"
+  />
+  <DownTriangleSvg
+    v-else-if="icon === TIconType.DOWN_TRIANGLE"
     :size="size"
     :stroke-color="strokeColor"
     :strokeWidth="strokeWidth"

@@ -17,7 +17,7 @@ const props = defineProps({
     :class="classes"
   >
     <path
-      d="M12 6L18 18L6 18Z"
+      d="M12 18L6 6L18 6Z"
       :stroke="strokeColor"
       :stroke-width="strokeWidth"
       stroke-linecap="round"

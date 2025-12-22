@@ -165,5 +165,14 @@ const publishers = computed(() => {
         </span>
       </div>
     </div>
+
+    <div>
+      <div class="font-semibold">Anime Start/End Chapter:</div>
+
+      <div v-if="!series?.anime?.start && !series?.anime?.end">N/A</div>
+
+      <div>Starts at {{ series?.anime?.start }}</div>
+      <div>Ends at {{ series?.anime?.end }}</div>
+    </div>
   </div>
 </template>
