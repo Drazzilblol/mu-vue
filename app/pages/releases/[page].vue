@@ -54,10 +54,10 @@ const preparedData = computed(() => {
             class="grid grid-cols-[1fr_200px_300px] gap-y-1 gap-x-2 even:bg-gray-800/20 p-2 rounded"
           >
             <div class="font-bold">
-              <Popup :width="400" :height="208" position="bottom" :delay="400">
+              <Popup :width="400" :height="208" position="right" :delay="400">
                 <template v-slot:target>
                   <span
-                    class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline"
+                    class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline mx-1"
                     @click="
                       () =>
                         navigateTo(

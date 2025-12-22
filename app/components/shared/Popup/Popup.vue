@@ -9,6 +9,7 @@ const props = defineProps<TPopupProps>();
 const targetContainer = ref<HTMLElement | null>(null);
 const showPopup = ref(false);
 const timeout = ref<number | null>(null);
+const arrowShift = ref(0);
 
 const getCorrectedPosition = (position: TPopupProps["position"]) => {
   if (!targetContainer.value) return;
@@ -30,7 +31,7 @@ const getCorrectedPosition = (position: TPopupProps["position"]) => {
   }
 };
 
-const popupPosition = computed(() => {
+const popupPosition = () => {
   if (!targetContainer.value) return;
   const rect = targetContainer.value.getBoundingClientRect();
   let top = 0;
@@ -39,27 +40,66 @@ const popupPosition = computed(() => {
 
   if (pos) {
     switch (pos) {
-      case "top":
+      case "top": {
         top = rect.top - props.height - 8;
-        left = rect.left;
+
+        const posLeft = rect.left - props.width / 2 + rect.width / 2 || 0;
+        left = posLeft;
+        if (posLeft + props.width > window.innerWidth) {
+          left = window.innerWidth - props.width;
+          arrowShift.value = posLeft + props.width - window.innerWidth;
+        } else if (posLeft < 0) {
+          left = 0;
+          arrowShift.value = posLeft;
+        }
         break;
-      case "bottom":
+      }
+      case "bottom": {
         top = rect.bottom + 8;
-        left = rect.left;
+
+        const posLeft = rect.left - props.width / 2 + rect.width / 2 || 0;
+        left = posLeft;
+        if (posLeft + props.width > window.innerWidth) {
+          left = window.innerWidth - props.width;
+          arrowShift.value = posLeft + props.width - window.innerWidth;
+        } else if (posLeft < 0) {
+          left = 0;
+          arrowShift.value = posLeft;
+        }
         break;
-      case "left":
-        top = rect.top;
+      }
+      case "left": {
+        const posTop = rect.top - props.height / 2 + rect.height / 2 || 0;
+        top = posTop;
+        if (posTop + props.height > window.innerHeight) {
+          top = window.innerHeight - props.height;
+          arrowShift.value = posTop + props.height - window.innerHeight;
+        } else if (posTop < 0) {
+          top = 0;
+          arrowShift.value = posTop;
+        }
         left = rect.left - props.width - 8;
         break;
-      case "right":
-        top = rect.top;
+      }
+      case "right": {
+        const posTop = rect.top - props.height / 2 + rect.height / 2 || 0;
+        top = posTop;
+        if (posTop + props.height > window.innerHeight) {
+          top = window.innerHeight - props.height;
+          arrowShift.value = posTop + props.height - window.innerHeight;
+        } else if (posTop < 0) {
+          top = 0;
+          arrowShift.value = posTop;
+        }
+
         left = rect.right + 8;
         break;
+      }
     }
   }
 
   return { top, left };
-});
+};
 
 const onMouseEnter = () => {
   if (props.delay) {
@@ -93,8 +133,9 @@ const onMouseLeave = () => {
     :width="width"
     :height="height"
     :position="getCorrectedPosition(position)"
-    :popoverTop="popupPosition ? popupPosition.top : 0"
-    :popoverLeft="popupPosition ? popupPosition.left : 0"
+    :popoverTop="popupPosition()?.top || 0"
+    :popoverLeft="popupPosition()?.left || 0"
+    :arrowShift="arrowShift"
   >
     <slot name="content"></slot>
   </PopupModal>

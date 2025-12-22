@@ -26,7 +26,9 @@ onMounted(() => {
 });
 </script>
 <template>
-  <Loading v-if="loading" />
+  <div v-if="loading" class="flex justify-center items-center h-full w-full">
+    <Loading />
+  </div>
 
   <div class="flex flex-row items-center gap-2 w-96" v-if="series && !loading">
     <div class="relative w-32 min-w-32">
