@@ -7,7 +7,7 @@ import type {
 const route = useRoute();
 
 const { data: releases } = await useFetch<TReleaseByDayResponse>(
-  `/api/releases/day?page=${route.params.page}`
+  `http://127.0.0.1:3001/releases/day?page=${route.params.page}`
 );
 
 const preparedData = computed(() => {
@@ -70,7 +70,10 @@ const preparedData = computed(() => {
                 </template>
 
                 <template v-slot:content>
-                  <SeriesPopup :seriesId="release.metadata.series.series_id" />
+                  <SeriesPopup
+                    :seriesId="release.metadata.series.series_id"
+                    :series="release.record.meta"
+                  />
                 </template>
               </Popup>
             </div>

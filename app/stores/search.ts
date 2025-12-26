@@ -134,7 +134,7 @@ export const useSearchStore = defineStore("searchStore", {
       this.error = null;
 
       try {
-        const data = (await $fetch("/api/search", {
+        const data = (await $fetch("http://localhost:3001/series/search", {
           method: "post",
           body: {
             ...this.filters,

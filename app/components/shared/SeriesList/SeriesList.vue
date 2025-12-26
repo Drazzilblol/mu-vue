@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import type { TGroupSeriesTitle } from "~/types/Groups";
-import type {
-  TPublisherPublicationsResponse,
-  TPublisherSeries,
-} from "~/types/Publisher";
+import type { TPublisherSeries } from "~/types/Publisher";
 
 type TSeriesListProps = {
   series?: TGroupSeriesTitle[] | TPublisherSeries[] | null;

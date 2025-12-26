@@ -3,6 +3,7 @@ import { ref } from "vue";
 import type { TSeries } from "~/types/Series";
 type TPopupProps = {
   seriesId: number;
+  series: any;
 };
 const props = defineProps<TPopupProps>();
 
@@ -10,14 +11,25 @@ const loading = ref(false);
 const series = ref<TSeries | null>(null);
 
 const getSeries = async () => {
-  try {
-    loading.value = true;
-    const response = await $fetch<TSeries>(`/api/series/${props.seriesId}`);
-    series.value = response;
-  } catch (error) {
-    console.error("Error fetching series:", error);
-  } finally {
-    loading.value = false;
+  if (props.series) {
+    series.value = {
+      ...props.series,
+      image: {
+        url: { original: props.series.original, thumb: props.series.thumb },
+      },
+    };
+  } else {
+    try {
+      loading.value = true;
+      const response = await $fetch<TSeries>(
+        `http://127.0.0.1:3001/series/metadata/${props.seriesId}`
+      );
+      series.value = response;
+    } catch (error) {
+      console.error("Error fetching series:", error);
+    } finally {
+      loading.value = false;
+    }
   }
 };
 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-type TInputProps = {
+type TAutocompleteProps = {
   placeholder?: string;
   onOptionClick: (value: string) => void;
   getOptions: (input: string) => Promise<string[]>;
 };
 
-const props = defineProps<TInputProps>();
+const props = defineProps<TAutocompleteProps>();
 const options = ref<Array<string> | null>(null);
 const isCollapsed = ref(true);
 const loading = ref(false);

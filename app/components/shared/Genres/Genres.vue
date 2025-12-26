@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { TGenre } from "~/types/General";
 
-const props = defineProps({
-  genres: {
-    type: Array<TGenre>,
-  },
-});
+type TGenresProps = {
+  genres?: TGenre[];
+};
+
+const props = defineProps<TGenresProps>();
 
 const searchStore = useSearchStore();
 

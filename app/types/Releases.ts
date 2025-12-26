@@ -27,6 +27,7 @@ export type TRelease = {
   groups: TReleaseGroup[];
   release_date: string;
   time_added: TTime;
+  meta?: any;
 };
 
 export type TReleaseGroup = {
