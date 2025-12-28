@@ -1,10 +1,15 @@
 <script setup lang="ts">
+import type { TImage } from "~/types/General";
 import type { TRecommendation } from "~/types/Series";
-const props = defineProps({
+type TRecomendationItemProps = {
   recomendation: {
-    type: Object as () => TRecommendation,
-  },
-});
+    series_name: string;
+    series_id: number;
+    series_image: TImage;
+    relation?: string;
+  };
+};
+const props = defineProps<TRecomendationItemProps>();
 
 const navigate = () => {
   navigateTo(`/series/${props.recomendation?.series_id}`);
@@ -13,7 +18,7 @@ const navigate = () => {
 
 <template>
   <div
-    class="flex flex-row items-center text-white cursor-pointer rounded-lg custom-block"
+    class="flex flex-row items-center text-white cursor-pointer rounded-lg custom-block-border"
     v-on:click="navigate"
   >
     <img
@@ -22,7 +27,10 @@ const navigate = () => {
     />
 
     <div class="font-semibold text-sm ml-4">
-      {{ recomendation?.series_name }}
+      <div v-if="recomendation?.relation" class="text-xs mb-1">
+        {{ recomendation?.relation }}
+      </div>
+      <span>{{ recomendation?.series_name }}</span>
     </div>
   </div>
 </template>

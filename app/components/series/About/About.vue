@@ -19,7 +19,7 @@ const props = defineProps({
 });
 
 const creators = computed<{ authors: TAuthor[]; artists: TAuthor[] }>(() => {
-  return props.series?.authors.reduce(
+  return props.series?.authors?.reduce(
     (acc: any, author: TAuthor) => {
       if (author.type === EAuthorType.Author) {
         acc.authors.push(author);
@@ -34,7 +34,7 @@ const creators = computed<{ authors: TAuthor[]; artists: TAuthor[] }>(() => {
 });
 
 const publishers = computed(() => {
-  return props.series?.publishers.reduce(
+  return props.series?.publishers?.reduce(
     (acc: any, publisher: TPublisher) => {
       if (publisher.type === EPublisherType.Original) {
         acc.original.push(publisher);
@@ -56,11 +56,11 @@ const publishers = computed(() => {
     <div>
       <div class="font-semibold">Author(s):</div>
 
-      <div v-if="!creators.authors.length">N/A</div>
+      <div v-if="!creators?.authors?.length">N/A</div>
 
       <div
         class="cursor-pointer hover:text-blue-300 underline"
-        v-for="author in creators.authors"
+        v-for="author in creators?.authors"
         @click="() => navigateTo(`/author/${author.author_id}`)"
       >
         {{ author.name }}
@@ -70,11 +70,11 @@ const publishers = computed(() => {
     <div>
       <div class="font-semibold">Artist(s):</div>
 
-      <div v-if="!creators.artists.length">N/A</div>
+      <div v-if="!creators?.artists?.length">N/A</div>
 
       <div
         class="cursor-pointer hover:text-blue-300 underline"
-        v-for="artist in creators.artists"
+        v-for="artist in creators?.artists"
         @click="() => navigateTo(`/author/${artist.author_id}`)"
       >
         {{ artist.name }}
@@ -84,9 +84,9 @@ const publishers = computed(() => {
     <div>
       <div class="font-semibold">Original Publishers:</div>
 
-      <div v-if="!publishers.original.length">N/A</div>
+      <div v-if="!publishers?.original?.length">N/A</div>
 
-      <div v-for="publisher in publishers.original">
+      <div v-for="publisher in publishers?.original">
         <span
           class="cursor-pointer hover:text-blue-300 underline mr-1"
           @click="() => navigateTo(`/publisher/${publisher.publisher_id}`)"
@@ -118,9 +118,9 @@ const publishers = computed(() => {
     <div>
       <div class="font-semibold">English Publishers:</div>
 
-      <div v-if="!publishers.english.length">N/A</div>
+      <div v-if="!publishers?.english?.length">N/A</div>
 
-      <div v-for="publisher in publishers.english">
+      <div v-for="publisher in publishers?.english">
         <span
           class="cursor-pointer hover:text-blue-300 underline mr-1"
           @click="() => navigateTo(`/publisher/${publisher.publisher_id}`)"
@@ -171,8 +171,10 @@ const publishers = computed(() => {
 
       <div v-if="!series?.anime?.start && !series?.anime?.end">N/A</div>
 
-      <div>Starts at {{ series?.anime?.start }}</div>
-      <div>Ends at {{ series?.anime?.end }}</div>
+      <template v-else>
+        <div>Starts at {{ series?.anime?.start }}</div>
+        <div>Ends at {{ series?.anime?.end }}</div>
+      </template>
     </div>
   </div>
 </template>

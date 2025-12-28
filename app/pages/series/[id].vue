@@ -118,7 +118,6 @@ const associated = computed(() => {
 
                   <div class="flex flex-row gap-2 mt-2">
                     <div class="w-[50%] flex flex-col gap-2">
-                      <RelatedSeries :related="data?.related_series" />
                       <UserRating :userRating="userRating" />
                       <Categories
                         :categories="data?.categories"
@@ -142,14 +141,10 @@ const associated = computed(() => {
             </Tabs>
           </div>
           <div class="w-[30%] flex flex-col gap-4">
-            <Recomendations
-              :recomendations="data?.category_recommendations"
-              :title="'Similar Series'"
-            />
-            <Recomendations
-              v-if="data?.recommendations?.length"
-              :recomendations="data?.recommendations"
-              :title="'Recommended Series'"
+            <RecomendationsSlider
+              :recommended="data?.recommendations"
+              :similar="data?.category_recommendations"
+              :related="data?.related_series"
             />
           </div>
         </div>

@@ -12,12 +12,7 @@ const series = ref<TSeries | null>(null);
 
 const getSeries = async () => {
   if (props.series) {
-    series.value = {
-      ...props.series,
-      image: {
-        url: { original: props.series.original, thumb: props.series.thumb },
-      },
-    };
+    series.value = props.series;
   } else {
     try {
       loading.value = true;

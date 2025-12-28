@@ -95,10 +95,10 @@ export type TPosition = {
 
 export type TRecommendation = {
   series_name: string;
-  series_url: string;
+  series_url?: string;
   series_id: number;
   series_image: TImage;
-  weight: number;
+  weight?: number;
 };
 
 export type TAuthor = {
@@ -129,6 +129,7 @@ export type TRelatedSeries = {
   related_series_name: string;
   related_series_url: string;
   triggered_by_relation_id: number;
+  metadata: any;
 };
 
 export type TAnime = {
