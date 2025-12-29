@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { TIconType } from "~/components/shared/Icons/IconsTypes";
+import type { TCategoryResponse } from "~/types/Categories";
 
 type TProps = {
   onBack: () => void;
@@ -9,11 +10,11 @@ const props = defineProps<TProps>();
 const { selectedFilters } = storeToRefs(useSearchStore());
 
 const getCategories = async (input: string): Promise<string[]> => {
-  const response = await $fetch<any>(
+  const response = await $fetch<TCategoryResponse>(
     `/api/categories/search?search=${input}&page=1&perpage=10`
   );
 
-  return response.results.map((item: any) => item.record.category);
+  return response.results.map((item) => item.record.category);
 };
 
 const onCategoryClick = (value: string) => {

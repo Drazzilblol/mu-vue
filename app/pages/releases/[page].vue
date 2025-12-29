@@ -61,7 +61,7 @@ const preparedData = computed(() => {
                     @click="
                       () =>
                         navigateTo(
-                          `/series/${release.metadata.series.series_id}`
+                          `/series/${release.metadata!.series.series_id}`
                         )
                     "
                   >
@@ -71,8 +71,8 @@ const preparedData = computed(() => {
 
                 <template v-slot:content>
                   <SeriesPopup
-                    :seriesId="release.metadata.series.series_id"
-                    :series="release.record.meta"
+                    :seriesId="release.metadata!.series.series_id"
+                    :series="release.record.metadata"
                   />
                 </template>
               </Popup>

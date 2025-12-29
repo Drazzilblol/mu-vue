@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { TSeriesSearchResult } from "~/types/Series";
+
 const searchStore = useSearchStore();
-const searchResults = ref<any[]>([]);
+const searchResults = ref<TSeriesSearchResult[]>([]);
 const container = ref<HTMLElement | null>(null);
 
 onMounted(() => {
@@ -34,7 +36,7 @@ const filtersHeight = computed(() => {
       <div class="flex flex-row gap-4 mx-auto max-w-[1240px] py-4">
         <SearchResults
           class="w-[75%]"
-          :search-result="searchResults"
+          :searchResults="searchResults"
           :isLoading="searchStore.loading"
         />
         <div

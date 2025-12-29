@@ -1,12 +1,13 @@
 import { defineStore } from "pinia";
-import type { TRelease } from "~/types/Releases";
+import type { TRequestMeta } from "~/types/General";
+import type { TRelease, TReleaseSearchResponse } from "~/types/Releases";
 
 const INITIAL_STATE = {
   page: 0,
   perpage: 40,
   totalHits: 0,
   searchTerm: "",
-  releases: [] as { record: TRelease; metadata?: any }[],
+  releases: [] as { record: TRelease; metadata?: TRequestMeta }[],
   loading: false,
   error: null as string | null,
 };
@@ -28,7 +29,7 @@ export const useReleasesSearchStore = defineStore("releasesSearchStore", {
             this.page + 1
           }&perpage=${this.perpage}` +
             (this.searchTerm ? `&search=${this.searchTerm}` : "")
-        )) as any;
+        )) as TReleaseSearchResponse;
         this.releases = [...this.releases, ...data.results];
         this.page = data.page;
         this.perpage = data.per_page;

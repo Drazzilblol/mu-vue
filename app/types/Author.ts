@@ -61,7 +61,26 @@ export type TAuthorSeries = {
     as_string: string;
   };
   genres: string[];
-  metadata: any;
+  metadata: TAuthorSeriesMeta;
+};
+
+export type TAuthorSeriesMeta = {
+  user_list: {
+    series: {
+      id: number;
+      url: string;
+      title: string;
+    };
+    list_id: number;
+    list_type: string;
+    list_icon: string;
+    status: {
+      volume: number;
+      chapter: number;
+    };
+    priority: number;
+    time_added: TTime;
+  };
 };
 
 export enum EAuthorBloodType {

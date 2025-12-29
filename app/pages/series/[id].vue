@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import type { TGroups, TSeries, TUserRating } from "~/types/Series";
 import dayjs from "dayjs";
+import type { TCommentsResponse } from "~/types/Comments";
 
 const route = useRoute();
 
 const { data } = await useFetch<TSeries>(
   `http://127.0.0.1:3001/series/${route.params.id}`
 );
-const { data: comments } = await useFetch<any>(
+const { data: comments } = await useFetch<TCommentsResponse>(
   `/api/series/comments/search?id=${route.params.id}&perpage=10&page=1`,
   { lazy: true }
 );
@@ -133,7 +134,8 @@ const associated = computed(() => {
               </Tab>
               <Tab :title="`Comments (${comments?.total_hits || 0})`">
                 <Comments
-                  :seriesId="data?.series_id"
+                  v-if="data"
+                  :seriesId="data.series_id"
                   :initialComments="comments"
                   :scrollRef="scrollContainer"
                 />

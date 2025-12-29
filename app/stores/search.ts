@@ -1,5 +1,9 @@
 import { cloneDeep } from "lodash";
 import { defineStore } from "pinia";
+import type {
+  TSeriesSearchResponse,
+  TSeriesSearchResult,
+} from "~/types/Series";
 
 export type TSelectedGenre = {
   [key: string]: boolean | undefined;
@@ -44,7 +48,7 @@ const INITIAL_STATE = {
     type: [],
   } as TSelectedFilters,
   orderby: "score",
-  results: [] as any[],
+  results: [] as TSeriesSearchResult[],
   loading: false,
   total: 0,
   page: 0,
@@ -54,7 +58,7 @@ const INITIAL_STATE = {
 };
 
 const preparedFilters = (filters: TSelectedFilters) => {
-  const prepared: any = {};
+  const prepared = {} as Record<string, string | TSelectedGenre | string[]>;
   Object.entries(filters).forEach(([key, value]) => {
     if (value !== null && value !== undefined && value !== "") {
       prepared[key as keyof TSelectedFilters] = value;
@@ -112,7 +116,7 @@ export const useSearchStore = defineStore("searchStore", {
       this.search();
     },
     resetResults() {
-      this.results = [] as any[];
+      this.results = [];
       this.loading = false;
       this.total = 0;
       this.page = 0;
@@ -134,15 +138,18 @@ export const useSearchStore = defineStore("searchStore", {
       this.error = null;
 
       try {
-        const data = (await $fetch("http://localhost:3001/series/search", {
-          method: "post",
-          body: {
-            ...this.filters,
-            orderby: this.orderby,
-            page: this.page + 1,
-            perpage: this.per_page,
-          },
-        })) as any;
+        const data = await $fetch<TSeriesSearchResponse>(
+          "http://localhost:3001/series/search",
+          {
+            method: "post",
+            body: {
+              ...this.filters,
+              orderby: this.orderby,
+              page: this.page + 1,
+              perpage: this.per_page,
+            },
+          }
+        );
         this.results = [...this.results, ...data.results];
         this.total = data.total_hits;
         this.page = data.page;

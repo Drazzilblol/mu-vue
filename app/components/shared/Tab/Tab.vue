@@ -5,20 +5,24 @@ export type TTab = {
   title: string;
 };
 
-const props = defineProps({
-  title: {
-    required: true,
-    type: String,
-  },
-});
+type TRegisterType = (tab: TTab) => {
+  unregister: () => void;
+  active: boolean;
+};
 
-const register = inject<any>("register-tabs");
+type TTabProps = {
+  title: string;
+};
+
+const props = defineProps<TTabProps>();
+
+const register = inject<TRegisterType>("register-tabs");
 
 const tab = reactive({
   title: toRef(props, "title"),
 });
 
-const { active, unregister } = register(tab);
+const { active, unregister } = register!(tab);
 
 onUnmounted(unregister);
 </script>

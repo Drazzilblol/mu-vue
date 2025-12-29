@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import type { TSeriesMeta } from "~/types/General";
 import type { TSeries } from "~/types/Series";
 type TPopupProps = {
   seriesId: number;
-  series: any;
+  series?: TSeriesMeta;
 };
 const props = defineProps<TPopupProps>();
 
 const loading = ref(false);
-const series = ref<TSeries | null>(null);
+const series = ref<TSeries | TSeriesMeta | null>(null);
 
 const getSeries = async () => {
   if (props.series) {

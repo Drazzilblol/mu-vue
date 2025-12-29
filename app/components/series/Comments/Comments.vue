@@ -1,22 +1,20 @@
 <script setup lang="ts">
-const props = defineProps({
-  seriesId: Number,
-  initialComments: {
-    type: Object,
-    required: true,
-  },
-  scrollRef: {
-    type: Object as () => HTMLElement | null,
-    required: false,
-  },
-});
+import type { TCommentsResponse } from "~/types/Comments";
+
+type TCommentsProps = {
+  seriesId: number;
+  initialComments?: TCommentsResponse;
+  scrollRef?: HTMLElement | null;
+};
+
+const props = defineProps<TCommentsProps>();
 
 const page = ref(0);
 const perPage = ref(10);
-const comments = ref<any>(props.initialComments);
+const comments = ref<TCommentsResponse | undefined>(props.initialComments);
 
 const loadComments = async (newPage: number) => {
-  const data = await $fetch<any>(
+  const data = await $fetch<TCommentsResponse>(
     `/api/series/comments/search?id=${props.seriesId}&perpage=${
       perPage.value
     }&page=${newPage + 1}`
@@ -49,7 +47,7 @@ const loadComments = async (newPage: number) => {
     />
     <Comment
       v-for="comment in comments?.results"
-      :key="comment.id"
+      :key="comment.record.id"
       :comment="comment"
     />
     <Pagination

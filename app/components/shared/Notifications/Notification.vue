@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { useNotificationsStore } from "~/stores/notifications";
 
-const props = defineProps({
+type TNotificationProps = {
   notification: {
-    type: Object,
-    required: true,
-  } as any,
-});
+    id: number;
+    message: string;
+  };
+};
+
+const props = defineProps<TNotificationProps>();
 
 const notificationStore = useNotificationsStore();
 </script>

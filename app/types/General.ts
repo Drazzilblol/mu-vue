@@ -1,3 +1,5 @@
+import type { TSeries } from "./Series";
+
 export type TOption = {
   label: string;
   value: string;
@@ -30,4 +32,23 @@ export type TCategory = {
   votes_plus?: number;
   votes_minus?: number;
   added_by?: number;
+};
+
+export type TSeriesMeta = {
+  series_id: string;
+  title: string;
+  type: string;
+  year: string;
+  genres: TGenre[];
+  bayesian_rating: number;
+  image: TImage;
+};
+
+export type TRequestMeta = {
+  series: TSeries;
+  user_list: any; // TODO: Define proper type
+  user_genre_highlights: any[]; // TODO: Define proper type
+  user_genre_filters: any[]; // TODO: Define proper type
+  user_group_filters: any[]; // TODO: Define proper type
+  type_filter: string;
 };

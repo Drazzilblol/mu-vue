@@ -1,22 +1,20 @@
 <script setup lang="ts">
-const props = defineProps({
-  searchResult: {
-    type: Array<any>,
-  },
-  isLoading: {
-    type: Boolean,
-    default: false,
-  },
-});
+import type { TSeriesSearchResult } from "~/types/Series";
+
+type TSearchResultsProps = {
+  searchResults: TSeriesSearchResult[];
+  isLoading?: boolean;
+};
+const props = defineProps<TSearchResultsProps>();
 </script>
 
 <template>
   <div>
     <div class="grid grid-cols-4 gap-4">
       <SearchResultsItem
-        v-for="item in searchResult"
-        :key="item.series_id"
-        :search-result-item="item.record"
+        v-for="item in searchResults"
+        :key="item.record.series_id"
+        :searchResultItem="item.record"
       />
     </div>
     <Loading v-if="isLoading" class="text-center pt-4" />

@@ -9,18 +9,16 @@ import {
   type TSeries,
 } from "~/types/Series";
 
-const props = defineProps({
-  series: {
-    type: Object as () => TSeries,
-  },
-  groups: {
-    type: Object as () => TGroups,
-  },
-});
+type TAboutProps = {
+  series?: TSeries;
+  groups?: TGroups;
+};
 
-const creators = computed<{ authors: TAuthor[]; artists: TAuthor[] }>(() => {
+const props = defineProps<TAboutProps>();
+
+const creators = computed(() => {
   return props.series?.authors?.reduce(
-    (acc: any, author: TAuthor) => {
+    (acc, author: TAuthor) => {
       if (author.type === EAuthorType.Author) {
         acc.authors.push(author);
       }
@@ -29,13 +27,13 @@ const creators = computed<{ authors: TAuthor[]; artists: TAuthor[] }>(() => {
       }
       return acc;
     },
-    { authors: [], artists: [] }
+    { authors: [] as TAuthor[], artists: [] as TAuthor[] }
   );
 });
 
 const publishers = computed(() => {
   return props.series?.publishers?.reduce(
-    (acc: any, publisher: TPublisher) => {
+    (acc, publisher: TPublisher) => {
       if (publisher.type === EPublisherType.Original) {
         acc.original.push(publisher);
       }
@@ -44,7 +42,7 @@ const publishers = computed(() => {
       }
       return acc;
     },
-    { original: [], english: [] }
+    { original: [] as TPublisher[], english: [] as TPublisher[] }
   );
 });
 </script>

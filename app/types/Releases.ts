@@ -1,4 +1,4 @@
-import type { TTime } from "./General";
+import type { TRequestMeta, TSeriesMeta, TTime } from "./General";
 
 export type TReleaseByDayResponse = {
   total_hits: number;
@@ -9,11 +9,11 @@ export type TReleaseByDayResponse = {
 
 export type TReleaseByDayResult = {
   record: TRelease;
-  metadata?: any;
+  metadata?: TRequestMeta;
 };
 
 export type TReleaseSearchResponse = {
-  results: { record: TRelease; metadata?: any }[];
+  results: { record: TRelease; metadata?: TRequestMeta }[];
   total_hits: number;
   page: number;
   per_page: number;
@@ -27,7 +27,7 @@ export type TRelease = {
   groups: TReleaseGroup[];
   release_date: string;
   time_added: TTime;
-  meta?: any;
+  metadata?: TSeriesMeta;
 };
 
 export type TReleaseGroup = {

@@ -1,4 +1,4 @@
-import type { TCategory, TGenre, TImage, TTime } from "./General";
+import type { TCategory, TGenre, TImage, TSeriesMeta, TTime } from "./General";
 
 export type TSeries = {
   series_id: number;
@@ -129,7 +129,7 @@ export type TRelatedSeries = {
   related_series_name: string;
   related_series_url: string;
   triggered_by_relation_id: number;
-  metadata: any;
+  metadata: TSeriesMeta;
 };
 
 export type TAnime = {
@@ -234,3 +234,31 @@ export enum EAuthorType {
   Author = "Author",
   Artist = "Artist",
 }
+
+export type TSeriesSearchResponse = {
+  results: TSeriesSearchResult[];
+  total_hits: number;
+  page: number;
+  per_page: number;
+};
+
+export type TSeriesSearchResult = {
+  record: TSeries;
+};
+
+export type TSeriesSearchItem = {
+  series_id: number;
+  title: string;
+  url: string;
+  description: string;
+  image: TImage;
+  type: ESeriesType;
+  year: string;
+  bayesian_rating: number;
+  rating_votes: number;
+  genres: TGenre[];
+  latest_chapter: number;
+  rank: TRank;
+  last_updated: TLastUpdated;
+  admin: any; // TODO: Define proper type
+};

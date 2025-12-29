@@ -1,9 +1,11 @@
 <script setup lang="ts">
-const props = defineProps({
-  searchResultItem: {
-    type: Object as () => any,
-  },
-});
+import type { TSeriesSearchItem } from "~/types/Series";
+
+type TSearchResultsItemProps = {
+  searchResultItem: TSeriesSearchItem;
+};
+
+const props = defineProps<TSearchResultsItemProps>();
 
 const navigate = () => {
   navigateTo(`/series/${props.searchResultItem?.series_id}`);

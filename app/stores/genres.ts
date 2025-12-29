@@ -17,7 +17,7 @@ export const useGenreStore = defineStore("genreStore", {
       this.error = null;
 
       try {
-        const data = (await $fetch("/api/genres")) as any;
+        const data = (await $fetch("/api/genres")) as TGenre[];
         this.genres = data;
       } catch (e) {
         this.error = "Failed to fetch genres.";

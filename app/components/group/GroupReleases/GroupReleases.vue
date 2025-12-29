@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { TRequestMeta } from "~/types/General";
 import type { TRelease } from "~/types/Releases";
 
 type TGroupReleasesProps = {
-  releases?: { record: TRelease; metadata?: any }[] | null;
+  releases?: { record: TRelease; metadata?: TRequestMeta }[] | null;
   groupId: number;
 };
 
@@ -49,7 +50,7 @@ const debouncedSearch = debounce(onSearch, 500);
           <span
             class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline"
             @click="
-              () => navigateTo(`/series/${release.metadata.series.series_id}`)
+              () => navigateTo(`/series/${release.metadata?.series.series_id}`)
             "
           >
             {{ release.record.title }}

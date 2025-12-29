@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import dayjs from "dayjs";
+import type { TCommentsResult } from "~/types/Comments";
 
-const props = defineProps({
-  comment: Object as () => any,
-});
+type TCommentProps = {
+  comment: TCommentsResult;
+};
+
+const props = defineProps<TCommentProps>();
 
 const createdAt = computed(() => {
   return dayjs(
