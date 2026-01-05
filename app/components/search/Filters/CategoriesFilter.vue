@@ -10,11 +10,15 @@ const props = defineProps<TProps>();
 const { selectedFilters } = storeToRefs(useSearchStore());
 
 const getCategories = async (input: string): Promise<string[]> => {
-  const response = await $fetch<TCategoryResponse>(
-    `/api/categories/search?search=${input}&page=1&perpage=10`
+  const response = await $fetch<string[]>(
+    `http://127.0.0.1:3001/categories/search`,
+    {
+      method: "POST",
+      body: { query: input },
+    }
   );
 
-  return response.results.map((item) => item.record.category);
+  return response;
 };
 
 const onCategoryClick = (value: string) => {

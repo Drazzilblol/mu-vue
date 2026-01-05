@@ -8,3 +8,8 @@ export const prepareText = (text?: string) => {
   );
   return links;
 };
+
+export const highlightText = (text: string, query: string) => {
+  const regex = new RegExp(query.trim(), "gi");
+  return text.replace(regex, "<span class='text-yellow-300'>$&</span>");
+};
