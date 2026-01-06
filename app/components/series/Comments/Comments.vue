@@ -14,10 +14,9 @@ const perPage = ref(10);
 const comments = ref<TCommentsResponse | undefined>(props.initialComments);
 
 const loadComments = async (newPage: number) => {
-  const data = await $fetch<TCommentsResponse>(
-    `/api/series/comments/search?id=${props.seriesId}&perpage=${
-      perPage.value
-    }&page=${newPage + 1}`
+  const data = await useNuxtApp().$api<TCommentsResponse>(
+    `/series/${props.seriesId}/comments/search`,
+    { method: "POST", body: { perpage: perPage.value, page: newPage + 1 } }
   );
   page.value = newPage;
   comments.value = data;

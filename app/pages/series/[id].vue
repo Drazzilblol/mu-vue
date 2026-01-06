@@ -6,16 +6,23 @@ import type { TCommentsResponse } from "~/types/Comments";
 const route = useRoute();
 
 const { data } = await useAPI<TSeries>(`/series/${route.params.id}`);
-const { data: comments } = await useFetch<TCommentsResponse>(
-  `/api/series/comments/search?id=${route.params.id}&perpage=10&page=1`,
+const { data: comments } = await useAPI<TCommentsResponse>(
+  `/series/${route.params.id}/comments/search`,
+  {
+    lazy: true,
+    method: "POST",
+    body: {
+      perpage: 10,
+      page: 1,
+    },
+  }
+);
+const { data: userRating } = await useAPI<TUserRating>(
+  `/series/${route.params.id}/ratingrainbow`,
   { lazy: true }
 );
-const { data: userRating } = await useFetch<TUserRating>(
-  `/api/ratingrainbow?id=${route.params.id}`,
-  { lazy: true }
-);
-const { data: groupsData } = await useFetch<TGroups>(
-  `/api/groups?id=${route.params.id}`,
+const { data: groupsData } = await useAPI<TGroups>(
+  `/series/${route.params.id}/groups`,
   { lazy: true }
 );
 

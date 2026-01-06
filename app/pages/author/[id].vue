@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TSeries } from "~/types/Series";
-import dayjs from "dayjs";
 import {
   EAuthorStatus,
   type TAuthor,
@@ -9,12 +7,13 @@ import {
 
 const route = useRoute();
 
-const { data: authorData } = await useFetch<TAuthor>(
-  `/api/author/${route.params.id}`
+const { data: authorData } = await useAPI<TAuthor>(
+  `/authors/${route.params.id}`
 );
 
-const { data: seriesData } = await useFetch<TAuthorSeriesResponse>(
-  `/api/author/series/${route.params.id}`
+const { data: seriesData } = await useAPI<TAuthorSeriesResponse>(
+  `/authors/${route.params.id}/series`,
+  { method: "POST", body: { orderby: "year" } }
 );
 
 const desc = computed(() => {

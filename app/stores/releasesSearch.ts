@@ -23,12 +23,18 @@ export const useReleasesSearchStore = defineStore("releasesSearchStore", {
       this.error = null;
 
       try {
-        console.log(this.searchTerm);
-        const data = (await $fetch(
-          `/api/releases/search?group_id=${groupId}&page=${
-            this.page + 1
-          }&perpage=${this.perpage}` +
-            (this.searchTerm ? `&search=${this.searchTerm}` : "")
+        const data = (await useNuxtApp().$api<TReleaseSearchResponse>(
+          `/releases/search`,
+          {
+            method: "POST",
+            body: {
+              group_id: groupId,
+              page: this.page + 1,
+              perpage: this.perpage,
+              search: this.searchTerm || undefined,
+              include_metadata: true,
+            },
+          }
         )) as TReleaseSearchResponse;
         this.releases = [...this.releases, ...data.results];
         this.page = data.page;

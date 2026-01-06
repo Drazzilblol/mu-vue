@@ -3,8 +3,8 @@ import type { TPublicationResponse } from "~/types/Publisher";
 
 const route = useRoute();
 
-const { data: publicationData } = await useFetch<TPublicationResponse>(
-  `/api/publications/${route.params.id}`
+const { data: publicationData } = await useAPI<TPublicationResponse>(
+  `publishers/publication?pubname=${route.params.id}`
 );
 
 const preparedGenres = (genres: string[]) => {

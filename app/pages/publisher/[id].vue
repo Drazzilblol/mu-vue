@@ -6,14 +6,13 @@ import {
 
 const route = useRoute();
 
-const { data: publisherData } = await useFetch<TPublisher>(
-  `/api/publishers/${route.params.id}`
+const { data: publisherData } = await useAPI<TPublisher>(
+  `/publishers/${route.params.id}`
 );
 
-const { data: publicationsData } =
-  await useFetch<TPublisherPublicationsResponse>(
-    `/api/publishers/publications/${route.params.id}`
-  );
+const { data: publicationsData } = await useAPI<TPublisherPublicationsResponse>(
+  `/publishers/${route.params.id}/series`
+);
 
 const desc = computed(() => {
   return prepareText(publisherData.value?.info);
