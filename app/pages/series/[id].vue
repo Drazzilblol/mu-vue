@@ -5,9 +5,7 @@ import type { TCommentsResponse } from "~/types/Comments";
 
 const route = useRoute();
 
-const { data } = await useFetch<TSeries>(
-  `http://127.0.0.1:3001/series/${route.params.id}`
-);
+const { data } = await useAPI<TSeries>(`/series/${route.params.id}`);
 const { data: comments } = await useFetch<TCommentsResponse>(
   `/api/series/comments/search?id=${route.params.id}&perpage=10&page=1`,
   { lazy: true }

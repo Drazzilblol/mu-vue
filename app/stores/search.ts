@@ -138,8 +138,8 @@ export const useSearchStore = defineStore("searchStore", {
       this.error = null;
 
       try {
-        const data = await $fetch<TSeriesSearchResponse>(
-          "http://localhost:3001/series/search",
+        const data = await useNuxtApp().$api<TSeriesSearchResponse>(
+          "/series/search",
           {
             method: "post",
             body: {

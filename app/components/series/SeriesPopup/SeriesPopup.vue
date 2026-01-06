@@ -17,8 +17,8 @@ const getSeries = async () => {
   } else {
     try {
       loading.value = true;
-      const response = await $fetch<TSeries>(
-        `http://127.0.0.1:3001/series/metadata/${props.seriesId}`
+      const response = await useNuxtApp().$api<TSeries>(
+        `/series/metadata/${props.seriesId}`
       );
       series.value = response;
     } catch (error) {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { TIconType } from "~/components/shared/Icons/IconsTypes";
-import type { TCategoryResponse } from "~/types/Categories";
 
 type TProps = {
   onBack: () => void;
@@ -10,13 +9,10 @@ const props = defineProps<TProps>();
 const { selectedFilters } = storeToRefs(useSearchStore());
 
 const getCategories = async (input: string): Promise<string[]> => {
-  const response = await $fetch<string[]>(
-    `http://127.0.0.1:3001/categories/search`,
-    {
-      method: "POST",
-      body: { query: input },
-    }
-  );
+  const response = await useNuxtApp().$api<string[]>(`/categories/search`, {
+    method: "POST",
+    body: { query: input },
+  });
 
   return response;
 };

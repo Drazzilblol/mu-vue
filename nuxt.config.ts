@@ -15,4 +15,9 @@ export default defineNuxtConfig({
       redirect: "/search",
     },
   },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: "",
+    },
+  },
 });
