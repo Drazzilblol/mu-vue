@@ -24,7 +24,7 @@ const onGenreClick = (genre: string) => {
       v-for="value in genres"
       :key="value.genre"
       @click="() => onGenreClick(value.genre)"
-      class="px-2 py-1 bg-gray-700 rounded-lg text-sm cursor-pointer h-min"
+      class="px-2 py-1 bg-background-secondary/70 border border-border/40 rounded-lg text-sm cursor-pointer h-min"
     >
       <span>{{ value.genre }}</span>
       <span v-if="value?.count">({{ value.count }})</span>

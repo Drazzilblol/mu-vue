@@ -14,7 +14,7 @@ const navigate = () => {
 
 <template>
   <div
-    class="flex flex-col items-center text-white p-2 rounded-lg cursor-pointer custom-block-border"
+    class="flex flex-col items-center p-2 rounded-lg cursor-pointer custom-block-border"
     v-on:click="navigate"
   >
     <div class="relative w-full">
@@ -23,14 +23,14 @@ const navigate = () => {
         :blurredBackground="true"
       />
       <div
-        class="absolute bottom-0 right-0 px-2 py-1 bg-gray-800 bg-opacity-80 text-white text-sm font-semibold rounded-full m-2"
+        class="absolute bottom-0 right-0 px-2 py-1 bg-accent/80 text-sm font-semibold rounded-full m-2"
       >
         ★ {{ searchResultItem.bayesian_rating || 0 }}
       </div>
     </div>
 
     <div class="text-sm mt-2 self-start">
-      <div class="font-normal text-gray-300">
+      <div class="font-normal text-foreground/70">
         {{ searchResultItem?.type }} - {{ searchResultItem?.year }}
       </div>
       <div class="font-semibold line-clamp-2">

@@ -77,7 +77,7 @@ const onPrev = () => {
 <template>
   <div
     v-if="availableTypes.length > 0"
-    class="flex flex-col text-white gap-4 custom-block"
+    class="flex flex-col gap-4 custom-block-border"
   >
     <div class="flex flex-row justify-between items-center self-center w-full">
       <Button v-if="availableTypes.length > 1" @click="onPrev"><</Button>

@@ -14,15 +14,15 @@ const props = defineProps({
 
 const backgroundColor = computed(() => {
   if (props.value === true) {
-    return "bg-blue-600 border-blue-600";
+    return "bg-primary border-primary";
   } else {
-    return "bg-gray-600 border-blue-600";
+    return "bg-background-accent border-primary";
   }
 });
 </script>
 <template>
   <div
-    class="flex flex-row items-center gap-2 cursor-pointer text-white select-none"
+    class="flex flex-row items-center gap-2 cursor-pointer select-none"
     v-on:click="() => onclick()"
   >
     <div

@@ -13,13 +13,13 @@ const navigate = (id: number) => {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center text-white flex-wrap custom-block">
+  <div class="flex flex-col justify-center flex-wrap custom-block-border">
     <div class="font-semibold">Related Series:</div>
     <div v-if="!related?.length">N/A</div>
     <TextCollapse :lines="6">
       <div v-for="item in related">
         <span
-          class="cursor-pointer hover:text-blue-300 underline"
+          class="cursor-pointer hover:text-link underline"
           v-on:click="navigate(item.related_series_id)"
         >
           {{ item.related_series_name }}

@@ -4,7 +4,7 @@ import type { TPublicationResponse } from "~/types/Publisher";
 const route = useRoute();
 
 const { data: publicationData } = await useAPI<TPublicationResponse>(
-  `publishers/publication?pubname=${route.params.id}`
+  `publishers/publication/${route.params.id}`
 );
 
 const preparedGenres = (genres: string[]) => {
@@ -18,12 +18,12 @@ const preparedGenres = (genres: string[]) => {
     <div
       class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0"
     >
-      <div class="flex flex-col gap-2 text-white w-full">
+      <div class="flex flex-col gap-2 w-full">
         <div class="text-2xl font-bold">{{ route.params.id }}</div>
         <div class="text-sm">
           by
           <span
-            class="font-semibold underline cursor-pointer hover:text-blue-300"
+            class="font-semibold underline cursor-pointer hover:text-link"
             @click="
               () =>
                 navigateTo(
@@ -42,13 +42,13 @@ const preparedGenres = (genres: string[]) => {
                 :key="value.series_id"
               >
                 <span
-                  class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline"
+                  class="whitespace-break-spaces cursor-pointer hover:text-link underline"
                   @click="() => navigateTo(`/series/${value.series_id}`)"
                 >
                   {{ value.title }}
                 </span>
 
-                <span class="text-gray-400 pl-1">
+                <span class="text-foreground/60 pl-1">
                   {{ preparedGenres(value.genres) }}
                 </span>
               </span>

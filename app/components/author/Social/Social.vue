@@ -8,7 +8,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="flex flex-row text-white gap-2"
+    class="flex flex-row gap-2"
     v-if="social?.facebook || social?.twitter || social?.officialsite"
   >
     <div class="font-semibold">Social:</div>
@@ -17,7 +17,7 @@ const props = defineProps({
       v-if="social?.officialsite"
       :to="social?.officialsite"
       external
-      class="underline hover:text-blue-300"
+      class="underline hover:text-link"
       target="_blank"
     >
       Official Website
@@ -26,7 +26,7 @@ const props = defineProps({
       v-if="social?.facebook"
       :to="social?.facebook"
       external
-      class="underline hover:text-blue-300"
+      class="underline hover:text-link"
       target="_blank"
     >
       Facebook
@@ -35,7 +35,7 @@ const props = defineProps({
       v-if="social?.twitter"
       :to="social?.twitter"
       external
-      class="underline hover:text-blue-300"
+      class="underline hover:text-link"
       target="_blank"
     >
       Twitter

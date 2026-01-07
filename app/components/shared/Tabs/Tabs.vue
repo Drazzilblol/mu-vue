@@ -34,11 +34,11 @@ provide("register-tabs", (tab: TTab) => {
 <template>
   <div class="w-full">
     <div
-      class="flex flex-row gap-2 w-max bg-zinc-900 bg-opacity-70 p-1 mb-2 rounded-full"
+      class="flex flex-row gap-2 w-max custom-block-border !p-1 mb-2 !rounded-full"
     >
       <div
         v-for="tab in tabs"
-        class="cursor-pointer px-2 py-1 rounded-full border border-b-0 border-gray-600 bg-gray-700 hover:bg-gray-600"
+        class="cursor-pointer px-2 py-1 rounded-full hover:bg-accent"
         :class="{ active: tab === active }"
         @click="activate(tab)"
       >
@@ -53,10 +53,10 @@ provide("register-tabs", (tab: TTab) => {
 
 <style lang="css" scoped>
 .active {
-  background-color: rgb(59 130 246);
+  @apply bg-primary;
 }
 
 .active:hover {
-  background-color: rgb(96 165 250);
+  @apply bg-primary/80;
 }
 </style>

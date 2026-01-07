@@ -76,7 +76,7 @@ const onInput = (event: Event) => {
 <template>
   <div
     ref="autocompleteRef"
-    class="w-full py-1 pl-4 pr-8 text-[16px] rounded-full bg-white focus-within:ring-1 focus-within:ring-blue-500 relative"
+    class="w-full py-1 pl-4 pr-8 text-[16px] rounded-full relative bg-accent"
   >
     <input
       class="w-full placeholder:text-muted-foreground bg-transparent border-none focus:outline-none"
@@ -91,7 +91,7 @@ const onInput = (event: Event) => {
       size="small"
     />
     <div
-      class="bg-gray-900 border border-gray-900 text-white rounded-2xl w-full absolute z-20 left-0 mt-2 max-h-96 overflow-y-auto"
+      class="border bg-background-secondary border-border/40 rounded-2xl w-full absolute z-20 left-0 mt-2 max-h-96 overflow-y-auto"
       v-if="!isCollapsed"
     >
       <div class="flex flex-col">
@@ -100,7 +100,7 @@ const onInput = (event: Event) => {
           v-for="option in options"
           :key="option.value"
           @click="() => onOptionClick(option.value)"
-          class="px-4 py-1 hover:bg-gray-700 cursor-pointer first:rounded-t-2xl last:rounded-b-2xl"
+          class="px-4 py-1 hover:bg-accent cursor-pointer first:rounded-t-2xl last:rounded-b-2xl"
           v-html="option.viewValue"
         ></div>
       </div>

@@ -22,13 +22,10 @@ const onCheckboxClick = (value: ESeriesType) => {
 <template>
   <div>
     <div class="flex justify-between items-center">
-      <div class="text-white font-semibold mb-2">Type</div>
+      <div class="font-semibold mb-2">Type</div>
       <Button :onClick="() => onback()"><- Back</Button>
     </div>
-    <div
-      v-for="value in ESeriesType"
-      class="flex items-center gap-2 m-2 text-white"
-    >
+    <div v-for="value in ESeriesType" class="flex items-center gap-2 m-2">
       <Checkbox
         :onclick="() => onCheckboxClick(value)"
         :value="selectedFilters.type?.includes(value)"

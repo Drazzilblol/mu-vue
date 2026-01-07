@@ -72,19 +72,19 @@ const visiblePages = computed(() => {
 
 <style lang="css" scoped>
 .additional-button {
-  @apply cursor-pointer content-end border border-gray-600 px-1 bg-gray-700 rounded-sm hover:bg-gray-600;
+  @apply cursor-pointer content-end border border-b border-border/40 px-1 bg-background-secondary rounded-sm hover:bg-accent;
 }
 
 .page-button {
-  @apply cursor-pointer border-y border-l last:border-r border-gray-600 px-1;
-  @apply bg-gray-700 first:rounded-s-sm last:rounded-e-sm hover:bg-gray-600;
+  @apply cursor-pointer border-y border-l last:border-r border-border/40 px-1;
+  @apply bg-background-secondary first:rounded-s-sm last:rounded-e-sm hover:bg-accent;
 }
 
 .active {
-  background-color: rgb(59 130 246);
+  @apply bg-primary;
 }
 
 .active:hover {
-  background-color: rgb(96 165 250);
+  @apply bg-primary/80;
 }
 </style>

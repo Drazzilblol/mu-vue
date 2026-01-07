@@ -35,7 +35,7 @@ const associated = computed(() => {
     <div
       class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0"
     >
-      <div class="flex flex-col gap-2 text-white w-full">
+      <div class="flex flex-col gap-2 w-full">
         <div class="text-2xl font-bold">{{ groupData?.name }}</div>
         <div class="flex flex-row gap-2">
           <div class="w-full">
@@ -51,7 +51,7 @@ const associated = computed(() => {
                     <Categories :categories="seriesData?.series_categories" />
                   </div>
                   <div class="w-[50%] flex flex-col gap-2">
-                    <div class="custom-block">
+                    <div class="custom-block-border">
                       <GroupSocial :social="groupData?.social" />
 
                       <div class="flex flex-row gap-2">
@@ -84,7 +84,7 @@ const associated = computed(() => {
                         :lines="10"
                       />
                     </div>
-                    <div class="custom-block">
+                    <div class="custom-block-border">
                       <div class="font-semibold mb-1">Genres:</div>
                       <Genres :genres="seriesData?.series_genres" />
                     </div>
@@ -92,7 +92,7 @@ const associated = computed(() => {
                 </div>
               </Tab>
               <Tab title="Series">
-                <div class="mt-2 custom-block">
+                <div class="mt-2 custom-block-border">
                   <SeriesList :series="seriesData?.series_titles" />
                 </div>
               </Tab>

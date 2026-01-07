@@ -5,7 +5,7 @@ const notificationStore = useNotificationsStore();
 </script>
 <template>
   <div
-    class="fixed bottom-4 left-2/4 -translate-x-1/2 flex flex-col gap-2 items-center"
+    class="fixed bottom-4 left-2/4 -translate-x-1/2 flex flex-col gap-2 items-center z-50"
   >
     <Notification
       v-for="notification in notificationStore.getNotifications"

@@ -26,7 +26,7 @@ const preparedGenres = (genres: string[]) => {
       <Popup :width="400" :height="208" position="right" :delay="400">
         <template v-slot:target>
           <div
-            class="overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer hover:text-blue-300"
+            class="overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer hover:text-link"
             @click="navigateTo(`/series/${item.series_id}`)"
           >
             {{ item.title }}

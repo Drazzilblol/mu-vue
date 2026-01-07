@@ -21,11 +21,11 @@ const copy = (name: string) => {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+  <div class="flex flex-col justify-center flex-wrap pt-2">
     <div class="font-semibold">{{ title }}</div>
     <TextCollapse :lines="lines">
       <div
-        class="cursor-pointer hover:text-blue-300 hover:underline"
+        class="cursor-pointer hover:text-link hover:underline"
         v-for="name in names"
         v-on:click="copy(name)"
       >

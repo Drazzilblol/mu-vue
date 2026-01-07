@@ -47,7 +47,7 @@ const filtersHeight = computed(() => {
             class="gap-2 grid grid-rows-[min-content_minmax(100px,_1fr)_min-content] max-h-full"
           >
             <div class="custom-block-border">
-              <div class="text-white font-semibold mb-2">Sort</div>
+              <div class="font-semibold mb-2">Sort</div>
               <SortManga />
             </div>
             <div class="custom-block-border">

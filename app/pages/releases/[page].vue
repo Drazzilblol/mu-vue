@@ -27,7 +27,7 @@ const preparedData = computed(() => {
 <template>
   <div class="flex h-full overflow-y-scroll">
     <div
-      class="flex flex-col gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0 text-white"
+      class="flex flex-col gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0"
     >
       <div class="flex flex-row justify-between items-center">
         <span class="text-2xl font-bold">New Releases</span>
@@ -43,7 +43,7 @@ const preparedData = computed(() => {
         class="flex flex-col gap-2 w-full"
       >
         <span class="font-bold text-2xl text-center">{{ date }}</span>
-        <div class="custom-block !p-4 flex flex-col gap-4">
+        <div class="custom-block-border !p-4 flex flex-col gap-4">
           <div class="grid grid-cols-[1fr_200px_300px] gap-2 p-2">
             <div class="font-bold">Title</div>
             <div class="font-bold">Volume/Chapter</div>
@@ -52,13 +52,13 @@ const preparedData = computed(() => {
           <div
             v-for="release in value"
             :key="release.record.id"
-            class="grid grid-cols-[1fr_200px_300px] gap-y-1 gap-x-2 even:bg-gray-800/20 p-2 rounded"
+            class="grid grid-cols-[1fr_200px_300px] gap-y-1 gap-x-2 even:bg-accent p-2 rounded"
           >
             <div class="font-bold">
               <Popup :width="400" :height="208" position="right" :delay="400">
                 <template v-slot:target>
                   <span
-                    class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline mx-1"
+                    class="whitespace-break-spaces cursor-pointer hover:text-link underline mx-1"
                     @click="
                       () =>
                         navigateTo(
@@ -95,7 +95,7 @@ const preparedData = computed(() => {
               <span
                 v-for="value in release.record.groups"
                 :key="value.group_id"
-                class="[&:not(:first-child)]:ml-2 cursor-pointer hover:text-blue-300 underline"
+                class="[&:not(:first-child)]:ml-2 cursor-pointer hover:text-link underline"
                 @click="() => navigateTo(`/group/${value.group_id}`)"
               >
                 {{ value.name }}

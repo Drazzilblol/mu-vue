@@ -20,4 +20,7 @@ export default defineNuxtConfig({
       apiBaseUrl: "",
     },
   },
+  tailwindcss: {
+    configPath: "tailwind.config.js",
+  },
 });

@@ -20,7 +20,7 @@ const props = defineProps<TSeriesListProps>();
         <Popup :width="400" :height="208" position="right" :delay="400">
           <template v-slot:target>
             <div
-              class="overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer hover:text-blue-300 underline"
+              class="overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer hover:text-link underline"
               @click="() => navigateTo(`/series/${item.series_id}`)"
             >
               {{ item.title }}

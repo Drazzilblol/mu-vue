@@ -26,9 +26,9 @@ input[type="number"] {
 }
 
 .custom-block {
-  @apply bg-zinc-900 bg-opacity-70 p-2 rounded-2xl;
+  @apply p-2 rounded-2xl bg-background-secondary/70;
 }
 
 .custom-block-border {
-  @apply bg-zinc-900 bg-opacity-70 p-2 rounded-2xl border border-gray-600 border-opacity-40;
+  @apply p-2 rounded-2xl border border-border/40 bg-background-secondary/70;
 }

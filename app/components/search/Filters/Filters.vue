@@ -35,9 +35,7 @@ const resetFilters = () => {
 
 <template>
   <div class="flex flex-col gap-2" v-if="show.value === FilterView.Filters">
-    <div
-      class="text-white font-semibold mb-2 flex justify-between items-center"
-    >
+    <div class="font-semibold mb-2 flex justify-between items-center">
       Filters <Button :onClick="resetFilters">Reset</Button>
     </div>
 
@@ -111,6 +109,6 @@ const resetFilters = () => {
 
 <style lang="css" scoped>
 .filter-button {
-  @apply flex justify-between items-center p-2 text-white cursor-pointer bg-gray-900 px-4 py-1 rounded-full border border-gray-900 hover:border-gray-700 select-none;
+  @apply flex justify-between items-center p-2 cursor-pointer px-4 py-1 rounded-full border border-border/40 hover:border-border select-none bg-background-secondary;
 }
 </style>

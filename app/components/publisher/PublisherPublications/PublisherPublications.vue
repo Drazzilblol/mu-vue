@@ -18,7 +18,7 @@ const props = defineProps({
         class="justify-center flex"
       >
         <div
-          class="overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer hover:text-blue-300 underline"
+          class="overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer hover:text-link underline"
           @click="() => navigateTo(`/publication/${item.publication_name}`)"
         >
           {{ item.publication_name }}

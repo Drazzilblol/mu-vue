@@ -27,11 +27,9 @@ const input = (event: Event) => {
 const model = defineModel();
 </script>
 <template>
-  <div
-    class="w-full h-8 py-1 px-4 text-[16px] rounded-full bg-white focus-within:ring-1 focus-within:ring-blue-500 relative"
-  >
+  <div class="w-full h-8 py-1 px-4 text-[16px] rounded-full bg-accent relative">
     <input
-      class="w-full placeholder:text-muted-foreground bg-transparent border-none focus:outline-none text-black"
+      class="w-full placeholder:text-muted-foreground bg-transparent border-none focus:outline-none h-full"
       v-model="model"
       :placeholder="placeholder"
       :type="type || 'text'"

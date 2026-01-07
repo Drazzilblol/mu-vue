@@ -48,7 +48,7 @@ const getArrowPosition = () => {
 <template>
   <teleport to="#app">
     <div
-      class="absolute z-50 text-black rounded-lg shadow-lg border border-gray-600 border-opacity-40 p-2 bg-zinc-700"
+      class="absolute z-50 rounded-lg shadow-lg border border-border/40 p-2 bg-zinc-700"
       :class="`pos-${position || 'bottom'}`"
       ref="modal"
       :style="{
@@ -67,6 +67,6 @@ const getArrowPosition = () => {
 
 <style lang="css" scoped>
 .arrow {
-  @apply absolute w-4 h-4 bg-zinc-700 border-gray-600 border-opacity-40;
+  @apply absolute w-4 h-4 bg-zinc-700 border-border/40;
 }
 </style>

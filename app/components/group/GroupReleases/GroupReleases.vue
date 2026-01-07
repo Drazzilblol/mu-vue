@@ -24,7 +24,7 @@ const debouncedSearch = debounce(onSearch, 500);
 
 <template>
   <div>
-    <div class="custom-block !p-4 flex flex-col gap-2">
+    <div class="custom-block-border !p-4 flex flex-col gap-2">
       <div class="w-80 flex self-end">
         <span class="font-semibold mr-2 self-center">Search:</span>
         <Input
@@ -43,14 +43,14 @@ const debouncedSearch = debounce(onSearch, 500);
       <div
         v-for="release in releases"
         :key="release.record.id"
-        class="grid grid-cols-[100px_1fr_200px_200px] gap-x-2 even:bg-gray-800/20 px-2 py-1 rounded"
+        class="grid grid-cols-[100px_1fr_200px_200px] gap-x-2 even:bg-accent px-2 py-1 rounded"
       >
         <div>{{ release.record.release_date }}</div>
         <div>
           <Popup :width="400" :height="208" position="right" :delay="400">
             <template v-slot:target>
               <span
-                class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline"
+                class="whitespace-break-spaces cursor-pointer hover:text-link underline"
                 @click="
                   () =>
                     navigateTo(`/series/${release.metadata?.series.series_id}`)
@@ -85,7 +85,7 @@ const debouncedSearch = debounce(onSearch, 500);
           <span
             v-for="value in release.record.groups"
             :key="value.group_id"
-            class="[&:not(:first-child)]:ml-2 cursor-pointer hover:text-blue-300 underline"
+            class="[&:not(:first-child)]:ml-2 cursor-pointer hover:text-link underline"
             @click="() => navigateTo(`/group/${value.group_id}`)"
           >
             {{ value.name }}

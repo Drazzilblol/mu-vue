@@ -28,9 +28,7 @@ const reversedRainbow = computed(() => {
 </script>
 
 <template>
-  <div
-    class="flex flex-col justify-center text-white flex-wrap gap-1 custom-block"
-  >
+  <div class="flex flex-col justify-center flex-wrap gap-1 custom-block-border">
     <div class="font-semibold">User Ratings:</div>
     <template v-if="summary !== 0">
       <div>
@@ -42,7 +40,7 @@ const reversedRainbow = computed(() => {
           <span>{{ item.rating }}:</span>
           <div>
             <div
-              class="inline-block bg-gray-700 h-5 align-middle"
+              class="inline-block bg-muted h-5 align-middle"
               :style="{ width: (item.count / max) * 100 + '%' }"
             />
           </div>

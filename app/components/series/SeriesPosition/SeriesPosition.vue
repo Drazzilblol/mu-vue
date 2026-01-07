@@ -22,7 +22,7 @@ const rankDiff = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col custom-block">
+  <div class="flex flex-col custom-block-border">
     <div class="font-semibold">Activity Stats (vs. other series):</div>
     <div v-if="!rank">N/A</div>
     <div class="flex flex-col" v-else>
@@ -110,7 +110,7 @@ const rankDiff = computed(() => {
     </div>
   </div>
 
-  <div class="flex flex-col custom-block">
+  <div class="flex flex-col custom-block-border">
     <div class="font-semibold">List Stats:</div>
     <div v-if="!rank">N/A</div>
     <!-- TODO add navigation for list stats -->

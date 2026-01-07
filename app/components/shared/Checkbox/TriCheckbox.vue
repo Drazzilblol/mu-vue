@@ -14,7 +14,7 @@ const props = defineProps({
 
 const backgroundColor = computed(() => {
   if (props.value === undefined) {
-    return "bg-gray-600 border-blue-600";
+    return "bg-background-accent border-primary";
   } else if (props.value === true) {
     return "bg-green-600 border-green-500";
   } else {
@@ -24,7 +24,7 @@ const backgroundColor = computed(() => {
 </script>
 <template>
   <div
-    class="flex flex-row items-center gap-2 cursor-pointer text-white select-none"
+    class="flex flex-row items-center gap-2 cursor-pointer select-none"
     v-on:click="
       () => {
         if (value === undefined) {
@@ -38,7 +38,7 @@ const backgroundColor = computed(() => {
     "
   >
     <div
-      class="w-5 h-5 rounded-md border border-blue-400 bg-gray-600 text-2xl font-semibold flex items-center justify-center relative"
+      class="w-5 h-5 rounded-md border text-2xl font-semibold flex items-center justify-center relative"
       :class="backgroundColor"
     >
       <div

@@ -37,7 +37,7 @@ const prepareText = (text?: string) => {
   );
   const links = spoilers?.replace(
     linkPattern,
-    `<a href="$&" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-300">$&</a>`
+    `<a href="$&" target="_blank" rel="noopener noreferrer" class="underline hover:text-link">$&</a>`
   );
   return links?.replaceAll("\n\n\n", "\n\n");
 };
@@ -48,7 +48,7 @@ const text = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center text-center custom-block">
+  <div class="flex flex-col justify-center text-center custom-block-border">
     <div class="flex flex-col gap-4">
       <div class="grid grid-cols-[56px_1fr_100px] gap-2">
         <div class="self-center">
@@ -81,7 +81,7 @@ const text = computed(() => {
       </div>
 
       <div class="text-left whitespace-pre-line" v-html="text"></div>
-      <div v-if="lastUpdated" class="text-sm text-left text-gray-500">
+      <div v-if="lastUpdated" class="text-sm text-left text-accent/60">
         ...Last updated {{ lastUpdated }}
       </div>
     </div>

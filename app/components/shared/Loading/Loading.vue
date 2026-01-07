@@ -28,8 +28,8 @@ const sizeClass = computed(() => {
 const colorClass = computed(() => {
   const colors = {
     blue: "border-blue-500",
-    gray: "border-gray-500",
-    white: "border-white",
+    gray: "border-accent",
+    white: "border-foreground",
     green: "border-green-500",
     red: "border-red-500",
     purple: "border-purple-500",
@@ -40,8 +40,8 @@ const colorClass = computed(() => {
 const textColorClass = computed(() => {
   const textColors = {
     blue: "text-blue-500",
-    gray: "text-gray-500",
-    white: "text-white",
+    gray: "text-accent",
+    white: "text-foreground",
     green: "text-green-500",
     red: "text-red-500",
     purple: "text-purple-500",

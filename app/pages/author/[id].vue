@@ -49,53 +49,59 @@ const statusTitle = computed(() => {
           <CoverImage :url="authorData?.image?.url?.original" />
         </div>
 
-        <div class="custom-block mt-2">
-          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+        <div class="custom-block-border mt-2">
+          <div class="flex flex-col justify-center flex-wrap pt-2">
             <div class="font-semibold">Name (in native language):</div>
-            {{ authorData?.actualname }}
+            {{ authorData?.actualname || "N/A" }}
           </div>
 
-          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+          <div class="flex flex-col justify-center flex-wrap pt-2">
             <div class="font-semibold">Gender:</div>
-            {{ authorData?.gender }}
+            {{ authorData?.gender || "N/A" }}
           </div>
 
-          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+          <div class="flex flex-col justify-center flex-wrap pt-2">
             <div class="font-semibold">Birth Place:</div>
-            {{ authorData?.birthplace }}
+            {{ authorData?.birthplace || "N/A" }}
           </div>
 
-          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+          <div class="flex flex-col justify-center flex-wrap pt-2">
             <div class="font-semibold">Birth Date:</div>
-            {{ authorData?.birthday.as_string }}
+            {{ authorData?.birthday.as_string || "N/A" }}
           </div>
-          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+          <div class="flex flex-col justify-center flex-wrap pt-2">
             <div class="font-semibold">Zodiac:</div>
-            {{ authorData?.birthday.zodiac }}
+            {{ authorData?.birthday.zodiac || "N/A" }}
           </div>
-          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+          <div class="flex flex-col justify-center flex-wrap pt-2">
             <div class="font-semibold">Blood Type:</div>
-            {{ authorData?.bloodtype }}
+            {{ authorData?.bloodtype || "N/A" }}
           </div>
 
           <AssociatedNames :names="associated" />
         </div>
       </div>
-      <div class="flex flex-col gap-2 text-white w-full">
+      <div class="flex flex-col gap-2 w-full">
         <div class="text-2xl font-bold">{{ authorData?.name }}</div>
         <div class="flex flex-row gap-4">
           <div class="w-full">
             <Tabs>
               <Tab title="Details">
-                <TextCollapse :lines="6" class="custom-block">
+                <TextCollapse
+                  v-if="desc"
+                  :lines="6"
+                  class="custom-block-border"
+                >
                   <div
                     class="whitespace-break-spaces wrap-anywhere break-words"
                     v-html="desc"
                   ></div>
                 </TextCollapse>
 
-                <div class="flex flex-row gap-4 mt-4">
-                  <div class="w-[50%] flex flex-col gap-4 custom-block h-max">
+                <div class="flex flex-row gap-2 mt-2">
+                  <div
+                    class="w-[50%] flex flex-col gap-4 custom-block-border h-max"
+                  >
                     <div>
                       <div class="font-semibold">Status:</div>
                       <div>{{ authorData?.status || "N/A" }}</div>
@@ -110,7 +116,9 @@ const statusTitle = computed(() => {
                     </div>
                     <Social :social="authorData?.social" />
                   </div>
-                  <div class="w-[50%] flex flex-col gap-4 custom-block h-max">
+                  <div
+                    class="w-[50%] flex flex-col gap-4 custom-block-border h-max"
+                  >
                     <div>
                       <div class="font-semibold">Total Series:</div>
                       <div>{{ seriesData?.total_series }}</div>
@@ -124,7 +132,7 @@ const statusTitle = computed(() => {
               </Tab>
 
               <Tab title="Author Series">
-                <div class="mt-2 custom-block">
+                <div class="mt-2 custom-block-border">
                   <AuthorSeries :series="seriesData?.series_list" />
                 </div>
               </Tab>

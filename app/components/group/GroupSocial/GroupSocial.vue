@@ -11,7 +11,7 @@ const props = defineProps<TGroupSocialProps>();
 
 <template>
   <div
-    class="flex flex-row text-white gap-2"
+    class="flex flex-row gap-2"
     v-if="
       social?.facebook ||
       social?.twitter ||
@@ -27,7 +27,7 @@ const props = defineProps<TGroupSocialProps>();
       v-if="social?.irc"
       :to="social?.irc.server"
       external
-      class="underline hover:text-blue-300"
+      class="underline hover:text-link"
       target="_blank"
     >
       IRC
@@ -37,7 +37,7 @@ const props = defineProps<TGroupSocialProps>();
       v-if="social?.site"
       :to="social?.site"
       external
-      class="underline hover:text-blue-300"
+      class="underline hover:text-link"
       target="_blank"
     >
       Website
@@ -46,7 +46,7 @@ const props = defineProps<TGroupSocialProps>();
       v-if="social?.forum"
       :to="social?.forum"
       external
-      class="underline hover:text-blue-300"
+      class="underline hover:text-link"
       target="_blank"
     >
       Forum
@@ -55,7 +55,7 @@ const props = defineProps<TGroupSocialProps>();
       v-if="social?.discord"
       :to="social?.discord"
       external
-      class="underline hover:text-blue-300"
+      class="underline hover:text-link"
       target="_blank"
     >
       Discord
@@ -65,7 +65,7 @@ const props = defineProps<TGroupSocialProps>();
       v-if="social?.twitter"
       :to="social?.twitter"
       external
-      class="underline hover:text-blue-300"
+      class="underline hover:text-link"
       target="_blank"
     >
       Twitter
@@ -74,7 +74,7 @@ const props = defineProps<TGroupSocialProps>();
       v-if="social?.facebook"
       :to="social?.facebook"
       external
-      class="underline hover:text-blue-300"
+      class="underline hover:text-link"
       target="_blank"
     >
       Facebook

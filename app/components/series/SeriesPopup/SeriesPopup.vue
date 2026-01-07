@@ -47,18 +47,18 @@ onMounted(() => {
         :blurredBackground="true"
       />
       <div
-        class="absolute bottom-0 right-0 px-2 py-1 bg-gray-800 bg-opacity-80 text-white text-sm font-semibold rounded-full m-2"
+        class="absolute bottom-0 right-0 px-2 py-1 bg-accent/80 text-sm font-semibold rounded-full m-2"
       >
         ★ {{ series.bayesian_rating || 0 }}
       </div>
     </div>
 
-    <div class="flex flex-col self-start text-white gap-2">
+    <div class="flex flex-col self-start gap-2">
       <div class="font-semibold line-clamp-2">
         {{ series?.title }}
       </div>
       <div class="font-normal">{{ series?.type }} - {{ series?.year }}</div>
-      <Genres :genres="series?.genres" class="h-[100px] overflow-hidden" />
+      <Genres :genres="series?.genres" class="h-[110px] overflow-hidden" />
     </div>
   </div>
 </template>

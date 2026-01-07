@@ -32,7 +32,7 @@ const prepareText = (text?: string) => {
   const strong = text?.replace(pattern, "<strong>$2</strong>");
   const links = strong?.replace(
     linkPattern,
-    '<a href="$2" class="underline hover:text-blue-300" target="_blank" rel="noopener noreferrer">$1</a>'
+    '<a href="$2" class="underline hover:text-link" target="_blank" rel="noopener noreferrer">$1</a>'
   );
   return links;
 };
@@ -71,38 +71,40 @@ const associated = computed(() => {
           <CoverImage :url="data?.image?.url?.original" />
         </div>
 
-        <div class="custom-block mt-2">
-          <div class="flex flex-col justify-center text-white flex-wrap">
+        <div class="custom-block-border mt-2">
+          <div class="flex flex-col justify-center flex-wrap">
             <div class="font-semibold">Status in Country of Origin:</div>
             <div v-html="status" />
           </div>
 
-          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+          <div class="flex flex-col justify-center flex-wrap pt-2">
             <div class="font-semibold">Scanlate:</div>
             {{ data?.completed ? "Completed" : "Continuing" }}
           </div>
 
-          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+          <div class="flex flex-col justify-center flex-wrap pt-2">
             <div class="font-semibold">Latest chapter:</div>
             {{ data?.latest_chapter }}
           </div>
 
-          <div class="flex flex-col justify-center text-white flex-wrap pt-2">
+          <div class="flex flex-col justify-center flex-wrap pt-2">
             <div class="font-semibold">Last updated:</div>
             {{ lastUpdated }}
           </div>
           <AssociatedNames :names="associated" />
         </div>
       </div>
-      <div class="flex flex-col gap-2 text-white w-full">
-        <div class="flex flex-row text-lg gap-4 justify-between text-center">
+      <div class="flex flex-col gap-2 w-full">
+        <div
+          class="flex flex-row text-lg gap-4 justify-between text-center leading-none items-center"
+        >
           <div>{{ data?.year }} - {{ data?.type }}</div>
-          <div class="text-green-600 text-2xl font-bold">
+          <div class="text-green-600 text-2xl font-bold leading-none">
             {{ data?.bayesian_rating }}
           </div>
         </div>
-        <div class="text-2xl font-bold">{{ data?.title }}</div>
-        <div class="flex gap-2 flex-row mb-2">
+        <div class="text-2xl font-bold leading-none">{{ data?.title }}</div>
+        <div class="flex gap-2 flex-row">
           <Genres :genres="data?.genres" />
         </div>
 
@@ -114,7 +116,7 @@ const associated = computed(() => {
                   <TextCollapse
                     v-if="desc"
                     :lines="6"
-                    class="mt-2 custom-block"
+                    class="mt-2 custom-block-border"
                   >
                     <div
                       class="whitespace-break-spaces wrap-anywhere break-words"

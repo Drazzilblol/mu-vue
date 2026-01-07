@@ -122,7 +122,7 @@ const onMouseLeave = () => {
 <template>
   <div
     ref="targetContainer"
-    class="w-fit h-fit max-w-full max-h-full overflow-hidden"
+    class="w-fit h-fit max-w-full max-h-full overflow-hidden text-foreground"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
   >

@@ -2,7 +2,7 @@
 const { selectedFilters } = storeToRefs(useSearchStore());
 </script>
 <template>
-  <div class="flex flex-col text-white mx-2">
+  <div class="flex flex-col mx-2">
     <div class="mb-1 text-sm">Search in</div>
 
     <div class="flex flex-row justify-between">

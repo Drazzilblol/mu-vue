@@ -18,7 +18,7 @@ const navigate = () => {
 
 <template>
   <div
-    class="flex flex-row items-center text-white cursor-pointer rounded-lg custom-block-border"
+    class="flex flex-row items-center cursor-pointer rounded-lg custom-block-border"
     v-on:click="navigate"
   >
     <img

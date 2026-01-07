@@ -45,7 +45,7 @@ const onselect = (option: string) => {
 <template>
   <div ref="selectRef" class="relative w-full">
     <div
-      class="bg-gray-900 border border-gray-900 text-white px-4 py-1 rounded-full w-full flex flex-row justify-between items-center cursor-pointer hover:border-gray-700"
+      class="bg-background-secondary border border-border/40 px-4 py-1 rounded-full w-full flex flex-row justify-between items-center cursor-pointer hover:border-border"
       @click="onClick"
     >
       <div>
@@ -55,13 +55,13 @@ const onselect = (option: string) => {
     </div>
     <div
       v-if="!isCollapsed"
-      class="bg-gray-900 border border-gray-900 text-white mt-1 rounded-3xl w-full absolute z-20"
+      class="bg-background-secondary border border-border/40 mt-1 rounded-3xl w-full absolute z-20"
     >
       <div class="flex flex-col">
         <div
           v-for="option in options"
           :key="option.value"
-          class="px-4 py-2 hover:bg-gray-700 cursor-pointer first:rounded-t-3xl last:rounded-b-3xl"
+          class="px-4 py-2 hover:bg-accent cursor-pointer first:rounded-t-3xl last:rounded-b-3xl"
           @click="() => onselect(option.value)"
         >
           {{ option.label }}

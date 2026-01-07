@@ -48,16 +48,14 @@ const publishers = computed(() => {
 </script>
 
 <template>
-  <div
-    class="flex flex-col justify-center text-white flex-wrap gap-4 custom-block"
-  >
+  <div class="flex flex-col justify-center flex-wrap gap-4 custom-block-border">
     <div>
       <div class="font-semibold">Author(s):</div>
 
       <div v-if="!creators?.authors?.length">N/A</div>
 
       <div
-        class="cursor-pointer hover:text-blue-300 underline"
+        class="cursor-pointer hover:text-link underline"
         v-for="author in creators?.authors"
         @click="() => navigateTo(`/author/${author.author_id}`)"
       >
@@ -71,7 +69,7 @@ const publishers = computed(() => {
       <div v-if="!creators?.artists?.length">N/A</div>
 
       <div
-        class="cursor-pointer hover:text-blue-300 underline"
+        class="cursor-pointer hover:text-link underline"
         v-for="artist in creators?.artists"
         @click="() => navigateTo(`/author/${artist.author_id}`)"
       >
@@ -86,7 +84,7 @@ const publishers = computed(() => {
 
       <div v-for="publisher in publishers?.original">
         <span
-          class="cursor-pointer hover:text-blue-300 underline mr-1"
+          class="cursor-pointer hover:text-link underline mr-1"
           @click="() => navigateTo(`/publisher/${publisher.publisher_id}`)"
         >
           {{ publisher.publisher_name }}
@@ -102,7 +100,7 @@ const publishers = computed(() => {
 
       <div v-for="publication in series?.publications">
         <span
-          class="cursor-pointer hover:text-blue-300 underline"
+          class="cursor-pointer hover:text-link underline"
           @click="
             () => navigateTo(`/publication/${publication?.publication_name}`)
           "
@@ -120,7 +118,7 @@ const publishers = computed(() => {
 
       <div v-for="publisher in publishers?.english">
         <span
-          class="cursor-pointer hover:text-blue-300 underline mr-1"
+          class="cursor-pointer hover:text-link underline mr-1"
           @click="() => navigateTo(`/publisher/${publisher.publisher_id}`)"
         >
           {{ publisher.publisher_name }}
@@ -136,7 +134,7 @@ const publishers = computed(() => {
 
       <TextCollapse :lines="4">
         <div
-          class="cursor-pointer hover:text-blue-300 underline"
+          class="cursor-pointer hover:text-link underline"
           v-for="group in groups?.group_list"
           @click="() => navigateTo(`/group/${group.group_id}`)"
         >
@@ -153,12 +151,12 @@ const publishers = computed(() => {
       <div v-for="release in groups?.release_list">
         ch.{{ release.chapter }} by
         <span
-          class="cursor-pointer hover:text-blue-300 underline"
+          class="cursor-pointer hover:text-link underline"
           @click="() => navigateTo(`/group/${release.groups[0].group_id}`)"
         >
           {{ release.groups[0].name }}
         </span>
-        <span class="text-gray-400 ml-1">
+        <span class="text-foreground/60 ml-1">
           {{ dayjs(release.release_date, "YYYY-MM-DD").fromNow() }}
         </span>
       </div>

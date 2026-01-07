@@ -35,7 +35,7 @@ const onRemoveCategory = (category: string) => {
 <template>
   <div>
     <div class="flex justify-between items-center">
-      <div class="text-white font-semibold mb-2">Categories</div>
+      <div class="font-semibold mb-2">Categories</div>
       <Button :onClick="() => onBack()"><- Back</Button>
     </div>
     <div class="my-4">
@@ -45,7 +45,7 @@ const onRemoveCategory = (category: string) => {
         :onOptionClick="onCategoryClick"
       />
     </div>
-    <div class="text-white text-center">
+    <div class="text-center">
       {{
         selectedFilters.category?.length
           ? "Selected Categories:"
@@ -56,7 +56,7 @@ const onRemoveCategory = (category: string) => {
       <div
         v-for="category in selectedFilters.category"
         :key="category"
-        class="text-white bg-gray-700 px-2 py-1 rounded-lg flex flex-row"
+        class="bg-background-secondary/70 border border-border/40 px-2 py-1 rounded-lg flex flex-row"
       >
         {{ category }}
         <div @click="() => onRemoveCategory(category)">

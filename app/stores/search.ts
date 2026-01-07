@@ -47,7 +47,7 @@ const INITIAL_STATE = {
     category: [],
     type: [],
   } as TSelectedFilters,
-  orderby: "score",
+  orderby: "rating",
   results: [] as TSeriesSearchResult[],
   loading: false,
   total: 0,
@@ -126,8 +126,6 @@ export const useSearchStore = defineStore("searchStore", {
     },
     resetFilters() {
       this.selectedFilters = cloneDeep(INITIAL_STATE.selectedFilters);
-
-      console.log(this.selectedFilters);
     },
     async search(shouldReset = true) {
       if (shouldReset) {
