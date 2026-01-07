@@ -47,14 +47,31 @@ const debouncedSearch = debounce(onSearch, 500);
       >
         <div>{{ release.record.release_date }}</div>
         <div>
-          <span
-            class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline"
-            @click="
-              () => navigateTo(`/series/${release.metadata?.series.series_id}`)
-            "
-          >
-            {{ release.record.title }}
-          </span>
+          <Popup :width="400" :height="208" position="right" :delay="400">
+            <template v-slot:target>
+              <span
+                class="whitespace-break-spaces cursor-pointer hover:text-blue-300 underline"
+                @click="
+                  () =>
+                    navigateTo(`/series/${release.metadata?.series.series_id}`)
+                "
+              >
+                {{ release.record.title }}
+              </span>
+            </template>
+
+            <template v-slot:content>
+              <SeriesPopup
+                :seriesId="release.metadata!.series.series_id"
+                :series="release.record.metadata"
+                :onSeriesLoaded="
+                  (series) => {
+                    release.record.metadata = series;
+                  }
+                "
+              />
+            </template>
+          </Popup>
         </div>
         <div>
           <span v-if="release.record.volume">

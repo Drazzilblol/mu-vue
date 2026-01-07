@@ -23,12 +23,29 @@ const preparedGenres = (genres: string[]) => {
       class="grid grid-cols-[2fr_3fr_50px] gap-2"
       :key="item.series_id"
     >
-      <div
-        class="overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer hover:text-blue-300"
-        @click="navigateTo(`/series/${item.series_id}`)"
-      >
-        {{ item.title }}
-      </div>
+      <Popup :width="400" :height="208" position="right" :delay="400">
+        <template v-slot:target>
+          <div
+            class="overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer hover:text-blue-300"
+            @click="navigateTo(`/series/${item.series_id}`)"
+          >
+            {{ item.title }}
+          </div>
+        </template>
+
+        <template v-slot:content>
+          <SeriesPopup
+            :seriesId="item.series_id"
+            :series="item.seriesMetadata"
+            :onSeriesLoaded="
+              (series) => {
+                item.seriesMetadata = series;
+              }
+            "
+          />
+        </template>
+      </Popup>
+
       <div class="overflow-hidden text-ellipsis whitespace-nowrap">
         {{ preparedGenres(item.genres) }}
       </div>

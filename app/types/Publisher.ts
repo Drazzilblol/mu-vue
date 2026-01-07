@@ -1,4 +1,5 @@
-import type { TTime } from "./General";
+import type { TSeriesMeta, TTime } from "./General";
+import type { TSeries } from "./Series";
 
 export type TPublisher = {
   publisher_id: number;
@@ -38,6 +39,7 @@ export type TPublisherSeries = {
   series_id: number;
   url: string;
   year: string;
+  metadata: TSeriesMeta | TSeries;
   last_updated: TTime;
 };
 

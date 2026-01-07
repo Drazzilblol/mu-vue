@@ -71,28 +71,28 @@ const popupPosition = () => {
       case "left": {
         const posTop = rect.top - props.height / 2 + rect.height / 2 || 0;
         top = posTop;
-        if (posTop + props.height > window.innerHeight) {
-          top = window.innerHeight - props.height;
+        if (posTop + props.height >= window.innerHeight) {
+          top = window.innerHeight - props.height - 4;
           arrowShift.value = posTop + props.height - window.innerHeight;
         } else if (posTop < 0) {
           top = 0;
           arrowShift.value = posTop;
         }
-        left = rect.left - props.width - 8;
+        left = rect.left - props.width - 12;
         break;
       }
       case "right": {
         const posTop = rect.top - props.height / 2 + rect.height / 2 || 0;
         top = posTop;
-        if (posTop + props.height > window.innerHeight) {
-          top = window.innerHeight - props.height;
+        if (posTop + props.height >= window.innerHeight) {
+          top = window.innerHeight - props.height - 4;
           arrowShift.value = posTop + props.height - window.innerHeight;
         } else if (posTop < 0) {
           top = 0;
           arrowShift.value = posTop;
         }
 
-        left = rect.right + 8;
+        left = rect.right + 12;
         break;
       }
     }
@@ -122,7 +122,7 @@ const onMouseLeave = () => {
 <template>
   <div
     ref="targetContainer"
-    class="w-fit h-fit"
+    class="w-fit h-fit max-w-full max-h-full overflow-hidden"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
   >

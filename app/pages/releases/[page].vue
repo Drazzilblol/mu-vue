@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TSeriesMeta } from "~/types/General";
 import type {
   TReleaseByDayResponse,
   TReleaseByDayResult,
@@ -73,6 +74,11 @@ const preparedData = computed(() => {
                   <SeriesPopup
                     :seriesId="release.metadata!.series.series_id"
                     :series="release.record.metadata"
+                    :onSeriesLoaded="
+                      (series) => {
+                        release.record.metadata = series;
+                      }
+                    "
                   />
                 </template>
               </Popup>

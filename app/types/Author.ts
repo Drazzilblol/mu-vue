@@ -1,4 +1,5 @@
-import type { TGenre, TImage, TTime } from "./General";
+import type { TGenre, TImage, TSeriesMeta, TTime } from "./General";
+import type { TSeries } from "./Series";
 
 export type TAuthor = {
   id: number;
@@ -62,6 +63,7 @@ export type TAuthorSeries = {
   };
   genres: string[];
   metadata: TAuthorSeriesMeta;
+  seriesMetadata: TSeriesMeta | TSeries;
 };
 
 export type TAuthorSeriesMeta = {

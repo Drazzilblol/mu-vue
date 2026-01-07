@@ -1,4 +1,5 @@
-import type { TCategory, TGenre, TTime } from "./General";
+import type { TCategory, TGenre, TSeriesMeta, TTime } from "./General";
+import type { TSeries } from "./Series";
 
 export type TGroup = {
   group_id: number;
@@ -40,4 +41,5 @@ export type TGroupSeriesTitle = {
   series_id: number;
   url: string;
   last_updated: TTime;
+  metadata: TSeriesMeta | TSeries;
 };

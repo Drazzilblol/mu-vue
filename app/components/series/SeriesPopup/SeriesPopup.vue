@@ -4,7 +4,8 @@ import type { TSeriesMeta } from "~/types/General";
 import type { TSeries } from "~/types/Series";
 type TPopupProps = {
   seriesId: number;
-  series?: TSeriesMeta;
+  series?: TSeriesMeta | TSeries;
+  onSeriesLoaded?: (series: TSeries) => void;
 };
 const props = defineProps<TPopupProps>();
 
@@ -21,6 +22,7 @@ const getSeries = async () => {
         `/series/metadata/${props.seriesId}`
       );
       series.value = response;
+      props.onSeriesLoaded?.(response);
     } catch (error) {
       console.error("Error fetching series:", error);
     } finally {
@@ -34,7 +36,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div v-if="loading" class="flex justify-center items-center h-full w-full">
+  <div v-if="loading" class="absolute inset-0 flex items-center justify-center">
     <Loading />
   </div>
 
@@ -56,7 +58,7 @@ onMounted(() => {
         {{ series?.title }}
       </div>
       <div class="font-normal">{{ series?.type }} - {{ series?.year }}</div>
-      <Genres :genres="series?.genres" />
+      <Genres :genres="series?.genres" class="h-[100px] overflow-hidden" />
     </div>
   </div>
 </template>
