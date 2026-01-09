@@ -1,4 +1,6 @@
+import { Tabs } from '../../../.nuxt/components';
 <script setup lang="ts">
+import type { TTab } from "~/components/shared/Tab/Tab.vue";
 import {
   EAuthorStatus,
   type TAuthor,
@@ -38,6 +40,8 @@ const statusTitle = computed(() => {
       return "Status Date";
   }
 });
+
+const tabs = ref<TTab[]>([{ title: "Details" }, { title: "Author Series" }]);
 </script>
 <template>
   <div class="flex h-full overflow-y-scroll">
@@ -85,8 +89,8 @@ const statusTitle = computed(() => {
         <div class="text-2xl font-bold">{{ authorData?.name }}</div>
         <div class="flex flex-row gap-4">
           <div class="w-full">
-            <Tabs>
-              <Tab title="Details">
+            <Tabs :tabs="tabs">
+              <Tab :title="tabs[0]!.title">
                 <TextCollapse
                   v-if="desc"
                   :lines="6"
@@ -131,7 +135,7 @@ const statusTitle = computed(() => {
                 </div>
               </Tab>
 
-              <Tab title="Author Series">
+              <Tab :title="tabs[1]!.title">
                 <div class="mt-2 custom-block-border">
                   <AuthorSeries :series="seriesData?.series_list" />
                 </div>

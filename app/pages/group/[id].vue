@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TTab } from "~/components/shared/Tab/Tab.vue";
 import type { TGroup, TGroupSeriesResponse } from "~/types/Groups";
 
 const route = useRoute();
@@ -28,6 +29,12 @@ const desc = computed(() => {
 const associated = computed(() => {
   return groupData.value?.associated.map((item) => item.name) || [];
 });
+
+const tabs = ref<TTab[]>([
+  { title: "Info" },
+  { title: "Series" },
+  { title: "Releases" },
+]);
 </script>
 
 <template>
@@ -39,8 +46,8 @@ const associated = computed(() => {
         <div class="text-2xl font-bold">{{ groupData?.name }}</div>
         <div class="flex flex-row gap-2">
           <div class="w-full">
-            <Tabs>
-              <Tab title="Info">
+            <Tabs :tabs="tabs">
+              <Tab :title="tabs[0]!.title">
                 <div class="flex flex-row gap-2 mt-2">
                   <div class="w-[50%] flex flex-col gap-2">
                     <div
@@ -91,12 +98,12 @@ const associated = computed(() => {
                   </div>
                 </div>
               </Tab>
-              <Tab title="Series">
+              <Tab :title="tabs[1]!.title">
                 <div class="mt-2 custom-block-border">
                   <SeriesList :series="seriesData?.series_titles" />
                 </div>
               </Tab>
-              <Tab title="Releases">
+              <Tab :title="tabs[2]!.title">
                 <InfiniteScroll
                   v-if="releases"
                   :isLoading="loading"

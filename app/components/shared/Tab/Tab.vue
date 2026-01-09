@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { inject, onUnmounted, reactive, toRef } from "vue";
+import { inject, reactive, toRef } from "vue";
 
 export type TTab = {
   title: string;
 };
 
 type TRegisterType = (tab: TTab) => {
-  unregister: () => void;
   active: boolean;
 };
 
@@ -22,9 +21,7 @@ const tab = reactive({
   title: toRef(props, "title"),
 });
 
-const { active, unregister } = register!(tab);
-
-onUnmounted(unregister);
+const { active } = register!(tab);
 </script>
 
 <template>

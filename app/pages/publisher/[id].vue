@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TTab } from "~/components/shared/Tab/Tab.vue";
 import {
   type TPublisher,
   type TPublisherPublicationsResponse,
@@ -21,6 +22,12 @@ const desc = computed(() => {
 const associated = computed(() => {
   return publisherData.value?.associated.map((item) => item.name) || [];
 });
+
+const tabs = ref<TTab[]>([
+  { title: "Info" },
+  { title: "Series" },
+  { title: "Publications" },
+]);
 </script>
 
 <template>
@@ -33,8 +40,8 @@ const associated = computed(() => {
         <div class="text-2xl font-bold">{{ publisherData?.name }}</div>
         <div class="flex flex-row gap-2">
           <div class="w-full">
-            <Tabs>
-              <Tab title="Info">
+            <Tabs :tabs="tabs">
+              <Tab :title="tabs[0]!.title">
                 <div class="flex flex-row gap-2">
                   <div class="w-[75%] flex flex-col gap-2">
                     <div
@@ -76,12 +83,12 @@ const associated = computed(() => {
                   </div>
                 </div>
               </Tab>
-              <Tab title="Series">
+              <Tab :title="tabs[1]!.title">
                 <div class="mt-2 custom-block-border">
                   <SeriesList :series="publicationsData?.series_list" />
                 </div>
               </Tab>
-              <Tab title="Publications">
+              <Tab :title="tabs[2]!.title">
                 <div class="mt-2 custom-block-border">
                   <PublisherPublications :publications="publicationsData" />
                 </div>

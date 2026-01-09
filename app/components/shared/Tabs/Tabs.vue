@@ -2,31 +2,27 @@
 import { computed, provide, reactive, ref } from "vue";
 import type { TTab } from "../Tab/Tab.vue";
 
-const active = ref<TTab | null>(null);
-const tabs = reactive<TTab[]>([]);
-
-const activate = (tab?: TTab) => {
-  active.value = tab || null;
+type TTabsProps = {
+  tabs: TTab[];
 };
 
-provide("register-tabs", (tab: TTab) => {
-  tabs.push(tab);
+const props = defineProps<TTabsProps>();
 
-  if (!active.value) {
-    activate(tab);
+const active = ref<string | null>(props.tabs[0]?.title || null);
+
+const activate = (tab?: TTab) => {
+  active.value = tab?.title || null;
+};
+
+onMounted(() => {
+  if (props.tabs.length > 0) {
+    activate(props.tabs[0]);
   }
+});
 
+provide("register-tabs", (tab: TTab) => {
   return {
-    active: computed(() => active.value === tab),
-
-    unregister() {
-      const index = tabs.indexOf(tab);
-      tabs.splice(index, 1);
-
-      if (active.value === tab) {
-        activate(tabs[0]);
-      }
-    },
+    active: computed(() => active.value === tab?.title),
   };
 });
 </script>
@@ -39,7 +35,7 @@ provide("register-tabs", (tab: TTab) => {
       <div
         v-for="tab in tabs"
         class="cursor-pointer px-2 py-1 rounded-full hover:bg-accent"
-        :class="{ active: tab === active }"
+        :class="{ active: tab.title === active }"
         @click="activate(tab)"
       >
         {{ tab.title }}

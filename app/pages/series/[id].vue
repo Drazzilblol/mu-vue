@@ -2,6 +2,7 @@
 import type { TGroups, TSeries, TUserRating } from "~/types/Series";
 import dayjs from "dayjs";
 import type { TCommentsResponse } from "~/types/Comments";
+import type { TTab } from "~/components/shared/Tab/Tab.vue";
 
 const route = useRoute();
 
@@ -38,6 +39,10 @@ const prepareText = (text?: string) => {
 };
 
 const scrollContainer = ref<HTMLElement | null>(null);
+const tabs = ref<TTab[]>([
+  { title: "Details" },
+  { title: `Comments (${comments.value?.total_hits || 0})` },
+]);
 
 const desc = computed(() => {
   return prepareText(data.value?.description);
@@ -53,6 +58,13 @@ const lastUpdated = computed(() => {
 
 const associated = computed(() => {
   return data.value?.associated.map((item) => item.title) || [];
+});
+
+watch(comments, () => {
+  tabs.value = [
+    { title: "Details" },
+    { title: `Comments (${comments.value?.total_hits || 0})` },
+  ];
 });
 </script>
 <template>
@@ -110,8 +122,8 @@ const associated = computed(() => {
 
         <div class="flex flex-row gap-4">
           <div class="w-[70%]">
-            <Tabs>
-              <Tab title="Details">
+            <Tabs :tabs="tabs">
+              <Tab :title="tabs[0]!.title">
                 <div>
                   <TextCollapse
                     v-if="desc"
@@ -139,7 +151,7 @@ const associated = computed(() => {
                   </div>
                 </div>
               </Tab>
-              <Tab :title="`Comments (${comments?.total_hits || 0})`">
+              <Tab :title="tabs[1]!.title">
                 <Comments
                   v-if="data"
                   :seriesId="data.series_id"
