@@ -35,10 +35,13 @@ provide("register-tabs", (tab: TTab) => {
       <div
         v-for="tab in tabs"
         class="cursor-pointer px-2 py-1 rounded-full hover:bg-accent"
-        :class="{ active: tab.title === active }"
-        @click="activate(tab)"
+        :class="{ active: tab.title === active, disabled: tab?.isLoading }"
+        @click="!tab?.isLoading && activate(tab)"
       >
-        {{ tab.title }}
+        <span class="flex flex-row items-center gap-1">
+          {{ tab.title }}
+          <Loading v-if="tab?.isLoading" size="small" />
+        </span>
       </div>
     </div>
     <div class="body">
@@ -54,5 +57,9 @@ provide("register-tabs", (tab: TTab) => {
 
 .active:hover {
   @apply bg-primary/80;
+}
+
+.disabled {
+  @apply opacity-50 cursor-not-allowed;
 }
 </style>

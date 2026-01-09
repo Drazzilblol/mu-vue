@@ -11,9 +11,35 @@ const { data: publisherData } = await useAPI<TPublisher>(
   `/publishers/${route.params.id}`
 );
 
-const { data: publicationsData } = await useAPI<TPublisherPublicationsResponse>(
-  `/publishers/${route.params.id}/series`
-);
+const tabs = ref<TTab[]>([
+  { title: "Info" },
+  { title: "Series" },
+  { title: "Publications" },
+]);
+
+const { data: publicationsData, status: seriesStatus } =
+  await useAPI<TPublisherPublicationsResponse>(
+    `/publishers/${route.params.id}/series`,
+    { lazy: true, server: false }
+  );
+
+watch(seriesStatus, () => {
+  if (seriesStatus.value === "pending") {
+    tabs.value[1]!.isLoading = true;
+    tabs.value[2]!.isLoading = true;
+  } else {
+    tabs.value[1]!.isLoading = false;
+    tabs.value[2]!.isLoading = false;
+  }
+  if (seriesStatus.value === "success") {
+    tabs.value[1]!.title = `Series (${
+      publicationsData.value?.series_list.length || 0
+    })`;
+    tabs.value[2]!.title = `Publications (${
+      publicationsData.value?.publication_list.length || 0
+    })`;
+  }
+});
 
 const desc = computed(() => {
   return prepareText(publisherData.value?.info);
@@ -22,12 +48,6 @@ const desc = computed(() => {
 const associated = computed(() => {
   return publisherData.value?.associated.map((item) => item.name) || [];
 });
-
-const tabs = ref<TTab[]>([
-  { title: "Info" },
-  { title: "Series" },
-  { title: "Publications" },
-]);
 </script>
 
 <template>

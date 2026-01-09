@@ -7,17 +7,19 @@ import type { TTab } from "~/components/shared/Tab/Tab.vue";
 const route = useRoute();
 
 const { data } = await useAPI<TSeries>(`/series/${route.params.id}`);
-const { data: comments } = await useAPI<TCommentsResponse>(
-  `/series/${route.params.id}/comments/search`,
-  {
-    lazy: true,
-    method: "POST",
-    body: {
-      perpage: 10,
-      page: 1,
-    },
-  }
-);
+const { data: comments, status: commentsStatus } =
+  await useAPI<TCommentsResponse>(
+    `/series/${route.params.id}/comments/search`,
+    {
+      lazy: true,
+      server: false,
+      method: "POST",
+      body: {
+        perpage: 10,
+        page: 1,
+      },
+    }
+  );
 const { data: userRating } = await useAPI<TUserRating>(
   `/series/${route.params.id}/ratingrainbow`,
   { lazy: true }
@@ -39,10 +41,7 @@ const prepareText = (text?: string) => {
 };
 
 const scrollContainer = ref<HTMLElement | null>(null);
-const tabs = ref<TTab[]>([
-  { title: "Details" },
-  { title: `Comments (${comments.value?.total_hits || 0})` },
-]);
+const tabs = ref<TTab[]>([{ title: "Details" }, { title: `Comments` }]);
 
 const desc = computed(() => {
   return prepareText(data.value?.description);
@@ -60,11 +59,15 @@ const associated = computed(() => {
   return data.value?.associated.map((item) => item.title) || [];
 });
 
-watch(comments, () => {
-  tabs.value = [
-    { title: "Details" },
-    { title: `Comments (${comments.value?.total_hits || 0})` },
-  ];
+watch(commentsStatus, () => {
+  if (commentsStatus.value === "pending") {
+    tabs.value[1]!.isLoading = true;
+  } else {
+    tabs.value[1]!.isLoading = false;
+  }
+  if (commentsStatus.value === "success") {
+    tabs.value[1]!.title = `Comments (${comments.value?.total_hits || 0})`;
+  }
 });
 </script>
 <template>
