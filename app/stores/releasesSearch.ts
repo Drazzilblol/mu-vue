@@ -23,8 +23,8 @@ export const useReleasesSearchStore = defineStore("releasesSearchStore", {
       this.error = null;
 
       try {
-        const data = (await useNuxtApp().$api<TReleaseSearchResponse>(
-          `/releases/search`,
+        const data = (await $fetch<TReleaseSearchResponse>(
+          `/api/releases/search`,
           {
             method: "POST",
             body: {

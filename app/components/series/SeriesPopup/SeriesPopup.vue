@@ -18,8 +18,8 @@ const getSeries = async () => {
   } else {
     try {
       loading.value = true;
-      const response = await useNuxtApp().$api<TSeries>(
-        `/series/metadata/${props.seriesId}`
+      const response = await $fetch<TSeries>(
+        `/api/series/metadata/${props.seriesId}`
       );
       series.value = response;
       props.onSeriesLoaded?.(response);

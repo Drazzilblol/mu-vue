@@ -1,4 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const userStore = useUserStore();
+onMounted(() => {
+  userStore.init();
+});
+</script>
 
 <template>
   <div class="h-screen overflow-hidden">

@@ -3,7 +3,7 @@ type TInputProps = {
   placeholder?: string;
   onKeydown?: (payload: KeyboardEvent) => void;
   onInput?: (payload: Event) => void;
-  type?: "text" | "number";
+  type?: "text" | "number" | "password";
   maxLength?: number;
 };
 

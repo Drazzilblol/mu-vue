@@ -7,8 +7,8 @@ import type {
 
 const route = useRoute();
 
-const { data: releases } = await useAPI<TReleaseByDayResponse>(
-  `/releases/day?page=${route.params.page}`
+const { data: releases } = await useFetch<TReleaseByDayResponse>(
+  `/api/releases/day?page=${route.params.page}`
 );
 
 const preparedData = computed(() => {

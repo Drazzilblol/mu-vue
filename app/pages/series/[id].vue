@@ -6,10 +6,10 @@ import type { TTab } from "~/components/shared/Tab/Tab.vue";
 
 const route = useRoute();
 
-const { data } = await useAPI<TSeries>(`/series/${route.params.id}`);
+const { data } = await useFetch<TSeries>(`/api/series/${route.params.id}`);
 const { data: comments, status: commentsStatus } =
-  await useAPI<TCommentsResponse>(
-    `/series/${route.params.id}/comments/search`,
+  await useFetch<TCommentsResponse>(
+    `/api/series/${route.params.id}/comments/search`,
     {
       lazy: true,
       server: false,
@@ -20,12 +20,12 @@ const { data: comments, status: commentsStatus } =
       },
     }
   );
-const { data: userRating } = await useAPI<TUserRating>(
-  `/series/${route.params.id}/ratingrainbow`,
+const { data: userRating } = await useFetch<TUserRating>(
+  `/api/series/${route.params.id}/ratingrainbow`,
   { lazy: true }
 );
-const { data: groupsData } = await useAPI<TGroups>(
-  `/series/${route.params.id}/groups`,
+const { data: groupsData } = await useFetch<TGroups>(
+  `/api/series/${route.params.id}/groups`,
   { lazy: true }
 );
 

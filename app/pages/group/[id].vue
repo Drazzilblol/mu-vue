@@ -16,10 +16,12 @@ onUnmounted(() => {
   releasesStore.$reset();
 });
 
-const { data: groupData } = await useAPI<TGroup>(`/groups/${route.params.id}`);
+const { data: groupData } = await useFetch<TGroup>(
+  `/api/groups/${route.params.id}`
+);
 
-const { data: seriesData } = await useAPI<TGroupSeriesResponse>(
-  `/groups/${route.params.id}/series`
+const { data: seriesData } = await useFetch<TGroupSeriesResponse>(
+  `/api/groups/${route.params.id}/series`
 );
 
 const desc = computed(() => {

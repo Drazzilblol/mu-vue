@@ -7,8 +7,8 @@ import {
 
 const route = useRoute();
 
-const { data: publisherData } = await useAPI<TPublisher>(
-  `/publishers/${route.params.id}`
+const { data: publisherData } = await useFetch<TPublisher>(
+  `/api/publishers/${route.params.id}`
 );
 
 const tabs = ref<TTab[]>([
@@ -18,8 +18,8 @@ const tabs = ref<TTab[]>([
 ]);
 
 const { data: publicationsData, status: seriesStatus } =
-  await useAPI<TPublisherPublicationsResponse>(
-    `/publishers/${route.params.id}/series`,
+  await useFetch<TPublisherPublicationsResponse>(
+    `/api/publishers/${route.params.id}/series`,
     { lazy: true, server: false }
   );
 

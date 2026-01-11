@@ -136,18 +136,15 @@ export const useSearchStore = defineStore("searchStore", {
       this.error = null;
 
       try {
-        const data = await useNuxtApp().$api<TSeriesSearchResponse>(
-          "/series/search",
-          {
-            method: "post",
-            body: {
-              ...this.filters,
-              orderby: this.orderby,
-              page: this.page + 1,
-              perpage: this.per_page,
-            },
-          }
-        );
+        const data = await $fetch<TSeriesSearchResponse>("/api/series/search", {
+          method: "post",
+          body: {
+            ...this.filters,
+            orderby: this.orderby,
+            page: this.page + 1,
+            perpage: this.per_page,
+          },
+        });
         this.results = [...this.results, ...data.results];
         this.total = data.total_hits;
         this.page = data.page;

@@ -9,12 +9,12 @@ import {
 
 const route = useRoute();
 
-const { data: authorData } = await useAPI<TAuthor>(
-  `/authors/${route.params.id}`
+const { data: authorData } = await useFetch<TAuthor>(
+  `/api/authors/${route.params.id}`
 );
 
-const { data: seriesData } = await useAPI<TAuthorSeriesResponse>(
-  `/authors/${route.params.id}/series`,
+const { data: seriesData } = await useFetch<TAuthorSeriesResponse>(
+  `/api/authors/${route.params.id}/series`,
   { method: "POST", body: { orderby: "year" } }
 );
 

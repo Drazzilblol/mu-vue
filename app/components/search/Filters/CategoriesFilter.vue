@@ -9,7 +9,7 @@ const props = defineProps<TProps>();
 const { selectedFilters } = storeToRefs(useSearchStore());
 
 const getCategories = async (input: string): Promise<string[]> => {
-  const response = await useNuxtApp().$api<string[]>(`/categories/search`, {
+  const response = await $fetch<string[]>(`/api/categories/search`, {
     method: "POST",
     body: { query: input },
   });
