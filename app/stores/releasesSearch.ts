@@ -2,6 +2,11 @@ import { defineStore } from "pinia";
 import type { TRequestMeta } from "~/types/General";
 import type { TRelease, TReleaseSearchResponse } from "~/types/Releases";
 
+export type TReleasesSeach = {
+  group_id?: number;
+  search_term?: string;
+};
+
 const INITIAL_STATE = {
   page: 0,
   perpage: 40,
@@ -18,7 +23,7 @@ export const useReleasesSearchStore = defineStore("releasesSearchStore", {
     setSearchTerm(term: string) {
       this.searchTerm = term;
     },
-    async load(groupId: number) {
+    async load(releasesSearch: TReleasesSeach) {
       this.loading = true;
       this.error = null;
 
@@ -28,15 +33,18 @@ export const useReleasesSearchStore = defineStore("releasesSearchStore", {
           {
             method: "POST",
             body: {
-              group_id: groupId,
+              group_id: releasesSearch.group_id,
               page: this.page + 1,
               perpage: this.perpage,
-              search: this.searchTerm || undefined,
+              search_type: "series",
+              search:
+                releasesSearch.search_term || this.searchTerm || undefined,
               include_metadata: true,
             },
-          }
+          },
         )) as TReleaseSearchResponse;
         this.releases = [...this.releases, ...data.results];
+        console.log(data, releasesSearch);
         this.page = data.page;
         this.perpage = data.per_page;
         this.totalHits = data.total_hits;
@@ -47,20 +55,19 @@ export const useReleasesSearchStore = defineStore("releasesSearchStore", {
       }
     },
 
-    async loadReleases(groupId: number) {
+    async loadReleases(releasesSearch: TReleasesSeach) {
       this.$reset();
-      await this.load(groupId);
+      await this.load(releasesSearch);
     },
 
-    async loadMore(groupId: number) {
+    async loadMore(releasesSearch: TReleasesSeach) {
       if (this.loading) return;
-      await this.load(groupId);
+      await this.load(releasesSearch);
     },
 
-    async search(groupId: number, searchTerm: string) {
+    async search(releasesSearch: TReleasesSeach) {
       this.$reset();
-      this.setSearchTerm(searchTerm);
-      await this.load(groupId);
+      await this.load(releasesSearch);
     },
   },
 });

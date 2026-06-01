@@ -5,6 +5,16 @@ import type { TCommentsResponse } from "~/types/Comments";
 import type { TTab } from "~/components/shared/Tab/Tab.vue";
 
 const route = useRoute();
+const releasesStore = useReleasesSearchStore();
+const { loading, releases, totalHits } = storeToRefs(releasesStore);
+
+onMounted(() => {
+  releasesStore.loadReleases({ search_term: route.params.id?.toString() });
+});
+
+onUnmounted(() => {
+  releasesStore.$reset();
+});
 
 const { data } = await useFetch<TSeries>(`/api/series/${route.params.id}`);
 const { data: comments, status: commentsStatus } =
@@ -18,15 +28,15 @@ const { data: comments, status: commentsStatus } =
         perpage: 10,
         page: 1,
       },
-    }
+    },
   );
 const { data: userRating } = await useFetch<TUserRating>(
   `/api/series/${route.params.id}/ratingrainbow`,
-  { lazy: true }
+  { lazy: true },
 );
 const { data: groupsData } = await useFetch<TGroups>(
   `/api/series/${route.params.id}/groups`,
-  { lazy: true }
+  { lazy: true },
 );
 
 const prepareText = (text?: string) => {
@@ -35,13 +45,17 @@ const prepareText = (text?: string) => {
   const strong = text?.replace(pattern, "<strong>$2</strong>");
   const links = strong?.replace(
     linkPattern,
-    '<a href="$2" class="underline hover:text-link" target="_blank" rel="noopener noreferrer">$1</a>'
+    '<a href="$2" class="underline hover:text-link" target="_blank" rel="noopener noreferrer">$1</a>',
   );
   return links;
 };
 
 const scrollContainer = ref<HTMLElement | null>(null);
-const tabs = ref<TTab[]>([{ title: "Details" }, { title: `Comments` }]);
+const tabs = ref<TTab[]>([
+  { title: "Details" },
+  { title: `Comments` },
+  { title: `Releases` },
+]);
 
 const desc = computed(() => {
   return prepareText(data.value?.description);
@@ -161,6 +175,24 @@ watch(commentsStatus, () => {
                   :initialComments="comments"
                   :scrollRef="scrollContainer"
                 />
+              </Tab>
+              <Tab :title="tabs[2]!.title">
+                <InfiniteScroll
+                  v-if="releases"
+                  :isLoading="loading"
+                  :canLoadMore="
+                    totalHits / releasesStore?.perpage > releasesStore?.page
+                  "
+                  :loadMore="
+                    () =>
+                      releasesStore.loadMore({
+                        search_term: route.params.id?.toString(),
+                      })
+                  "
+                  :scrollRef="scrollContainer"
+                >
+                  <Releases v-if="data" :releases="releases" />
+                </InfiniteScroll>
               </Tab>
             </Tabs>
           </div>

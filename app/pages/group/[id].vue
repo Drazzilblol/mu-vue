@@ -9,7 +9,7 @@ const { loading, releases, totalHits } = storeToRefs(releasesStore);
 const scrollContainer = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-  releasesStore.loadReleases(Number(route.params.id));
+  releasesStore.loadReleases({ group_id: Number(route.params.id) });
 });
 
 onUnmounted(() => {
@@ -17,11 +17,11 @@ onUnmounted(() => {
 });
 
 const { data: groupData } = await useFetch<TGroup>(
-  `/api/groups/${route.params.id}`
+  `/api/groups/${route.params.id}`,
 );
 
 const { data: seriesData } = await useFetch<TGroupSeriesResponse>(
-  `/api/groups/${route.params.id}/series`
+  `/api/groups/${route.params.id}/series`,
 );
 
 const desc = computed(() => {
@@ -113,7 +113,10 @@ const tabs = ref<TTab[]>([
                     totalHits / releasesStore?.perpage > releasesStore?.page
                   "
                   :loadMore="
-                    () => releasesStore.loadMore(Number(route.params.id))
+                    () =>
+                      releasesStore.loadMore({
+                        group_id: Number(route.params.id),
+                      })
                   "
                   :scrollRef="scrollContainer"
                 >

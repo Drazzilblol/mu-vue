@@ -16,7 +16,7 @@ const inputModel = ref<string>("");
 const onSearch = (event: Event) => {
   const target = event.target as HTMLInputElement;
   const value = target.value;
-  releasesStore.search(props.groupId, value);
+  releasesStore.search({ group_id: props.groupId, search_term: value });
 };
 
 const debouncedSearch = debounce(onSearch, 500);
