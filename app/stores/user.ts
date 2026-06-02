@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
+import type { TUser } from "~/types/User";
 
-const INITIAL_STATE = {
-  user: null as any | null,
+const INITIAL_STATE: { loading: boolean; error?: string; user?: TUser } = {
+  user: undefined,
   loading: false,
-  error: null as string | null,
+  error: undefined,
 };
 
 export const useUserStore = defineStore("userStore", {
@@ -12,12 +13,12 @@ export const useUserStore = defineStore("userStore", {
     async init() {
       const currentUser = useUserSession().user.value;
       if (currentUser) {
-        await this.refreshToken(currentUser);
+        await this.refreshToken();
         await this.loadUser();
       }
     },
 
-    async refreshToken(user: any) {
+    async refreshToken() {
       await $fetch("/api/refresh", {
         method: "GET",
       });
@@ -26,7 +27,7 @@ export const useUserStore = defineStore("userStore", {
 
     async login(username: string, password: string) {
       try {
-        this.error = null;
+        this.error = undefined;
         this.loading = true;
         await $fetch("/api/login", {
           method: "POST",
@@ -43,11 +44,11 @@ export const useUserStore = defineStore("userStore", {
 
     async logout() {
       try {
-        this.error = null;
+        this.error = undefined;
         this.loading = true;
         await $fetch("/api/logout", { method: "POST" });
         await useUserSession().clear();
-        this.user = null;
+        this.user = undefined;
       } catch (e) {
         this.error = "Logout failed.";
       } finally {
@@ -59,7 +60,8 @@ export const useUserStore = defineStore("userStore", {
       if (this.user) return;
 
       try {
-        this.user = await $fetch("/api/account/profile");
+        this.user = await $fetch<TUser>("/api/account/profile");
+        console.log(this.user);
       } catch (e) {
         this.error = "Failed to fetch user data.";
       } finally {
@@ -67,7 +69,7 @@ export const useUserStore = defineStore("userStore", {
       }
 
       this.loading = true;
-      this.error = null;
+      this.error = undefined;
     },
   },
 });

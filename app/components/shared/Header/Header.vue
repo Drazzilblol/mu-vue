@@ -20,7 +20,10 @@ const userStore = useUserStore();
       <div v-if="loggedIn" class="flex flex-row items-center gap-4">
         <Button :onClick="() => userStore.logout()">Logout</Button>
         <div>{{ userStore.user?.username }}</div>
-        <div>
+        <div
+          class="cursor-pointer"
+          :onClick="() => navigate(`/user/${userStore.user?.user_id}`)"
+        >
           <img :src="userStore.user?.avatar.url" alt="Avatar" class="w-8 h-8" />
         </div>
       </div>
