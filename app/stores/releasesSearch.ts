@@ -44,7 +44,6 @@ export const useReleasesSearchStore = defineStore("releasesSearchStore", {
           },
         )) as TReleaseSearchResponse;
         this.releases = [...this.releases, ...data.results];
-        console.log(data, releasesSearch);
         this.page = data.page;
         this.perpage = data.per_page;
         this.totalHits = data.total_hits;

@@ -61,7 +61,6 @@ export const useUserStore = defineStore("userStore", {
 
       try {
         this.user = await $fetch<TUser>("/api/account/profile");
-        console.log(this.user);
       } catch (e) {
         this.error = "Failed to fetch user data.";
       } finally {

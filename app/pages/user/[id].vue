@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import type { TTab } from "~/components/shared/Tab/Tab.vue";
 import dayjs from "dayjs";
+import { useListsStore } from "../../stores/lists";
 
 const userStore = useUserStore();
+const listsStore = useListsStore();
+onMounted(() => {
+  listsStore.loadLists();
+});
+
+const scrollContainer = ref<HTMLElement | null>(null);
 
 const lastActive = computed(() => {
   return dayjs(userStore.user?.last_active_time.timestamp! * 1000);
@@ -15,7 +22,7 @@ const joined = computed(() => {
 const tabs = ref<TTab[]>([{ title: "Profile" }, { title: "Lists" }]);
 </script>
 <template>
-  <div class="flex h-full overflow-y-scroll">
+  <div class="flex h-full overflow-y-scroll" ref="scrollContainer">
     <div
       class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0"
     >
@@ -78,7 +85,12 @@ const tabs = ref<TTab[]>([{ title: "Profile" }, { title: "Lists" }]);
               </Tab>
 
               <Tab :title="tabs[1]!.title">
-                <div class="mt-2 custom-block-border"></div>
+                <div class="mt-2">
+                  <Lists
+                    :lists="listsStore.lists"
+                    :scroll-ref="scrollContainer"
+                  />
+                </div>
               </Tab>
             </Tabs>
           </div>

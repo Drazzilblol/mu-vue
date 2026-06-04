@@ -4,6 +4,7 @@ import { inject, reactive, toRef } from "vue";
 export type TTab = {
   title: string;
   isLoading?: boolean;
+  id?: string;
 };
 
 type TRegisterType = (tab: TTab) => {
