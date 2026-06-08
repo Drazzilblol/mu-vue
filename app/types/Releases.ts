@@ -15,6 +15,7 @@ export type TReleaseByDayResult = {
 
 export type TReleaseSearchResponse = {
   results: { record: TRelease; metadata?: TRequestMeta }[];
+  bookmark: any;
   total_hits: number;
   page: number;
   per_page: number;

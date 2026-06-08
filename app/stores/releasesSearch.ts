@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   totalHits: 0,
   searchTerm: "",
   releases: [] as { record: TRelease; metadata?: TRequestMeta }[],
+  bookmark: undefined as any,
   loading: false,
   error: null as string | null,
 };
@@ -44,6 +45,7 @@ export const useReleasesSearchStore = defineStore("releasesSearchStore", {
           },
         )) as TReleaseSearchResponse;
         this.releases = [...this.releases, ...data.results];
+        this.bookmark = data.bookmark;
         this.page = data.page;
         this.perpage = data.per_page;
         this.totalHits = data.total_hits;
