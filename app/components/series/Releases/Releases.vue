@@ -12,21 +12,35 @@ const props = defineProps<TGroupReleasesProps>();
 const userStore = useUserStore();
 const releasesStore = useReleasesSearchStore();
 
-const addBookmark = async (
+const changeBookmark = async (
   releaseId: string,
   userId: string,
   seriesId: string,
 ) => {
-  const data = await $fetch<any>(`/api/releases/bookmark/add`, {
-    method: "POST",
-    body: {
-      user_id: userId,
-      series_id: seriesId,
-      release_id: releaseId,
-      bookmark_id: releasesStore.bookmark?.bookmark_id,
-    },
-  });
-  releasesStore.bookmark = data;
+  try {
+    if (releasesStore.bookmark?.release_id === releaseId) {
+      await $fetch<any>(`/api/releases/bookmark`, {
+        method: "DELETE",
+        body: {
+          bookmark_id: releasesStore.bookmark?.bookmark_id,
+        },
+      });
+      releasesStore.bookmark = undefined;
+    } else {
+      const data = await $fetch<any>(`/api/releases/bookmark`, {
+        method: "PUT",
+        body: {
+          user_id: userId,
+          series_id: seriesId,
+          release_id: releaseId,
+          bookmark_id: releasesStore.bookmark?.bookmark_id,
+        },
+      });
+      releasesStore.bookmark = data;
+    }
+  } catch (error) {
+    console.error("Error changing bookmark:", error);
+  }
 };
 </script>
 
@@ -42,7 +56,7 @@ const addBookmark = async (
         @click="
           () => {
             if (userStore.user) {
-              addBookmark(
+              changeBookmark(
                 release.record.id.toString(),
                 userStore.user?.user_id.toString()!,
                 release.metadata?.series?.series_id?.toString()!,
