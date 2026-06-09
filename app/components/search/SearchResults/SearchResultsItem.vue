@@ -14,7 +14,7 @@ const navigate = () => {
 
 <template>
   <div
-    class="flex flex-col items-center p-2 rounded-lg cursor-pointer custom-block-border"
+    class="flex flex-col items-center p-2 rounded-lg cursor-pointer custom-block-border hover:border-border/80"
     v-on:click="navigate"
   >
     <div class="relative w-full">
