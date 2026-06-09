@@ -10,12 +10,12 @@ import {
 const route = useRoute();
 
 const { data: authorData } = await useFetch<TAuthor>(
-  `/api/authors/${route.params.id}`
+  `/api/authors/${route.params.id}`,
 );
 
 const { data: seriesData } = await useFetch<TAuthorSeriesResponse>(
   `/api/authors/${route.params.id}/series`,
-  { method: "POST", body: { orderby: "year" } }
+  { method: "POST", body: { orderby: "year" } },
 );
 
 const desc = computed(() => {
@@ -46,43 +46,11 @@ const tabs = ref<TTab[]>([{ title: "Details" }, { title: "Author Series" }]);
 <template>
   <div class="flex h-full overflow-y-scroll">
     <div
-      class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0"
+      class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0 relative"
     >
-      <div class="w-64">
+      <div class="w-64 sticky top-4 h-fit">
         <div class="w-64 min-w-64 rounded-2xl">
           <CoverImage :url="authorData?.image?.url?.original" />
-        </div>
-
-        <div class="custom-block-border mt-2">
-          <div class="flex flex-col justify-center flex-wrap pt-2">
-            <div class="font-semibold">Name (in native language):</div>
-            {{ authorData?.actualname || "N/A" }}
-          </div>
-
-          <div class="flex flex-col justify-center flex-wrap pt-2">
-            <div class="font-semibold">Gender:</div>
-            {{ authorData?.gender || "N/A" }}
-          </div>
-
-          <div class="flex flex-col justify-center flex-wrap pt-2">
-            <div class="font-semibold">Birth Place:</div>
-            {{ authorData?.birthplace || "N/A" }}
-          </div>
-
-          <div class="flex flex-col justify-center flex-wrap pt-2">
-            <div class="font-semibold">Birth Date:</div>
-            {{ authorData?.birthday.as_string || "N/A" }}
-          </div>
-          <div class="flex flex-col justify-center flex-wrap pt-2">
-            <div class="font-semibold">Zodiac:</div>
-            {{ authorData?.birthday.zodiac || "N/A" }}
-          </div>
-          <div class="flex flex-col justify-center flex-wrap pt-2">
-            <div class="font-semibold">Blood Type:</div>
-            {{ authorData?.bloodtype || "N/A" }}
-          </div>
-
-          <AssociatedNames :names="associated" />
         </div>
       </div>
       <div class="flex flex-col gap-2 w-full">
@@ -103,8 +71,41 @@ const tabs = ref<TTab[]>([{ title: "Details" }, { title: "Author Series" }]);
                 </TextCollapse>
 
                 <div class="flex flex-row gap-2 mt-2">
+                  <div class="custom-block-border w-[33%]">
+                    <div class="flex flex-col justify-center flex-wrap pt-2">
+                      <div class="font-semibold">
+                        Name (in native language):
+                      </div>
+                      {{ authorData?.actualname || "N/A" }}
+                    </div>
+
+                    <div class="flex flex-col justify-center flex-wrap pt-2">
+                      <div class="font-semibold">Gender:</div>
+                      {{ authorData?.gender || "N/A" }}
+                    </div>
+
+                    <div class="flex flex-col justify-center flex-wrap pt-2">
+                      <div class="font-semibold">Birth Place:</div>
+                      {{ authorData?.birthplace || "N/A" }}
+                    </div>
+
+                    <div class="flex flex-col justify-center flex-wrap pt-2">
+                      <div class="font-semibold">Birth Date:</div>
+                      {{ authorData?.birthday.as_string || "N/A" }}
+                    </div>
+                    <div class="flex flex-col justify-center flex-wrap pt-2">
+                      <div class="font-semibold">Zodiac:</div>
+                      {{ authorData?.birthday.zodiac || "N/A" }}
+                    </div>
+                    <div class="flex flex-col justify-center flex-wrap pt-2">
+                      <div class="font-semibold">Blood Type:</div>
+                      {{ authorData?.bloodtype || "N/A" }}
+                    </div>
+
+                    <AssociatedNames :names="associated" />
+                  </div>
                   <div
-                    class="w-[50%] flex flex-col gap-4 custom-block-border h-max"
+                    class="w-[33%] flex flex-col gap-4 custom-block-border h-max"
                   >
                     <div>
                       <div class="font-semibold">Status:</div>
@@ -121,7 +122,7 @@ const tabs = ref<TTab[]>([{ title: "Details" }, { title: "Author Series" }]);
                     <Social :social="authorData?.social" />
                   </div>
                   <div
-                    class="w-[50%] flex flex-col gap-4 custom-block-border h-max"
+                    class="w-[33%] flex flex-col gap-4 custom-block-border h-max"
                   >
                     <div>
                       <div class="font-semibold">Total Series:</div>

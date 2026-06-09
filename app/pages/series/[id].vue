@@ -93,34 +93,11 @@ watch(commentsStatus, () => {
       />
     </div>
     <div
-      class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0 z-10"
+      class="flex flex-row gap-4 p-4 max-w-[1240px] h-fit justify-center mx-auto w-full shrink-0 z-10 relative"
     >
-      <div class="w-64">
+      <div class="w-64 sticky top-4 h-fit">
         <div class="w-64 min-w-64 rounded-2xl">
           <CoverImage :url="data?.image?.url?.original" />
-        </div>
-
-        <div class="custom-block-border mt-2">
-          <div class="flex flex-col justify-center flex-wrap">
-            <div class="font-semibold">Status in Country of Origin:</div>
-            <div v-html="status" />
-          </div>
-
-          <div class="flex flex-col justify-center flex-wrap pt-2">
-            <div class="font-semibold">Scanlate:</div>
-            {{ data?.completed ? "Completed" : "Continuing" }}
-          </div>
-
-          <div class="flex flex-col justify-center flex-wrap pt-2">
-            <div class="font-semibold">Latest chapter:</div>
-            {{ data?.latest_chapter }}
-          </div>
-
-          <div class="flex flex-col justify-center flex-wrap pt-2">
-            <div class="font-semibold">Last updated:</div>
-            {{ lastUpdated }}
-          </div>
-          <AssociatedNames :names="associated" />
         </div>
       </div>
       <div class="flex flex-col gap-2 w-full">
@@ -155,15 +132,45 @@ watch(commentsStatus, () => {
 
                   <div class="flex flex-row gap-2 mt-2">
                     <div class="w-[50%] flex flex-col gap-2">
+                      <div class="custom-block-border">
+                        <div class="flex flex-col justify-center flex-wrap">
+                          <div class="font-semibold">
+                            Status in Country of Origin:
+                          </div>
+                          <div v-html="status" />
+                        </div>
+
+                        <div
+                          class="flex flex-col justify-center flex-wrap pt-2"
+                        >
+                          <div class="font-semibold">Scanlate:</div>
+                          {{ data?.completed ? "Completed" : "Continuing" }}
+                        </div>
+
+                        <div
+                          class="flex flex-col justify-center flex-wrap pt-2"
+                        >
+                          <div class="font-semibold">Latest chapter:</div>
+                          {{ data?.latest_chapter }}
+                        </div>
+
+                        <div
+                          class="flex flex-col justify-center flex-wrap pt-2"
+                        >
+                          <div class="font-semibold">Last updated:</div>
+                          {{ lastUpdated }}
+                        </div>
+                        <AssociatedNames :names="associated" />
+                      </div>
                       <UserRating :userRating="userRating" />
                       <Categories
                         :categories="data?.categories"
                         isCollapsible
                       />
-                      <SeriesPosition :rank="data?.rank" />
                     </div>
                     <div class="w-[50%] flex flex-col gap-2">
                       <About :series="data" :groups="groupsData" />
+                      <SeriesPosition :rank="data?.rank" />
                     </div>
                   </div>
                 </div>
