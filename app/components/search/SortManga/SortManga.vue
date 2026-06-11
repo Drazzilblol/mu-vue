@@ -26,7 +26,7 @@ const { orderby } = storeToRefs(searchStore);
     <Select
       :options="SORT_OPTIONS"
       :selected-option="orderby"
-      :onselect="(option) => searchStore.sort(option)"
+      :onselect="(option) => searchStore.sort(option.toString())"
     />
   </div>
 </template>

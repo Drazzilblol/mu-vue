@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import type { TGroups, TSeries, TUserRating } from "~/types/Series";
+import type {
+  TGroups,
+  TSeries,
+  TSeriesList,
+  TUserRating,
+} from "~/types/Series";
 import dayjs from "dayjs";
 import type { TCommentsResponse } from "~/types/Comments";
 import type { TTab } from "~/components/shared/Tab/Tab.vue";
 
 const route = useRoute();
+const userStore = useUserStore();
 const releasesStore = useReleasesSearchStore();
 const { loading, releases, totalHits } = storeToRefs(releasesStore);
 
@@ -37,6 +43,9 @@ const { data: userRating } = await useFetch<TUserRating>(
 const { data: groupsData } = await useFetch<TGroups>(
   `/api/series/${route.params.id}/groups`,
   { lazy: true },
+);
+const { data: seriesList } = await useFetch<TSeriesList>(
+  `/api/lists/series/${route.params.id}`,
 );
 
 const prepareText = (text?: string) => {
@@ -98,6 +107,12 @@ watch(commentsStatus, () => {
       <div class="w-64 sticky top-4 h-fit">
         <div class="w-64 min-w-64 rounded-2xl">
           <CoverImage :url="data?.image?.url?.original" />
+        </div>
+        <div v-if="userStore.user" class="mt-4">
+          <ListSelect
+            :series-id="data?.series_id!"
+            :seriesList="seriesList"
+          ></ListSelect>
         </div>
       </div>
       <div class="flex flex-col gap-2 w-full">

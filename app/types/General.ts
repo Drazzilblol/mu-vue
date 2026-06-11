@@ -2,7 +2,7 @@ import type { TSeries } from "./Series";
 
 export type TOption = {
   label: string;
-  value: string;
+  value: string | number;
 };
 
 export type TImage = {

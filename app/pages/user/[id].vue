@@ -5,9 +5,14 @@ import { useListsStore } from "../../stores/lists";
 
 const userStore = useUserStore();
 const listsStore = useListsStore();
-onMounted(() => {
-  listsStore.loadLists();
-});
+
+watch(
+  listsStore.lists,
+  () => {
+    listsStore.loadListsItems();
+  },
+  { immediate: true },
+);
 
 const scrollContainer = ref<HTMLElement | null>(null);
 
@@ -88,6 +93,7 @@ const tabs = ref<TTab[]>([{ title: "Profile" }, { title: "Lists" }]);
                 <div class="mt-2">
                   <Lists
                     :lists="listsStore.lists"
+                    :lists-items="listsStore.listsItems"
                     :scroll-ref="scrollContainer"
                   />
                 </div>

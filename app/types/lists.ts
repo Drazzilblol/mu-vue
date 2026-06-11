@@ -39,12 +39,20 @@ export type TUserListResult = {
 };
 
 export type TUserList = {
-  id: number;
+  list_id: number;
   title: string;
+  description: string;
+  type: string;
+  icon: string;
+  custom: boolean;
+};
+
+export type TUserListItems = {
   page: number;
   perpage: number;
   totalHits?: number;
   results?: TUserListResult[];
 };
 
+export type TUserListsItems = Record<string, TUserListItems>;
 export type TUserLists = Record<string, TUserList>;

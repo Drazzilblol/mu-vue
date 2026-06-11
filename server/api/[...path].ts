@@ -16,11 +16,15 @@ export default defineEventHandler(async (event) => {
     authorization: (session as any)?.session_token ?? "",
   };
 
-  const res = await $fetch(url.toString(), {
-    method,
-    headers: upstreamHeaders,
-    body,
-  });
+  try {
+    const res = await $fetch(url.toString(), {
+      method,
+      headers: upstreamHeaders,
+      body,
+    });
 
-  return res;
+    return res;
+  } catch (error) {
+    return error;
+  }
 });

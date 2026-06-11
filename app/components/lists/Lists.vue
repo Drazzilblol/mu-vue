@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { TTab } from "~/components/shared/Tab/Tab.vue";
 import { useListsStore } from "../../stores/lists";
-import type { TUserLists } from "~/types/lists";
+import type { TUserLists, TUserListsItems } from "~/types/lists";
 
 type TListsProps = {
   lists: TUserLists;
+  listsItems: TUserListsItems;
   isLoading?: boolean;
   scrollRef: HTMLElement | null;
 };
@@ -26,13 +27,14 @@ const tabs = ref<TTab[]>(
           <InfiniteScroll
             :isLoading="false"
             :canLoadMore="
-              (lists[item.id!]!.totalHits || 0) / lists[item.id!]!.perpage >
-              lists[item.id!]!.page
+              (listsItems[item.id!]!.totalHits || 0) /
+                listsItems[item.id!]!.perpage >
+              listsItems[item.id!]!.page
             "
-            :loadMore="() => listsStore.loadMore(+item.id!)"
+            :loadMore="() => listsStore.loadMore(item.id!)"
             :scrollRef="scrollRef"
           >
-            <List :list="lists[item.id!]!" />
+            <List :list-items="listsItems[item.id!]!" />
           </InfiniteScroll>
         </Tab>
       </Tabs>

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 const userStore = useUserStore();
+const listsStore = useListsStore();
 onMounted(() => {
-  userStore.init();
+  userStore.init().then(() => {
+    listsStore.loadLists();
+  });
 });
 </script>
 

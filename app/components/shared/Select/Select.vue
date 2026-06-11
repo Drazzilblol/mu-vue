@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import type { TOption } from "~/types/General";
 
-const props = defineProps({
-  options: { type: Array as PropType<TOption[]>, required: true },
-  selectedOption: {
-    type: String,
-    default: undefined,
-  },
-  onselect: {
-    type: Function as PropType<(option: string) => void>,
-    required: true,
-  },
-});
+type TSelectProps = {
+  options: TOption[];
+  selectedOption?: string | number;
+  onselect: (option: string | number) => void;
+};
 
-const selectedOption = ref<string | undefined>(props.selectedOption);
+const props = defineProps<TSelectProps>();
+
+const selectedOption = ref<string | number | undefined>(props.selectedOption);
+
+watch(
+  () => props.selectedOption,
+  () => {
+    selectedOption.value = props.selectedOption;
+  },
+);
 const isCollapsed = ref(true);
 const selectRef = ref<HTMLElement | null>(null);
 
@@ -35,7 +38,7 @@ const onClick = () => {
   isCollapsed.value = !isCollapsed.value;
 };
 
-const onselect = (option: string) => {
+const onselect = (option: string | number) => {
   selectedOption.value = option;
   props.onselect(option);
   isCollapsed.value = true;

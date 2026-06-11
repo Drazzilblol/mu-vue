@@ -176,7 +176,7 @@ export type TRelease = {
       name: string;
       group_id: number;
       url: string;
-    }
+    },
   ];
   release_date: string;
   time_added: TTime;
@@ -261,4 +261,23 @@ export type TSeriesSearchItem = {
   rank: TRank;
   last_updated: TLastUpdated;
   admin: any; // TODO: Define proper type
+};
+
+export type TSeriesList = {
+  series: {
+    id: number;
+    url: string;
+    title: string;
+  };
+  list_id: number;
+  status: {
+    volume: number;
+    chapter: number;
+  };
+  priority: number;
+  time_added: {
+    timestamp: number;
+    as_rfc3339: string;
+    as_string: string;
+  };
 };
